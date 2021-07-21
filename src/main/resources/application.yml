@@ -1,0 +1,31 @@
+#服务端口和初始页面设置
+server:
+  port: 8080
+  servlet:
+    context-path: ""
+
+#数据库四要素
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone = GMT
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+
+  #SpringMVC拼接
+  mvc:
+    view:
+      prefix: classpath:/templates/
+      suffix: .html
+
+#关闭百里香缓存
+  thymeleaf:
+    cache: false
+
+    #redis常规设置
+    #  redis:
+    #    host:主机IP地址
+    #    port:端口号
+    #    password: 密码

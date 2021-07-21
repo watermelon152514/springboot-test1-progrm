@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>开卡</title>
+  <style>
+      *{
+          padding: 0px;
+          margin: 0px;
+      }
+      .wrapper{
+          padding: 20px;
+      }
+      .header{
+          height: 25px; 
+          display: flex;
+          flex-direction: row;
+          align-items: flex-start; 
+      }
+      .events{   
+          height: 25px;
+          margin-bottom: 5px;
+          margin-left: 4px; 
+      }
+      #search{
+          width: 70px;
+          border-radius: 5px;
+          background-color: green;
+          color: white;
+          border: none;
+      }
+      .tips{
+          width: 1260px;
+          height: 40px;
+          margin-left: 5px;
+          margin-top: 10px;
+          background-color: rgb(221, 231, 175);
+          border: rgb(218, 230, 168) solid 1px;
+      }
+      .main{
+          width: 1500px;
+          height: 565px;
+          border: 1px inset gray;
+          margin-left: 5px;
+          margin-top: 15px;
+      }
+      .paybody div{
+          margin-left: 100px;
+          margin-top: 20px;
+      }
+      #pay input{
+          width: 55px;
+          height: 25px;
+      }
+      #select input{
+          width: 305px;
+          height: 25px;
+      }
+      #date input{
+          width: 15px;
+          height: 25px;
+      }
+      .forms{
+          width: 305px;
+          height: 25px;
+          margin-bottom: 10px;
+          margin-left: -5px;
+      }
+      #remarks input{
+          width: 250px;
+          height: 70px;
+      }
+      #remarks span{
+          vertical-align: top;
+      }
+      .Checkout{
+          height: 40px;
+          margin-bottom: 0px;
+          margin-left: 5px;
+      }
+      .paybody{
+          width: 85%;
+          height: 25px;
+          float: left;
+      }
+      .date{
+          width:15%;
+          height: 25px;
+          float: left;
+      }
+      .date div{
+          margin-left: 0px;
+          margin-top: 30px;
+          font-size: 15px;
+      }
+      .one{
+          display: block;
+          float: left;
+          margin-right: 180px;
+      }
+      .phead{
+          width: 100px;
+          height: 30px;
+          margin-left: 5px;
+          margin-top: 5px;
+      }
+  </style>
+ </head>
+ <body>
+  <div class="wrapper">
+    <div>
+        <p class="phead">基本信息</p>
+    </div>
+    <div class="main">
+        <div class="paybody">
+            <div id="select" style="margin-top: 80px;">
+                <span class="one">会员卡号<input type="text"></span>
+                <span class="one">过期日期<input type="text"></span>
+            </div>
+        </div>
+        <div class="date">
+            <div id="date" style="margin-top: 80px;">
+                <input type="checkbox" name="date" value="No term"/>无期限
+            </div>
+        </div>
+        <div class="paybody">
+            <div id="select" style="margin-top: 100px;">
+                <span class="one">会员类型
+                    <select  name="All States" id="States" class="forms">
+                        <option value="6">6-美甲会员</option>
+                        <option value="1">1-9折卡</option>
+                        <option value="2">2-8.5折卡</option>
+                        <option value="3">3-8折卡</option>
+                        <option value="4">4-7.5折卡</option>
+                        <option value="5">5-7折卡</option>
+                    </select>
+                </span>
+                <span class="one">生&emsp;&emsp;日<input type="text"></span>
+            </div>
+        </div>
+        <div class="date">
+            <div id="date" style="margin-top: 100px;">
+                <input type="radio" checked="checked" name="search" class="events"/>阳历
+                <input type="radio" checked="checked" name="search" class="events"/>阴历
+            </div>
+        </div>
+        <div class="paybody">
+            <div id="select" style="margin-top: 120px;">
+                <span class="one">折&emsp;&emsp;扣<input type="text"></span>
+                <span class="one">消费密码<input type="text"></span>
+            </div>
+        </div>
+        <div class="paybody">
+            <div id="select" style="margin-top: 140px;">
+                <span class="one">流水单号<input type="text"></span>
+                <span class="one">来源类型
+                    <select  name="All States" id="States" class="forms">
+                        <option value="type">6-美甲会员</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+    </div>
+  </div>
+ </body>
+</html>

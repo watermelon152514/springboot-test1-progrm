@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+    <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+    <style>
+        table,td{
+            border-collapse: collapse;
+            border: 1px solid #000000;
+            background-color: aquamarine;
+        }
+        #findDataDisplay{
+            display: block;
+        }
+    </style>
+</head>
+
+    <script>
+        function setOperation() {
+            var objId=document.getElementById("set-id").value;
+            var objName=document.getElementById("set-name").value;
+            var objAddress=document.getElementById("set-address").value;
+            $.ajax({
+                url:"setOperation",
+                type:"post",
+                dataType:"json",
+                data:{
+                    id:objId,
+                    name:objName,
+                    address:objAddress
+                },
+                success:function (resp) {
+                    alert("操作成功！！！");
+                    location.reload();
+                }
+            })
+        }
+
+
+        function addOperation() {
+            var obj=document.getElementsByClassName("add");
+            var objName=obj[0].value;
+            var objAddress=obj[1].value;
+            $.ajax({
+                url:"addOperation",
+                type:"post",
+                dataType:"json",
+                data:{
+                    name:objName,
+                    address:objAddress
+                },
+                success:function (resp) {
+                    alert("操作成功！！！");
+                    location.reload();
+                }
+            })
+        }
+
+        function deleteOperation() {
+            var obj=document.getElementsByClassName("delete");
+            var objId=obj[0].value;
+            $.ajax({
+                url:"deleteOperation",
+                type:"post",
+                dataTyoe:"json",
+                data:{
+                    id:objId
+                },
+                success:function (resp) {
+                    document.getElementById("")
+                    alert("操作成功！！！");
+                    location.reload();
+                }
+            })
+        }
+
+        function lookforOperation() {
+            var obj=document.getElementsByClassName("lookfor");
+            var objName=obj[0].value;
+            $.ajax({
+                url:"lookforOperation",
+                type:"post",
+                dataTypr:"json",
+                data:{
+                    name:objName,
+                },
+                success:function (resp) {
+                     // document.getElementById("findDataDisplay").style.display="none";
+                    var objTr=document.getElementById("findDataDisplay-tr");
+                    var objData=JSON.parse(resp);
+                    objTr.setAttribute("th:each","user:"+objData);
+                    var objTd=document.getElementsByClassName("findDataDisplay-td");
+                    objTr[0].setAttribute("th:text",user[id]);
+                    objTr[1].setAttribute("th:text",user["name"]);
+                    objTr[2].setAttribute("th:text",user["address"]);
+                    console.log(resp);
+                    alert("操作完成！！！");
+                    location.reload();
+                }
+            })
+        }
+
+    </script>
+    <body>
+
+        <table>
+            <tr>
+                <td>序号</td>
+                <td>用户ID</td>
+                <td>用户名D</td>
+                <td>籍贯</td>
+            </tr>
+            <tr th:each="user:${Users}">
+                <td th:text="${userStat.count}">序号</td>
+                <td th:text="${user.id}">用户ID</td>
+                <td th:text="${user.name}">用户名</td>
+                <td th:text="${user.address}">籍贯</td>
+            </tr>
+        </table>
+
+        <input type="button" value="修改" onclick="setOperation()">
+        用户ID：<input type="text" id="set-id">
+        用户名：<input type="text" id="set-name">
+        籍贯：<input type="text" id="set-address">
+        <br/>
+
+        <input type="button" value="添加" onclick="addOperation()">
+        用户名：<input type="text" class="add">
+        籍贯：<input type="text" class="add">
+        <br/>
+
+        <input type="button" value="删除" onclick="deleteOperation()">
+        用户ID：<input type="text" class="delete">
+        <br/>
+
+        <input type="button" value="查询" onclick="lookforOperation()">
+        用户名：<input type="text" class="lookfor">
+        <br/>
+
+    <div id="findDataDisplay">
+        <table>
+            <tr>
+                <td>用户ID</td>
+                <td>用户名D</td>
+                <td>籍贯</td>
+            </tr>
+            <tr th:each="user:${Users}" id="findDataDisplay-tr">
+                <td th:text="${user.id}" class="findDataDisplay-td">用户ID</td>
+                <td th:text="${user.name} " class="findDataDisplay-td">用户名</td>
+                <td th:text="${user.address}" class="findDataDisplay-td">籍贯</td>
+            </tr>
+        </table>
+    </div>
+    </body>
+</html>
