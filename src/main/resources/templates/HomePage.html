@@ -2,178 +2,344 @@
 <html  lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>理发店会员管理系统</title>
-    <meta charset="UTF-8">
+    <title>美咖♥理发店</title>
+    <link rel="icon" type="image/x-ico" href="img/logo.jpg"/>
     <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+
+
+
+
+
     <style>
-        .wrapper{
-            width: 100%;
-            height: 830px;
-            background-color: rgb(255, 255, 255);
-            margin:0px auto;  
-        }
-        .nav{
-            width: 1850px;
-            height:60px;
-            background: linear-gradient(50deg, rgb(88, 46, 155) 40%, rgb(177, 17, 209) 50%);
+
+
+        .Page{
+            width: 1200px;
+            height: 900px;
+            background: orange;
             margin: 0 auto;
+
         }
-        .container{
-          width: 1300px;
-          height: 680px;
-          margin-left: 310px;
-        }
-        .li1{
-            width: 150px;
-            height: 40px;
-            list-style: none;
+        .top-page{
+            width: 100%;
+            height: 10%;
+            background: linear-gradient(50deg, rgb(88, 46, 155) 40%, rgb(177, 17, 209) 50%);
             float: left;
-            text-align:left;
-            line-height: 60px;
-            margin: 0px 5px;
-            color: rgb(255, 255, 255);
-            font-size: 20px;
-            padding: 0 20px;
+            position: relative;
+
         }
-        .li2{
-            width: 150px;
-            height: 40px;
-            list-style: none;
-            float: right;
-            text-align:left;
-            line-height: 60px;
-            margin: 0px 0px 0px 1px;
-            color: rgb(255, 255, 255);
-            font-size: 20px;
-        }
-        .li3{
-            width: 150px;
-            height: 40px;
-            list-style: none;
+        .left-page{
+            width: 15%;
+            height: 90%;
             float: left;
-            text-align:left;
-            line-height: 60px;
-            margin: 0px 5px;
-            color: rgb(255, 255, 255);
-            font-size: 30px;
-            letter-spacing: 10px;
+            background-color: #272727;
+
+        }
+        .centre-page{
+            width: 85%;
+            height: 90%;
+            float: left;
+            background: white;
+        }
+        .bottom-page{
+            width: 100%;
+            height: 10%;
+            float: left;
+            background: linear-gradient(to right,#feac5e,#c779d0,#4bc0c8);
+        }
+        #top-navigation{
+            list-style-type:none;
+            padding:0px;
+            margin-left: 20%;
+        }
+        #top-navigation li{
+            overflow:hidden;
+            padding:10px;
+            float: left;
         }
         li{
-            box-sizing: border-box;
+            list-style-type: none;
         }
-        li a{
-            color: white;
-            text-decoration: none;
+        #top-navigation img{
+            position: relative;
+            width: 40px;
+            height: 40px;
         }
-        .left{
-          width: 310px;
-          height: 790px;
-          background-color:#f0f1f7;
-          float: left;
+        #top-navigation a{
+            top: -13px;
+            left: 0px;
+            position: relative;
         }
-        .left ul li{
-          list-style: none;
-          line-height: 50px;
-        }
-        .left>ul>li>a{ 
-          text-decoration: none; 
-          color: rgb(134, 133, 133);
-          font-size: 25px;
-          display: block;             
-        }
-        .left ul li a:hover{
-          font-weight: bold;
-          color: rgb(61, 12, 141);
-          background-color:rgba(97, 99, 190, 0.1);
-          border-right: rgba(69, 2, 78, 0.253) solid 3px;
-          box-sizing: border-box;
-        }
-    </style>
-    <script src="../js/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function(){
-        $('.left').on('click','ul>li>a',function(){ 
-            if ($(this).next().css('display') == "none") {
-                $(this).next('div').slideDown(300);
-            }else {
-                $(this).next('div').slideUp(300);
-            }
-        })
-      })
 
-      function skip(name) {
-          $.ajax({
-              url:"AjaxToController",
-              type:"post",
-              data:{
-              },
-              dataType:"json",
-              success:function (resp){
-                  var obj=document.getElementById("menuFrame");
-                  if(name=="ShouYin"){
-                      obj.setAttribute('src','ShouYinHtml');
-                      console.log("ShouYinHtml Pass!!")
-                  }
-                   else if(name=="KaiKa"){
-                      obj.setAttribute('src','KaiKaHtml');
-                      console.log("KaiKaHtml Pass!!")
-                  }
-                  else if(name=="GuaDan"){
-                      obj.setAttribute('src','GuaDanHtml');
-                      console.log("GuaDanHtml Pass!!")
-                  }
-                  else if(name=="ShuiDan"){
-                      obj.setAttribute('src','ShuiDanHtml');
-                      console.log("ShuiDanHtml Pass!!")
-                  }
-                  else if(name=="ShouZhi"){
-                      obj.setAttribute('src','ShouZhiHtml');
-                      console.log("ShouZhiHtml Pass!!")
-                  }
-              }
-          })
-      }
+        #two,#three,#fore,#five{
+            font-size: 18px;
+            display: none;
+        }
+        #one{
+            font-size: 18px;
+        }
+
+        #1{
+            height: 30px;
+        }
+
+        #1,#2,#3,#4,#5,#7,#8,#9,#10,#11,#12,#13,#14,#15,#16,#17,#18,#19,#20 {
+
+
+        }
+
+        a{
+            text-decoration:none;
+            color: honeydew;
+        }
+        a:hover{
+            color: azure;
+            font-weight: bold;
+            font-size: 120%;
+        }
+
+        #MeiKa{
+            color: aliceblue;
+            font-size: xx-large;
+            position: absolute;
+            top: 10px;
+            left: 60px;
+            float: left;
+        }
+
+    </style>
+
+
+    <script type="text/javascript" >
+        function displayOfTopAfter(obj){
+            var DIV=document.getElementById(obj);
+            DIV.style.display="block";
+        }
+        function displayOfTopBefore(){
+            var DIV1=document.getElementById("one");
+            DIV1.style.display="none";
+            var DIV2=document.getElementById("two");
+            DIV2.style.display="none";
+            var DIV3=document.getElementById("three");
+            DIV3.style.display="none";
+            var DIV4=document.getElementById("fore");
+            DIV4.style.display="none";
+            var DIV5=document.getElementById("five");
+            DIV5.style.display="none";
+        }
+
+
+        function show(d1) {
+
+            if (document.getElementById(d1).style.display=="none") {
+                document.getElementById(d1).style.display = 'block'; //触动的层如果处于隐藏状态，即显示
+            } else {
+                document.getElementById(d1).style.display = 'none'; //触动的层如果处于显示状态，即隐藏
+                console.log("false")
+            }
+        }
+
+
+        function skip(name) {
+            $.ajax({
+                url:"AjaxToController",
+                type:"post",
+                data:{
+                },
+                dataType:"json",
+                success:function (resp){
+                    var obj=document.getElementById("menuFrame");
+                    if(name=="ShouYin"){
+                        obj.setAttribute('src','ShouYinHtml');
+                        console.log("ShouYinHtml Pass!!")
+                    }
+                    else if(name=="KaiKa"){
+                        obj.setAttribute('src','KaiKaHtml');
+                        console.log("KaiKaHtml Pass!!")
+                    }
+                    else if(name=="GuaDan"){
+                        obj.setAttribute('src','GuaDanHtml');
+                        console.log("GuaDanHtml Pass!!")
+                    }
+                    else if(name=="ShuiDan"){
+                        obj.setAttribute('src','ShuiDanHtml');
+                        console.log("ShuiDanHtml Pass!!")
+                    }
+                    else if(name=="ShouZhi"){
+                        obj.setAttribute('src','ShouZhiHtml');
+                        console.log("ShouZhiHtml Pass!!")
+                    }
+                }
+            })
+        }
     </script>
+
+
+
 </head>
-<body>  
-    <div class="wrapper">
-        <div class="nav">
-            <ul>
-                <li class="li3">美咖</li>
-                <li class="li1"><a href="#">收银台</a></li>
-                <li class="li1"><a href="#">会员中心</a></li>
-                <li class="li1"><a href="#">财务中心</a></li>
-                <li class="li1"><a href="#">数据中心</a></li>
-                <li class="li1"><a href="#">系统设置</a></li>
-                <li class="li2"><a href="#">退出</a></li>
-                <li class="li2"><a href="#">用户</a></li>
-                <li class="li2"><a href="#">首页</a></li>
-            </ul>
-        </div> 
-        <div class="mainbody">
-            <div class="left">
-                <ul>
-                    <li> 
-                        <a name="ShouYin" href="javascript:void(0);" onclick="skip(name)" ><img style="float: left; margin-right: 15px;margin-top: 9px;" src="img/收银.png">收银</a>
-                    </li>
-                    <li>
-                        <a name="KaiKa" href="javascript:void(0);" onclick="skip(name)"><img style="float: left; margin-right: 15px;margin-top: 9px;" src="img/开卡.png">开卡</a>
-                    </li>
-                    <li>
-                        <a name="GuaDan" href="javascript:void(0);" onclick="skip(name)"><img style="float: left; margin-right: 10px;margin-top: 9px;margin-left: 3px;" src="img/挂单.png">挂单</a>
-                    </li>
-                    <li>
-                        <a name="ShuiDan" href="javascript:void(0);" onclick="skip(name)"><img style="float: left; margin-right: 15px;margin-top: 9px;" src="img/今日水单.png">今日水单</a>
-                    </li>
-                    <li>
-                        <a name="ShouZhi" href="javascript:void(0);" onclick="skip(name)"><img style="float: left; margin-right: 14px;margin-top: 9px;margin-left: 1px;" src="img/日常支出.png">日常收支</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="container">
-                <iframe src="/ShouYinHtml" frameborder="0" width="1540px" height="750" id="menuFrame">
-                </iframe>
-            </div>
+<body>
+
+<div class="Page" >
+
+    <div class="top-page">
+
+        <ul id="top-navigation">
+            <li>
+                <img src="img/收银台.png" />
+                <a name="one" href="javascript:void(0);"onmousedown="displayOfTopBefore()" onmouseup="displayOfTopAfter(name)">收银台</a>
+            </li>
+            <li>
+                <img src="img/会员中心.png" />
+                <a name="two" href="javascript:void(0);"onmousedown="displayOfTopBefore()" onmouseup="displayOfTopAfter(name)">会员中心</a>
+            </li>
+            <li>
+                <img src="img/财务中心.png" />
+                <a name="three" href="javascript:void(0);"onmousedown="displayOfTopBefore()" onmouseup="displayOfTopAfter(name)">财务中心</a>
+            </li>
+            <li>
+                <img src="img/数据中心.png" />
+                <a name="fore" href="javascript:void(0);"onmousedown="displayOfTopBefore()" onmouseup="displayOfTopAfter(name)">数据中心</a>
+            </li>
+            <li>
+                <img src="img/系统设置.png" />
+                <a name="five" href="javascript:void(0);"onmousedown="displayOfTopBefore()" onmouseup="displayOfTopAfter(name)">系统设置</a>
+            </li>
+        </ul>
+        <label id="MeiKa" >
+            <img src="img/商标.png" height="50" width="50">
+            美咖
+        </label>
+
+    </div>
+
+
+
+    <div class="left-page" id="left-page"/>
+    <div id="one">
+        <div id="1"><a name="ShouYin" href="javascript:void(0);" onclick="skip(name)"><img src="img/收银.png" height="30" width="30">收银</a>
+        </div>
+        <div id="2"><a name="KaiKa" href="javascript:void(0);" onclick="skip(name)"><img src="img/开卡.png" height="30" width="30">开卡</a>
+        </div>
+        <div id="3"><a name="GuaDan" href="javascript:void(0);" onclick="skip(name)"><img src="img/挂单.png" height="30" width="30">挂单</a>
+        </div>
+        <div id="4"><a name="ShuiDan" href="javascript:void(0);" onclick="skip(name)"><img src="img/今日水单.png" height="30" width="30">今日水单</a>
+        </div>
+        <div id="5"><a name="ShouZhi" href="javascript:void(0);" onclick="skip(name)"><img src="img/日常支出.png" height="30" width="30">日常收支</a>
         </div>
     </div>
+    <div id="two">
+        <div id="7"><a href="javascript:onClick=show('two-7')">会员资料</a>
+            <ul id="two-7" style="display: none">
+                <li><a href="">会员列表</a></li>
+                <li><a href=""> 散客列表</a></li>
+            </ul>
+        </div>
+        <div id="8"><a href="javascript:onClick=show('two-8')">消息与通知</a>
+            <ul id="two-8" style="display: none">
+                <li><a href="">群发短信</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="three">
+        <div id="9" ><a href="javascript:onClick=show('three-9')">营业记录</a>
+            <ul id="three-9" style="display: none">
+                <li><a href="">水单审核</a></li>
+                <li><a href="">项目消费记录</a></li>
+                <li><a href="">商品销售记录</a></li>
+                <li><a href="">充值开卡记录</a></li>
+                <li><a href="">订购套餐记录</a></li>
+            </ul>
+        </div>
+        <div id="10"><a href="javascript:onClick=show('three-10')">店面财务数据</a>
+            <ul id="three-10" style="display: none">
+                <li><a href="">店面财务数据</a></li>
+            </ul>
+        </div>
+        <div id="11"><a href="javascript:onClick=show('three-11')">业绩提成核对</a>
+            <ul id="three-11" style="display: none">
+                <li><a href="">员工提成核对</a></li>
+                <li><a href="">员工业绩核对</a></li>
+            </ul>
+        </div>
+        <div id="12"><a href="javascript:onClick=show('three-12')">员工资料表</a>
+            <ul id="three-12" style="display: none">
+                <li><a href="">员工资料表</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="fore">
+        <div id="13"><a href="javascript:onClick=show('fore-13')">店面经营报表</a>
+            <ul id="fore-13" style="display: none">
+                <li><a href="">收支报表</a></li>
+                <li><a href="">店面业绩报表</a></li>
+            </ul>
+        </div>
+        <div id="14"><a href="javascript:onClick=show('fore-14')">员工业绩报表</a>
+            <ul id="fore-14" style="display: none">
+                <li><a href="">员工业绩报表</a></li>
+            </ul>
+        </div>
+        <div id="15"><a href="javascript:onClick=show('fore-15')">销售系统报表</a>
+            <ul id="fore-15" style="display: none">
+                <li><a href="">项目消费报表</a></li>
+                <li><a href="">商品销售报表</a></li>
+                <li><a href="">套餐订购报表</a></li>
+            </ul>
+        </div>
+        <div id="16"><a href="javascript:onClick=show('fore-16')">会员卡统计报表</a>
+            <ul id="fore-16" style="display: none">
+                <li><a href="">会员卡充值报表</a></li>
+                <li><a href="">会员卡消费报表</a></li>
+                <li><a href="">会员卡余额报表</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="five">
+        <div id="17"><a href="javascript:onClick=show('five-17')">开店设置</a>
+            <ul id="five-17" style="display: none">
+                <li><a href="">添加员工</a></li>
+                <li><a href="">添加卡类型</a></li>
+                <li><a href="">添加服务项目</a></li>
+                <li><a href="">添加疗程套餐</a></li>
+                <li><a href="">添加商品</a></li>
+            </ul>
+        </div>
+        <div id="18" ><a href="javascript:onClick=show('five-18')">提成设置</a>
+            <ul id="five-18" style="display: none">
+                <li><a href="">服务项目提成设置</a></li>
+                <li><a href="">商品销售提成设置</a></li>
+                <li><a href="">开卡充值提成设置</a></li>
+                <li><a href="">套餐订购提成设置</a></li>
+            </ul>
+        </div>
+        <div id="19"><a href="javascript:onClick=show('five-19')">短信设置</a>
+            <ul id="five-19" style="display: none">
+                <li><a href="">会员卡动态提醒</a></li>
+                <li><a href="">会员卡消费跟进</a></li>
+                <li><a href="">会员服务</a></li>
+                <li><a href="">店面管理</a></li>
+                <li><a href="">基础设置</a></li>
+            </ul>
+        </div>
+        <div id="20"><a href="javascript:onClick=show('five-20')">系统安全</a>
+            <ul id="five-20" style="display: none">
+                <li><a href="">系统日志</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="centre-page" >
+    <iframe src="/ShouYinHtml" frameborder="0" width="1010px" height="800px" id="menuFrame">
+    </iframe>
+</div>
+
+
+<div class="bottom-page" >
+</div>
+</div>
 </body>
+</html>

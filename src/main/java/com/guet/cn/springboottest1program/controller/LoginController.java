@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,6 +21,7 @@ public class LoginController {
 
     @RequestMapping("/HomePage")
     public String HomePage(){
+
         return "HomePage";
     }
 
