@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>发送短信</title>
+    <link rel="stylesheet" th:href="@{/css/sendChat.css}" />
+    <script type="text/javascript"  th:src="@{/js/jquery-3.6.0.min.js}"></script>
+</head>
+<body>
+<div class="top">
+    <div>
+        <a th:href="@{sendAllChat.html}" target="menuFrame">返回列表</a>
+        <span>></span>
+        <span>营销短信发送</span>
+        <span>></span>
+        <a th:href="@{sendAllChat.html}" target="menuFrame" class="button"><input type="button" value="返回列表" id="button"></a>
+    </div>
+
+</div>
+<div class="wrapper">
+
+    <div class="head">
+        <div id="tips">
+            <div>发营销短信 “尊称+内容+签名” 目前移动、联通、电信营销资源系统自带“回复TD退订”字眼，扣费字符标准是64个字符内为一条，超过64个字符按64的倍数扣除</div>
+            <div>发通知短信，内容+签名=70字符扣费一条，超过70字符按67字符的倍数扣费</div>
+            <div class="ps">由于运行商管控营销短信包含某些敏感字符会发不出去，失效具体原因稍后可在列表查看</div>
+            <div class="ps">由于运行商管控营销短信都会人工审核，短信收到会有延迟</div>
+        </div>
+
+    </div>
+    <div class="main">
+        <div class="left">
+            <div id="left-head">
+                <div class="icon"></div>
+                <span>短信内容</span>
+            </div>
+            <div id="left-contain">
+                <div><span>客户称呼</span><input type="text" value="亲爱的" id="l-c-items"> <span class="ps">必须填写称呼，例如亲爱的，否则无法发送成功（运营商要求）</span></div>
+                <div><span>编辑内容</span><textarea id="l-c-items" cols="98" rows="5"></textarea></div>
+                <div id="sendTime">
+                    <span>发送时间</span>
+                    <div><input type="radio" name="sel" id="s-t-items"><span id="s-t-items">立即发送</span></div>
+                    <div><input type="radio" name="sel" id="s-t-items"><span id="s-t-items">定时发送</span><input type="text"id="s-t-item"></div>
+                    <div><input type="button" value="确定" id="s-t-b"></div>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div id="right-head">
+                <div class="icon"></div>
+                <span>选择模板</span>
+            </div>
+            <div id="right-contain">
+                <ul>
+                    <li><a href="javascript:void(0)">佳节促销短信</a></li>
+                    <li><a href="javascript:void(0)">模板二</a></li>
+                    <li><a href="javascript:void(0)">周末祝福短信</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="foot">
+        <div id="foot-head">
+            <div class="icon"></div>
+            <span>选择接收对象</span>
+            <input type="button" value="设置选择条件" name="" id="foot-button">
+        </div>
+        <div id="foot-contain">
+            <textarea name="" id="f-text" cols="170" rows="9"></textarea>
+        </div>
+    </div>
+</div>
+</body>
+</html>

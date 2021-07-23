@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>散客列表</title>
+    <link rel="stylesheet" th:href="@{/css/castList.css}" />
+    <script type="text/javascript"  th:src="@{/js/jquery-3.6.0.min.js}"></script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="header">
+        <div>最后消费时间</div>
+        <input type="date" value="2020-05-28 - 2020-06-27" min="2020-05-28" max="2020-06-27" class="events"/>
+        <form>
+            <select name="kinds" id="" class="events">
+                <option value="">选择类型</option>
+            </select>
+        </form>
+        <input type="submit" value="查询" id="search" class="events">
+
+    </div>
+    <div class="tips">
+
+    </div>
+    <div class="main">
+
+    </div>
+</div>
+
+</body>
+</html>

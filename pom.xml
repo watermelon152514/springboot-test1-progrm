@@ -78,7 +78,6 @@
         </dependency>
 
 
-
     </dependencies>
 
 <!-- SpringBoot打包插件-->
@@ -99,6 +98,7 @@
                 </includes>
             </resource>
         </resources>
+
     </build>
 
 </project>

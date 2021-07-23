@@ -1,0 +1,40 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+.wrapper{
+    padding: 20px;
+}
+.header{
+    height: 25px; 
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start; 
+}
+.events{   
+    height: 25px;
+    margin-bottom: 5px;
+    margin-left: 4px; 
+}
+#search{
+    width: 70px;
+    border-radius: 5px;
+    background-color: green;
+    color: white;
+    border: none;
+}
+.tips{
+  width: 1260px;
+  height: 40px;
+  margin-left: 5px;
+  margin-top: 10px;
+  background-color: rgb(221, 231, 175);
+  border: rgb(218, 230, 168) solid 1px;
+}
+.main{
+  width: 1260px;
+  height: 565px;
+  border: 1px inset gray;
+  margin-left: 5px;
+  margin-top: 15px;
+}
