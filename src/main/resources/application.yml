@@ -29,3 +29,11 @@ spring:
     #    host:主机IP地址
     #    port:端口号
     #    password: 密码
+
+#分页插件pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  page-size-zero: false
+  params: count=countSql
