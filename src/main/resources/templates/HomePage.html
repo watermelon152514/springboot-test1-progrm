@@ -169,6 +169,10 @@
                         obj.setAttribute('src','ShouZhiHtml');
                         console.log("ShouZhiHtml Pass!!")
                     }
+                    else if(name=="YuanGongGongZi"){
+                        obj.setAttribute('src','YuanGongGongZiHtml');
+                        console.log("YuanGongGongZi Pass!!")
+                    }
                 }
             })
         }
@@ -263,7 +267,7 @@
         </div>
         <div id="12"><a href="javascript:onClick=show('three-12')">员工资料表</a>
             <ul id="three-12" style="display: none">
-                <li><a href="">员工资料表</a></li>
+                <li><a name="YuanGongGongZi" href="javascript:void(0);" onclick="skip(name)">员工资料表</a></li>
             </ul>
         </div>
     </div>

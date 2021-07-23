@@ -57,4 +57,9 @@ public class LoginController {
     public String ShouZhiHtml(){
         return "收支";
     }
+
+    @RequestMapping("/YuanGongGongZiHtml")
+    public String YuanGongGongZiHtml(){
+        return "员工工资";
+    }
 }
