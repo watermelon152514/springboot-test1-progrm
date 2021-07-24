@@ -90,7 +90,22 @@
        #buttom1:hover{
         background-color: white;
 
+        
        }
+       #tittle{
+      
+        height: 30px;
+        position:relative;           
+        width: 800px;
+      
+    }
+       #ti2{
+          
+        position: absolute;
+       
+        top: 5px;
+       
+    }
        #buttom1{
         -webkit-transition-duration: 0.4s;
         transition-duration: 0.4s;
@@ -100,32 +115,17 @@
         color: black;
         border: 1px solid #eeeef5d8;
         position: relative;
-       top: -45px;
-       left: 680px;
-      
-        
-                      
+        top: 5px;
+        left: 680px;
+                   
        }
-       #tittle{
 
-         
-           position:absolute;
-           top: 80px;
-         
-       }
-       #ti2{
-          
+       #tab1{
            position: relative;
-           top: -70px;
-           
-          
-           
-       }
-       #tab{
-           position: relative;
-           top: 40px;
+           top: 20 px;
           
        }
+  
    .selectstate{
        position: relative;
        top:300px;

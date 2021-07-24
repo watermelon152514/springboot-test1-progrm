@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus?">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/添加卡类型.css">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+
+    <script>
+        window.onload = function () {
+            $(".buttoncontain").on("click", ".buttom1", function () {
+                $("#buttom1").show();
+                $("#tab1").show();
+                $("#tab2").hide();
+
+                
+            })
+
+            $(".buttoncontain").on("click", ".buttom2", function () {
+                $("#buttom1").hide();
+                $("#tab2").show();
+                $("#tab1").hide();
+              
+
+            })
+            $(".buttoncontain").on("click", ".buttom3", function () {
+                console.log("升/降级设置");
+            })
+            
+
+        }
+
+
+
+
+    </script>
+</head>
+
+<body>
+    <div class="wapper">
+
+        <div class="body">
+
+            <div class="main">
+                <div class="buttoncontain">
+                    <button class="buttom1" id="buttom">会员卡设置</button>
+                    <button class="buttom2" id="buttom">开卡充值设置</button>
+                    <button class="buttom3" id="buttom">升/降级设置</button><br>
+                </div>
+
+                <div id="tittle" >
+                    <ul>
+                        <li><button id="buttom1">添加会员卡类型</button> </li>
+                        <li id="ti2"><input type="text"  style="height: 21px;withd:100px" > <input type="submit" id="sel" value="查询"></li>
+                    </ul>
+                </div>
+                <div id="tab1">
+                    <table border="1px" width="800px">
+                        <thead>
+                            <tr>
+                                <th colspan="10">会员卡类型列表</th>
+                            </tr>
+                            <tr>
+                                <th>编号</th>
+                                <th>会员卡名称</th>
+                                <th>项目折扣</th>
+                                <th>商品折扣</th>
+                                <th>套餐折扣</th>
+                                <th>每月短信收费</th>
+                                <th>有效天数</th>
+                                <th>状态</th>
+                                <th>备注</th>
+                                <th>操作</th>
+
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>
+                                    <a href="#">添加</a>
+                                    <a href="#">删除</a>
+                                </td>
+
+                        </tbody>
+
+                        <tfoot></tfoot>
+                    </table>
+                  
+                </div>
+
+               
+
+                <div id="tab2" style="display: none;">
+                    <table border="1px" width="800px">
+                        <thead>
+                            <tr>
+                                <td colspan="10">会员卡类型列表</td>
+                            </tr>
+                            <tr>
+                                <th>编号</th>
+                                <th>会员卡名称</th>
+                                <th>开卡设置</th>
+                                <th>充值设置</th>
+                                <th>操作</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>
+                                    <a href="#">设置</a>
+                                    <a href="#">清空</a>
+
+                                </td>
+
+                        </tbody>
+                        <tfoot></tfoot>
+
+                    </table>
+                </div>
+
+
+            </div>
+
+
+
+
+
+</body>
+
+</html>
