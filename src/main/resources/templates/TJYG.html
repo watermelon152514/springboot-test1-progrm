@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+            <!--            系统设置    添加员工界面             -->
+<head>
+    <meta charset="UTF-8">
+    <title>添加员工</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+</head>
+
+<link rel="stylesheet" href="./css/tjyg.css">
+<link rel="stylesheet" href="./css/tijia.css">
+
+<!-- 修改功能中的传参请求 处理 将数据回显到模态框中-->
+<script  th:inline="javascript">
+
+    function f1(id) {
+        console.log("aaaaaaaaaaa");
+        $.ajax({
+            type: "get",
+            url: "getEmployeeById",
+            data: {"id": id},
+            dataType: "json",
+            success: showMessage,
+            error: function () {
+                alert("请求失败");
+            }
+        });
+    }
+
+    function showMessage(data) {
+        $("#BH").val(data.id);
+        $("#XM").val(data.name);
+        $("#XB").val(data.sex);
+        $("#SJ").val(data.phone);
+        $("#JB").val(data.lv);
+        $("#RZ").val(data.entrytime);
+        $("#YJ").val(data.perobj);
+        $("#ZT1").val(data.jobstatus);
+        $("#BM").val(data.department);
+        $("#BQ").val(data.label);
+        $("#PX").val(data.ordernum);
+        $("#ZT2").val(data.workstatus);
+        $("#DK").val(data.open_ports);
+        $("#TJ").val(data.tuijian_status);
+        // 显示模态框
+        $('#update').modal('show');
+    }
+
+</script>
+
+<!--<script type="text/javascript">
+    var empMsg = {      //自定义一个对象
+        currPage : 1, //当前页
+        pageSize : 2, //每页记录数
+        totalPage :null, //总页数
+        empData :null,  //用于缓存数据的变量
+
+    // 对应的按钮写对应的方法相应
+    gotoFirst: function () {    //去首页
+        if (empMsg.currPage==1){
+            alert("已经是第一页了！");
+            return;
+            }
+        empMsg.currPage=1;
+        // 如果缓存里面有数据,则不进行数据访问,直接利用缓存数据填充页面
+        if (empMsg.empData!=null){
+            //就不能调用tzQueryEmp  不用数据访问
+            empMsg.tzFillEmpListTable(empMsg.empData);//直接利用缓存数据填充页面
+            }else{
+                empMsg.tzQueryEmp();//无数据的时候调用重新刷新缓存数据
+            }
+        },
+        gotoBefore:function () {//上一页
+            empMsg.currPage&#45;&#45;;
+            if (empMsg.currPage){
+                alert("已经是第一页了！");
+                return;
+            }
+            // 如果缓存里面有数据,则不进行数据访问,直接利用缓存数据填充页面
+            if (empMsg.empData!=null){
+                //就不能调用tzQueryEmp  不用数据访问
+                empMsg.tzFillEmpListTable(empMsg.empData);//直接利用缓存数据填充页面
+            }else{
+                empMsg.tzQueryEmp();//无数据的时候调用重新刷新缓存数据
+            }
+        },
+        gotoNext:function () {//下一页
+            empMsg.currPage++;
+            if (empMsg.currPage>empMsg.totalPage){
+                alert("已到达最后一页！");
+                return;
+            }
+            // 如果缓存里面有数据,则不进行数据访问,直接利用缓存数据填充页面
+            if (empMsg.empData!=null){
+                //就不能调用tzQueryEmp  不用数据访问
+                empMsg.tzFillEmpListTable(empMsg.empData);//直接利用缓存数据填充页面
+            }else{
+                empMsg.tzQueryEmp();//无数据的时候调用重新刷新缓存数据
+            }
+        },
+        gotoLast:function () {//去尾页
+            if (empMsg.currPage==empMsg.totalPage){
+                alert("已到达最后一页");
+                return;
+        }
+            empMsg.currPage=empMsg.totalPage;
+            // 如果缓存里面有数据,则不进行数据访问,直接利用缓存数据填充页面
+            if (empMsg.empData!=null){
+                //就不能调用tzQueryEmp  不用数据访问
+                empMsg.tzFillEmpListTable(empMsg.empData);//直接利用缓存数据填充页面
+            }else{
+                empMsg.tzQueryEmp();//无数据的时候调用重新刷新缓存数据
+            }
+        },
+        //查询员工方法
+        tzQueryEmp:function () {
+            // 这里是模糊查询，获得参数穿给后台
+            var empNameQuery=$("#empNameQuery").val();
+            $.ajax({
+                type:'post',//请求方式
+                url:,
+                datatype:'json',//有几种格式 xml html json text 等常用
+                //data传值的另外一种方式 form的序列化
+                data:{"empNameQuery":empNameQuery},//传递给服务器的参数
+
+                success:function(data) {//与服务器交互成功调用的回调函数
+                    //data就是out.print输出的内容
+                    if (data=='error'){
+                        alert("查询员工记录失败！");
+                    }else{
+                        empMsg.empData=data;//相当于刷新了缓存里的数据
+                        empMsg.tzFillEmpListTable(data);//利用缓存数据填充页面
+                    }
+                }
+            });
+        },
+
+        tzFillEmpListTable:function (data) {
+            var htmlTable="";
+            if (data.length>0){
+                //页数：currPage = 1  每页记录条数：pageSize = 2
+                //通过页数和每页记录条数，计算显示返回数据数组的那几条记录
+                empMsg.totalPage = Math.ceil(data.length/empMsg.pageSize);//得到总页数
+                var beginRow = (empMsg.currPage-1)*empMsg.pageSize; //得到 每页开始行号？
+                var endRow = empMsg.currPage*empMsg.pageSize;   //定了当前页最后一行的行号
+                //如果通过页数和页记录计算出来的endRow大于数据总记录 ，则将endRow缩小至data.length
+                if (endRow>data.length){
+                    endRow = data.length;
+                }
+            // for (var i=0;i<data.length;i++){
+                for (var i=beginRow;i<endRow;i++){
+
+                }
+            }
+        }
+    }
+</script>-->
+
+<body>
+<div id="wrapper">
+    <div class="tips">
+        <div class="top1">
+            <form th:action="selectmsg" method="get">
+                <select name="sex" id="sex" class="events">
+                    <option >性别</option>
+                    <option >男</option>
+                    <option >女</option>
+                </select>
+                <select name="jobstatus" id="jobstatus" class="events">
+                    <option >状态</option>
+                    <option >在职</option>
+                    <option >离职</option>
+                </select>
+                <input type="submit"  value="筛选" style="width: 50px;height: 30px ">
+            </form>
+
+            <div class="top2">
+                <button  id="addtype" class="btn btn-primary btn-sm top2" data-toggle="modal" data-target="#myModal-1" style="background-color: rgba(1, 3, 4, 0.45); ">添加类型</button>
+                <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal-2"><span class="glyphicon glyphicon-user"></span>添加员工</button>
+                <button  id="insertall" class="btn btn-primary btn-sm top2" data-toggle="modal" data-target="#myModal-3"  style="background-color: rgba(1, 3, 4, 0.45);">批量导入</button>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div id="main">
+        <div class="msg1">
+            <img class="m1" src="./images/msg.png" >
+            <lable class="m2">员工资料列表</lable>
+
+            <div class="mtop">
+                <form class="bs-example bs-example-form" role="form">
+                    <div class="row">
+                        <div class="col-lg-6" style="width: 100%">
+                            <div class="input-group">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button">
+							筛选
+						</button>
+					</span>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="tb">
+            <table class="table table-condensed">
+                <thead>
+                    <tr >
+                        <th colspan="9" style="text-align: center;background: rgba(5,5,11,0.5)">基本信息</th>
+                        <td colspan="5" style="text-align: center;background: rgba(5,5,11,0.5)">服务信息</td>
+                        <td rowspan="2" colspan="2" style="text-align: center;background: rgba(5,5,11,0.59);font-size: larger">操作</td>
+                    </tr>
+                    <tr style="background: rgba(5,5,11,0.5)">
+                        <td>编号</td>
+                        <td>姓名</td>
+                        <td>性别</td>
+                        <td>手机号码</td>
+                        <td>级别</td>
+                        <td>入职时间</td>
+                        <td>业绩目标</td>
+                        <td>状态</td>
+                        <td>部门</td>
+
+                        <td>标签</td>
+                        <td>排序号</td>
+                        <td>状态</td>
+                        <td>开放端口</td>
+                        <td>推荐状态</td>
+
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="employee:${employees}"><!--数据-->
+                    <td id="employee" th:text="${employee.id}">001</td>
+                    <td th:text="${employee.name}">Bangalore</td>
+                    <td th:text="${employee.sex}">男</td>
+                    <td th:text="${employee.phone}">888</td>
+                    <td th:text="${employee.lv}">中公</td>
+                    <td th:text="${employee.entrytime}">2021-7-19</td>
+                    <td th:text="'今日业绩：'+${employee.perobj}">今日业绩：1</td>
+                    <td><button type="button" class="btn btn-primary" data-toggle="button" onclick="location.href=''">设置离职</button></td>
+                    <td th:text="${employee.department}"> </td>
+
+                    <td th:text="${employee.lable}"> </td>
+                    <td th:text="${employee.ordernum}">1000</td>
+                    <td><button type="button" class="btn btn-default" style="background: skyblue">上线</button></td>
+                    <td th:text="${employee.open_ports}">端端端端端</td>
+                    <td th:text="${employee.tuijian_status}"><button type="button" class="btn btn-default " style="background: orange">取消推荐</button></td>
+
+                    <td>
+                        <input id="vv" type="button" class="btn btn-default" data-toggle="modal" data-target="#update" th:onclick="|f1('${employee.id}')|" value="修改"/>
+                    </td>
+
+                    <td> <a th:href="@{deleteEmployee(id=${employee.id})}">
+                        <input type="button" class="btn btn-default" value="删除"/></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!--        分页页码显示-->
+            <ul id="yiul" class="pager" th:if="${articlePage.pages>0}" >
+                <li>
+                    <a th:href="@{TJYG.html(pageNum=1)}">首页</a>
+                </li>
+
+                <li><!-- 当前页面不等于1 的时候显示这个span 并且能够触发 -->
+                    <span th:unless="${articlePage.current==1}">
+                        <a th:href="@{TJYG.html(pageNum=${articlePage.current - 1})}">[上一页]</a>
+                    </span>
+                </li>
+
+                <li>
+                    <span th:text="'Now'+${articlePage.current}+'页'"></span>
+                </li>
+
+                <li><!-- 当前页面不等于总页数 的时候显示这个span 并且能够触发 -->
+                    <span th:unless="${articlePage.pages==articlePage.current}">
+                        <a th:href="@{TJYG.html(pageNum=${articlePage.current + 1})}">下一页</a>
+                    </span>
+                </li>
+
+                <li>
+                    <a th:href="@{TJYG.html(pageNum=${articlePage.pages})}">尾页</a>
+                </li>
+
+                <li>
+                    <span th:text="'共'+${articlePage.pages}+'页'"></span>
+                </li>
+
+            </ul>
+
+
+        </div>
+    </div>
+</div>
+
+
+<!-- 添加员工类型框  没搞懂所以没实现-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal" autocomplete="off" action="0.php">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">x</button>
+                    <h4>添加员工类型</h4>
+                </div>
+                <div class="modal-body">
+                    <div style="background: #f7ffb4">
+                        <lable >1.点击三左边的文字，可直接修改!<br><br>
+                            2.可添加多个二级分类,用于满足不同提成的设置。<br></lable>
+                    </div><br>
+
+                    <div class="form-group">
+                        <label  class="col-sm-2 control-label">工种选择:</label><br><br>
+                        <div class="col-sm-6" style="direction:ltr;">
+                            <select class="form-control">
+                                <option>发型师</option>
+                                <option>中工</option>
+                                <option>洗头工</option>
+                                <option>理发师</option>
+                            </select>
+                        </div><br><br>
+            <!--   <div style="height: 10px;width: 100%;background: deepskyblue"></div>-->
+                        <label  class="col-sm-2 control-label">工种选择:</label><br><br>
+                        <div class="col-sm-6" style="direction:ltr;">
+                            <select class="form-control">
+                                <option>发型师</option>
+                                <option>中工</option>
+                                <option>洗头工</option>
+                                <option>清洁工</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit">保存</button>
+                    <button class="btn btn-info" data-dismiss="modal">关闭</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- 增添员工信息框 -->
+<div class="modal fade" id="myModal-2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    添加员工信息
+                </h4>
+            </div>
+
+            <form action="addEmployee"  method="get">
+            <ul class="nav nav-tabs" >
+                <li role="presentation" class="active"><a href="#">基础信息</a></li>
+                <li role="presentation" class="active"><a href="#">服务信息</a></li>
+            </ul>
+            <div class="modal-body">
+                <div id="d1">
+                    <div class="add" >
+                        <lable>*编 号 </lable><input class="input" type="text" name="id" ><br><br>
+                        <lable>*姓 名 </lable><input class="input" type="text" name="name" >
+                    </div><br>
+                    <div class="add">
+                        <lable>*级 别 </lable><input id="inputlv" class="input" list="jibie" type="text" οnchange="inputSelect()" name="lv"/>
+                            <datalist id="jibie">
+                                <option value="中工"></option>
+                                <option value="理发师"></option>
+                                <option value="发型师"></option>
+                            </datalist>
+                    </div><br>
+                    <div class="add" >
+                        <lable>*部 门 </lable><input class="input" list="bumen" type="text" name="department">
+                            <datalist id="bumen">
+                                <option value="001"></option>
+                                <option value="002"></option>
+                            </datalist>
+                        </select>
+                    </div><br>
+                    <div class="add radio">
+                        <lable>*性 别   </lable>
+
+                        <!--<input type="radio" name="sex" value="man" id="man">
+                        <label for="man">男</label>
+                        <input type="radio" name="sex" value="female" id="female">
+                        <label for="female">女</label>-->
+                            <label for="man"><input  id="man" type="radio" name="sex" value="男">男</label>
+                            <label for="female"><input id="female" type="radio" name="sex" value="女">女</label>
+                    </div>
+                    <div class="add">
+                        <lable>排序号</lable>
+                        <input placeholder="1000" class="input" type="text" name="ordernum" >
+                    </div>
+                </div>
+
+                <div id="d2">
+                    <div class="add2">
+                        <lable>入职时间</lable>
+                        <input class="input lg" type="text" name="entrytime">
+                    </div><br>
+                    <div class="add2">
+                        <lable>入职状态</lable>
+                        <input placeholder="在职" class="input lg" type="text" name="jobstatus" >
+                    </div><br>
+                    <div class="add2">
+                        <lable>*手机号码</lable>
+                        <input class="input lg" type="text" name="phone">
+                    </div><br>
+                    <div class="add2">
+                        <lable>在线/离线</lable>
+                        <input placeholder="在线" class="input lg" type="text" name="workstatus" >
+                    </div><br>
+                    <div class="add2">
+                        <lable>开放端口</lable>
+                        <input placeholder="商家端、客户端、技师端" class="input lg" type="text" name="open_ports" >
+                    </div><br>
+                    <div class="add2">
+                        <lable>推荐状态</lable>
+                        <input class="input lg" type="text" name="tuijian_status">
+                    </div><br>
+                </div>
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">确定添加</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--修改员工信息的弹框-->
+<div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">x</button>
+                    <h4>修改信息</h4>
+                </div>
+
+                <div  class="modal-body">
+                    <form action="updateEmployee"  method="get">
+                        <div class="input-group">
+                            <span class="input-group-addon">编        号</span>
+                            <input type="text" class="form-control" placeholder="请输入编号" id="BH" readonly="readonly" name="id">
+                        </div><br>
+                        <div class="input-group">
+                            <span class="input-group-addon">姓        名</span>
+                            <input type="text" class="form-control" placeholder="请输入姓名" id="XM" name="name">
+                        </div><br>
+                        <div class="input-group">
+                            <span class="input-group-addon">性         别</span>
+                            <input type="text" class="form-control" placeholder="请输入性别" id="XB" name="sex" >
+                        </div><br>
+                        <div class="input-group">
+                            <span class="input-group-addon">手机号码</span>
+                            <input type="text" class="form-control" placeholder="请输入手机号码" id="SJ" name="phone">
+                        </div><br>
+                        <div class="input-group">
+                            <span class="input-group-addon">级          别</span>
+                            <input type="text" class="form-control" placeholder="请输入级别" id="JB"  name="lv">
+                        </div><br>
+                        <div class="input-group">
+                            <span class="input-group-addon">入职时间</span>
+                            <input type="text" class="form-control" placeholder="入职时间" id="RZ" name="entrytime">
+                        </div><br>
+                        <div class="input-group">
+                            <span class="input-group-addon">业绩目标</span>
+                            <input type="text" class="form-control" placeholder="业绩目标(如：0,1,2..)" id="YJ" name="perobj">
+                        </div><br>
+                        <div class="input-group">
+                            <span class="input-group-addon">状   态1</span>
+                            <input type="text" class="form-control" placeholder="离职或在职" id="ZT1" name="jobstatus">
+                        </div><br>
+                        <div class="input-group">
+                            <span class="input-group-addon">部    门</span>
+                            <input type="text" class="form-control" placeholder="请输入部门" id="BM" name="department">
+                        </div><br>
+                        <div class="input-group">
+                            <span class="input-group-addon">标    签</span>
+                            <input type="text" class="form-control" placeholder="请输入标签" id="BQ" name="lable" >
+                        </div><br>
+                        <div class="input-group">
+                            <span class="input-group-addon">排序号</span>
+                            <input type="text" class="form-control" placeholder="输入排序号" id="PX" name="ordernum">
+                        </div><br>
+                        <div class="input-group">
+                            <span class="input-group-addon">状   态2</span>
+                            <input type="text" class="form-control" placeholder="上线或离线" id="ZT2" name="workstatus">
+                        </div><br>
+                        <div class="input-group">
+                            <span class="input-group-addon">开放端口</span>
+                            <input type="text" class="form-control" placeholder="商家端、客户端、技师端" id="DK" name="open_ports">
+                        </div><br>
+                        <div class="input-group">
+                            <span class="input-group-addon">推荐状态</span>
+                            <input type="text" class="form-control" placeholder="推荐状态" id="TJ" name="tuijian_status">
+                        </div><br>
+
+                        <div class="modal-footer" >
+                            <input type="submit" class="btn btn-primary" value="保存"/>
+
+                            <button class="btn btn-info" data-dismiss="modal">关闭</button>
+                        </div>
+                    </form>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.guet.cn.springboottest1program.mapper.EmployeesMapper">
+
+
+    <select id="selectmsg" parameterType="com.guet.cn.springboottest1program.bean.Employees" resultType="com.guet.cn.springboottest1program.bean.Employees">
+        <choose>
+            <when test="sex eq '性别' and jobstatus eq '状态'">
+                SELECT * FROM employeesinfo
+            </when>
+            <when test="sex eq '性别' ">
+                SELECT * FROM jobstatus=#{jobstatus}
+            </when>
+            <when test="jobstatus eq '状态' ">
+                SELECT * FROM sex=#{sex}
+            </when>
+            <otherwise>
+                SELECT * FROM sex=#{sex} AND jobstatus=#{jobstatus}
+            </otherwise>
+        </choose>
+    </select>
+
+
+    <select id="viewEmployees" resultType="com.guet.cn.springboottest1program.bean.Employees">
+        SELECT * FROM employeesinfo
+    </select>
+
+    <delete id="deleteEmployee" parameterType="int">
+        DELETE FROM employeesinfo WHERE id=#{value}
+    </delete>
+
+    <select id="getEmployeeById" parameterType="int" resultType="com.guet.cn.springboottest1program.bean.Employees">
+        SELECT * FROM employeesinfo WHERE id=#{value}
+    </select>
+
+    <!--    添加员工信息-->
+    <insert id="addEmployee" parameterType="employees">
+        INSERT INTO employeesinfo VALUES (#{id},#{name}, #{sex}, #{phone}, #{lv}, #{entrytime},null,#{jobstatus},#{department}, null,#{ordernum},workstatus=#{workstatus}, open_ports=#{open_ports}, #{tuijian_status})
+    </insert>
+    <!--    修改员工信息-->
+    <update id="updateEmployee" parameterType="employees">
+        UPDATE employeesinfo SET name=#{name}, sex=#{sex}, phone=#{phone}, lv=#{lv}, entrytime=#{entrytime},perobj=#{perobj},jobstatus=#{jobstatus},department=#{department}, lable=#{lable},ordernum=#{ordernum},workstatus=#{workstatus}, open_ports=#{open_ports}, tuijian_status=#{tuijian_status}
+        WHERE id=#{id}
+    </update>
+
+</mapper>
