@@ -1,6 +1,6 @@
 package com.guet.cn.springboottest1program.bean;
 
-public class vip_information {
+public class Vip_information {
     private String VIP_ID;
     private String VIP_NAME;
     private String VIP_PHONE;
@@ -15,6 +15,15 @@ public class vip_information {
     private String BIRTHDAY;
     private String OPENG_TIME;
     private String LAST_TIME;
+    private String CUSTOMER_SEX;
+
+    public String getCUSTOMER_SEX() {
+        return CUSTOMER_SEX;
+    }
+
+    public void setCUSTOMER_SEX(String CUSTOMER_SEX) {
+        this.CUSTOMER_SEX = CUSTOMER_SEX;
+    }
 
     public String getVIP_ID() {
         return VIP_ID;

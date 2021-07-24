@@ -7,18 +7,18 @@
     <script type="text/javascript"  th:src="@{/js/jquery-3.6.0.min.js}"></script>
 </head>
 <body>
-<div class="top">
-    <div>
-        <a th:href="@{sendAllChat.html}" target="menuFrame">返回列表</a>
-        <span>></span>
-        <span>营销短信发送</span>
-        <span>></span>
-        <a th:href="@{sendAllChat.html}" target="menuFrame" class="button"><input type="button" value="返回列表" id="button"></a>
-    </div>
 
-</div>
 <div class="wrapper">
+    <div class="top">
+        <div>
+            <a th:href="@{sendAllChat.html}" target="menuFrame">返回列表</a>
+            <span>></span>
+            <span>营销短信发送</span>
+            <span>></span>
+            <a th:href="@{sendAllChat.html}" target="menuFrame" class="button"><input type="button" value="返回列表" id="button"></a>
+        </div>
 
+    </div>
     <div class="head">
         <div id="tips">
             <div>发营销短信 “尊称+内容+签名” 目前移动、联通、电信营销资源系统自带“回复TD退订”字眼，扣费字符标准是64个字符内为一条，超过64个字符按64的倍数扣除</div>
@@ -36,7 +36,7 @@
             </div>
             <div id="left-contain">
                 <div><span>客户称呼</span><input type="text" value="亲爱的" id="l-c-items"> <span class="ps">必须填写称呼，例如亲爱的，否则无法发送成功（运营商要求）</span></div>
-                <div><span>编辑内容</span><textarea id="l-c-items" cols="98" rows="5"></textarea></div>
+                <div><span>编辑内容</span><textarea id="l-c-items" cols="30" rows="5"></textarea></div>
                 <div id="sendTime">
                     <span>发送时间</span>
                     <div><input type="radio" name="sel" id="s-t-items"><span id="s-t-items">立即发送</span></div>
@@ -66,7 +66,7 @@
             <input type="button" value="设置选择条件" name="" id="foot-button">
         </div>
         <div id="foot-contain">
-            <textarea name="" id="f-text" cols="170" rows="9"></textarea>
+            <textarea name="" id="f-text" cols="110" rows="4"></textarea>
         </div>
     </div>
 </div>

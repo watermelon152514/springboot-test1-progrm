@@ -7,49 +7,11 @@
     <script type="text/javascript"  th:src="@{/js/jquery-3.6.0.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/vipList.js}"></script>
     <script type="text/javascript" th:src="@{/js/layer-v3.5.1/layer/layer.js}"></script>
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css}" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.6.3/css/all.css}" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/bootstrap-table.min.css}">
+    <script type="text/javascript" th:src="@{https://unpkg.com/bootstrap-table@1.15.3/dist/bootstrap-table.min.js}"></script>
     <script th:inline="javascript">
-        // $(function(){
-        //     $('#search').on('click',function(){
-        //         var a=0
-        //         var card_amount=0
-        //         var gift_money=0
-        //         var integral=0
-        //         var package=0
-        //         var package_amount=0
-        //         var arrears=0
-        //         console.log($("#car option:selected").text())//获取选择文本
-        //         console.log($("#sex option:selected").text())
-        //         console.log($("#user option:selected").text())
-        //         console.log($("#meal option:selected").text())
-        //         $.ajax({
-        //             url:"vipList.do",
-        //             method:"GET",
-        //             dataType:"JSON",
-        //             async:true,
-        //             data:{
-        //                 card_type:$("#car option:selected").text(),
-        //                 sex:$("#sex option:selected").text()
-        //             },
-        //             success:function(data){//data服务器返回的数据
-        //                 console.log(data);
-        //                 $.each(data,function(index,vip){
-        //                     console.log(vip.card_id);
-        //                     console.log(vip.customer_name);
-        //                     a=index+1//获取数据长度
-        //                     card_amount=card_amount+vip.card_amount*1
-        //                     gift_money+=vip.gift_money*1
-        //                     integral+=vip.integral*1
-        //                     if (vip.package!="null"){
-        //                         package+=1
-        //                     }
-        //                     package_amount+=vip.package_amount*1
-        //                     arrears+=vip.arrears*1
-        //                 })
-        //                 $('.tips').children('div').text("查询统计:总共"+a+"位，卡金"+card_amount+"元、赠送金"+gift_money+"元、积分"+integral+"分、套餐用户"+package+"位、套餐余额"+package_amount+"元、欠款"+arrears+"元")
-        //             }
-        //         })
-        //     })
-        // })
         function la(VIP_ID){
             layer.open({
                 type: 2 //Page层类型
@@ -58,30 +20,87 @@
                 ,shade: 0.6 //遮罩透明度
                 ,maxmin: true //允许全屏最小化
                 ,anim: 5 //0-6的动画形式，-1不开启
+                ,btn: ['确定','取消']
                 ,content: 'vipModify.html?VIP_ID='+VIP_ID
             });
         }
+        $(document).ready(function(){
+            $("#table").bootstrapTable({
+                columns:[{
+                    field:'select',
+                    title:'口'
+                },{
+                    field:'VIP_ID',
+                    title:'卡号'
+                },{
+                    field:'VIP_NAME',
+                    title:'用户姓名'
+                },{
+                    field:'VIP_PHONE',
+                    title:'手机号'
+                },{
+                    field:'VIP_TYPE',
+                    title:'卡类'
+                },{
+                    field:'CARD_MONEY',
+                    title:'卡金'
+                },{
+                    field:'HISTORY_MONGEY',
+                    title:'消费总额'
+                },{
+                    field:'ZENGSONG_MONEY',
+                    title:'赠送金'
+                },{
+                    field:'JIFEN',
+                    title:'积分'
+                },{
+                    field:'QIANKUAN',
+                    title:'欠款'
+                },{
+                    field:'TAOCAN_NUMBER',
+                    title:'套餐数量'
+                },{
+                    field:'TAOCAN_REMAIN',
+                    title:'套餐余额'
+                },{
+                    field:'BIRTHDAY',
+                    title:'生日'
+                },{
+                    field:'OPENG_TIME',
+                    title:'开卡时间'
+                },{
+                    field:'LAST_TIME',
+                    title:'最近操作时间'
+                },{
+                    field:'opra',
+                    title:'操作'
+                },]
+            })
+        })
     </script>
 </head>
 <body>
 <div class="wrapper">
     <div class="header">
-        <input type="text" placeholder="会员姓名/卡号/手机号"  class="search">
+
         <form th:action="vipList.do" method="get">
+            <input type="text" placeholder="会员姓名/卡号/手机号"  class="search" id="searchT" name="searchT" th:value="${searchT}">
             <select name="VIP_TYPE" id="VIP_TYPE" class="events">
-                <option >全部会员卡类</option>
-                <option >美甲会员</option>
-                <option >9折卡</option>
-                <option >8.5折卡</option>
-                <option >8折卡</option>
-                <option >7.5折卡</option>
-                <option >7折卡</option>
+                <!--th:selected="${vip_type=='全部会员卡类'}" value="全部会员卡类" 用于判断是否等于该类，等于则回显value-->
+                <option th:selected="${vip_type=='全部会员卡类'}" value="全部会员卡类">全部会员卡类</option>
+                <option th:selected="${vip_type=='美甲会员'}" value="美甲会员">美甲会员</option>
+                <option th:selected="${vip_type=='9折卡'}" value="9折卡">9折卡</option>
+                <option th:selected="${vip_type=='8.5折卡'}" value="8.5折卡">8.5折卡</option>
+                <option th:selected="${vip_type=='8折卡'}" value="8折卡">8折卡</option>
+                <option th:selected="${vip_type=='7.5折卡'}" value="7.5折卡">7.5折卡</option>
+                <option th:selected="${vip_type=='7折卡'}" value="7折卡">7折卡</option>
             </select>
-            <select name="sex" id="sex" class="events">
-                <option >全部性别</option>
-                <option >男</option>
-                <option >女</option>
+            <select name="CUSTOMER_SEX" id="CUSTOMER_SEX" class="events" th:option="${customer_sex}">
+                <option th:selected="${vip_type=='全部性别'}" value="全部性别">全部性别</option>
+                <option th:selected="${vip_type=='男'}" value="男">男</option>
+                <option th:selected="${vip_type=='女'}" value="女">女</option>
             </select>
+            <!--后两个select暂不处理-->
             <select name="kinds_user" id="kinds_user" class="events">
                 <option>正常用户</option>
                 <option>已删除用户</option>
@@ -99,25 +118,26 @@
         </div>
     </div>
     <div class="main" >
-        <table border="1" th:if="${vip_information} ne null">
-            <tr>
-                <th>口</th>
-                <th>卡号</th>
-                <th>用户姓名</th>
-                <th>手机号</th>
-                <th>卡类</th>
-                <th>卡金</th>
-                <th>消费总额</th>
-                <th>赠送金</th>
-                <th>积分</th>
-                <th>欠款</th>
-                <th>套餐数量</th>
-                <th>套餐余额</th>
-                <th>生日</th>
-                <th>开卡时间</th>
-                <th>最近消费时间</th>
-                <th>操作</th>
-            </tr>
+        <table border="1" id="table" th:if="${vip_information} ne null"
+               data-pagination="true"  data-side-pagination="client"  data-page-size="5">
+<!--            <tr>-->
+<!--                <th>口</th>-->
+<!--                <th>卡号</th>-->
+<!--                <th>用户姓名</th>-->
+<!--                <th>手机号</th>-->
+<!--                <th>卡类</th>-->
+<!--                <th>卡金</th>-->
+<!--                <th>消费总额</th>-->
+<!--                <th>赠送金</th>-->
+<!--                <th>积分</th>-->
+<!--                <th>欠款</th>-->
+<!--                <th>套餐数量</th>-->
+<!--                <th>套餐余额</th>-->
+<!--                <th>生日</th>-->
+<!--                <th>开卡时间</th>-->
+<!--                <th>最近消费时间</th>-->
+<!--                <th>操作</th>-->
+<!--            </tr>-->
             <tr th:each="vip:${vip_information}">
                 <td></td>
                 <td th:text="${vip.VIP_ID}"></td>

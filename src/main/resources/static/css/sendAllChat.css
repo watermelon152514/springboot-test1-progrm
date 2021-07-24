@@ -1,25 +1,28 @@
 *{
     padding: 0px;
     margin: 0px;
+    box-sizing: border-box;
 }
 .wrapper{
-    padding: 20px;
+    width: 838.5px;
+    height: 639.6px;
+    padding: 20px 0 0 10px;
 }
 .tips{
-  width: 1260px;
-  height: 40px;
-  margin-left: 5px; 
-  background-color: rgb(221, 231, 175);
-  border: rgb(218, 230, 168) solid 1px;
+    width: 100%;
+    height: 6%;
+    margin-left: 5px;
+    background-color: rgb(221, 231, 175);
+    border: rgb(218, 230, 168) solid 1px;
 }
 .main{
-  width: 1260px;
-  height: 600px;
-  border: 1px inset gray;
-  margin-left: 5px;
-  margin-top: 15px;
+    width: 100%;
+    height: 94%;
+    border: 1px inset gray;
+    margin-left: 5px;
+    margin-top: 15px;
 }
 #button{
-  float:right; 
-  background-color: rgb(63, 165, 123);
+    float:right;
+    background-color: rgb(63, 165, 123);
 }

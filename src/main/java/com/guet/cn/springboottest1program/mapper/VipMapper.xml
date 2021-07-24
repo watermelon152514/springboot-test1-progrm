@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.guet.cn.springboottest1program.mapper.VipMapper">
 
-    <resultMap id="vipMap" type="com.guet.cn.springboottest1program.bean.vip_information">
+    <resultMap id="vipMap" type="com.guet.cn.springboottest1program.bean.Vip_information">
         <id column="VIP_ID" property="VIP_ID"/>
         <result column="VIP_NAME" property="VIP_NAME"/>
         <result column="VIP_PHONE" property="VIP_PHONE"/>
@@ -18,26 +18,49 @@
         <result column="OPENG_TIME" property="OPENG_TIME"/>
         <result column="LAST_TIME" property="LAST_TIME"/>
     </resultMap>
-    <select id="selectVip" resultMap="vipMap" parameterType="com.guet.cn.springboottest1program.bean.vip_information">
+    <select id="selectVip" resultMap="vipMap" parameterType="com.guet.cn.springboottest1program.bean.Vip_information">
         <choose>
-            <when test=" VIP_TYPE eq '全部会员卡类'">
+            <when test=" VIP_TYPE eq '全部会员卡类' and CUSTOMER_SEX eq '全部性别'">
                 SELECT * FROM vip_information
+                <if test="searchT != null and searchT != ''">
+                    WHERE 1=1
+                    AND CONCAT(VIP_ID, VIP_NAME,VIP_PHONE) LIKE CONCAT('%',#{param3},'%')
+                </if>
+            </when>
+            <when test="VIP_TYPE eq '全部会员卡类' and CUSTOMER_SEX neq '全部性别'">
+                SELECT * FROM vip_information where CUSTOMER_SEX=#{CUSTOMER_SEX,jdbcType=VARCHAR}
+                <if test="searchT != null and searchT != ''">
+                    AND 1=1
+                    AND CONCAT(VIP_ID, VIP_NAME,VIP_PHONE) LIKE CONCAT('%',#{param3},'%')
+                </if>
+            </when>
+            <when test="VIP_TYPE neq '全部会员卡类' and CUSTOMER_SEX eq '全部性别'">
+                SELECT * FROM vip_information where VIP_TYPE=#{VIP_TYPE,jdbcType=VARCHAR}
+                <if test="searchT != null and searchT != ''">
+                    AND 1=1
+                    AND CONCAT(VIP_ID, VIP_NAME,VIP_PHONE) LIKE CONCAT('%',#{param3},'%')
+                </if>
             </when>
             <otherwise>
-                SELECT * FROM vip_information where VIP_TYPE=#{VIP_TYPE,jdbcType=VARCHAR}
+                SELECT * FROM vip_information where VIP_TYPE=#{VIP_TYPE,jdbcType=VARCHAR} AND CUSTOMER_SEX=#{CUSTOMER_SEX,jdbcType=VARCHAR}
+                <if test="searchT != null and searchT != ''">
+                    AND 1=1
+                    AND CONCAT(VIP_ID, VIP_NAME,VIP_PHONE) LIKE CONCAT('%',#{param3},'%')
+                </if>
             </otherwise>
+
         </choose>
     </select>
     <select id="viewVips" resultMap="vipMap">
         SELECT * FROM vip_information
     </select>
-    <delete id="deleteVip" parameterType="com.guet.cn.springboottest1program.bean.vip_information">
+    <delete id="deleteVip" parameterType="com.guet.cn.springboottest1program.bean.Vip_information">
         DELETE FROM vip_information WHERE VIP_ID=#{value}
     </delete>
-    <select id="selectVipById" parameterType="com.guet.cn.springboottest1program.bean.vip_information" resultMap="vipMap">
+    <select id="selectVipById" parameterType="com.guet.cn.springboottest1program.bean.Vip_information" resultMap="vipMap">
         SELECT * FROM vip_information WHERE VIP_ID=#{value}
     </select>
-    <update id="modifyVip" parameterType="com.guet.cn.springboottest1program.bean.vip_information">
+    <update id="modifyVip" parameterType="com.guet.cn.springboottest1program.bean.Vip_information">
         UPDATE vip_information SET VIP_NAME=#{param1},VIP_PHONE=#{param2} WHERE VIP_ID=#{param3}
     </update>
 </mapper>

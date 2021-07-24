@@ -1,6 +1,6 @@
 package com.guet.cn.springboottest1program.service.Impl;
 
-import com.guet.cn.springboottest1program.bean.vip_information;
+import com.guet.cn.springboottest1program.bean.Vip_information;
 import com.guet.cn.springboottest1program.mapper.VipMapper;
 import com.guet.cn.springboottest1program.service.IVipService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,18 +9,18 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class vipServiceImpl implements IVipService {
+public class VipServiceImpl implements IVipService {
 
     @Autowired
     private VipMapper vipMapper;
 
     @Override
-    public List<vip_information> selectVip(String VIP_TYPE) {
-        return vipMapper.selectVip(VIP_TYPE);
+    public List<Vip_information> selectVip(String VIP_TYPE,String CUSTOMER_SEX,String searchT) {
+        return vipMapper.selectVip(VIP_TYPE,CUSTOMER_SEX,searchT);
     }
 
     @Override
-    public List<vip_information> viewVips() {
+    public List<Vip_information> viewVips() {
         return vipMapper.viewVips();
     }
 
@@ -30,7 +30,7 @@ public class vipServiceImpl implements IVipService {
     }
 
     @Override
-    public vip_information selectVipById(String VIP_ID) {
+    public Vip_information selectVipById(String VIP_ID) {
         return vipMapper.selectVipById(VIP_ID);
     }
 
