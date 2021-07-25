@@ -20,7 +20,7 @@ public class EmployeeService implements IEmployeeService {
         return employeesMapper.selectmsg(sex,jobstatus);
     }
 
-    @Override
+    @Override//改造这个方法成分页时候的查询
     public List<Employees> viewEmployees() {
         return employeesMapper.viewEmployees();
     }
@@ -44,4 +44,27 @@ public class EmployeeService implements IEmployeeService {
     public void addEmployee(int id, String name, String sex, String phone, String lv, Date entrytime,String jobstatus, String department, int ordernum, String workstatus, String open_ports, String tuijian_status){
         employeesMapper.addEmployee(id, name, sex, phone, lv, entrytime,jobstatus,department,ordernum,workstatus, open_ports, tuijian_status);
     }
+
+    @Override
+    public List<Employees> searchYG(String sparam) {
+        return employeesMapper.searchYG(sparam);
+
+    }
+
+    @Override
+    public void setjobstatus(int setjob, int id) {
+        employeesMapper.setjobstatus(setjob,id);
+    }
+
+    @Override
+    public void setworkstatus(int setwork, int id) {
+        employeesMapper.setworkstatus(setwork,id);
+    }
+
+    @Override
+    public void settuijian(int settui, int id) {
+        employeesMapper.settuijian(settui, id);
+    }
+
+
 }

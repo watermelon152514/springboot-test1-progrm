@@ -30,8 +30,8 @@ public class EmployeesController {
         return "XTSZ";
     }
 
-    /*进入页面就开始显示数据*/ /*改造此方法成分页*/
-   /* @GetMapping("TJYG.html")
+    /*进入页面就开始显示数据*/
+    /*@GetMapping("TJYG.html")        *//*改造此方法成分页*//*
     public String viewEmployees(HttpServletRequest request){
         request.setAttribute("employees",iEmployeeService.viewEmployees());
         return "TJYG";
@@ -82,7 +82,7 @@ public class EmployeesController {
     }
 
 
-    @GetMapping("getEmployeeById")
+    @GetMapping("getEmployeeById")/*跟update一起用：修改操作*/
     @ResponseBody
     public Employees getEmployeeById(int id){
         System.out.println("aaaaaaa");
@@ -96,9 +96,58 @@ public class EmployeesController {
         return "redirect:TJYG.html";
     }
 
-    @GetMapping("addEmployee")
+    @GetMapping("addEmployee")  /*添加操作*/
     public String addEmployee(int id, String name, String sex, String phone, String lv, Date entrytime,String jobstatus, String department, int ordernum, String workstatus, String open_ports, String tuijian_status){
         iEmployeeService.addEmployee(id,name,sex,phone,lv,entrytime,jobstatus,department,ordernum,workstatus,open_ports,tuijian_status);
+        return "redirect:TJYG.html";
+    }
+
+    @GetMapping("searchYG")
+    public String searchYG(String sparam, Model model, @RequestParam(value ="pageNum",defaultValue ="1") int pageNum,
+                           @RequestParam(value = "pageSize",defaultValue = "4") int pageSize){
+        System.out.println("1111111111"+sparam);
+//        PageHelper.startPage(pageNum,pageSize);//调用PageHelper接口
+        //iEmployeeService.searchYG(sparam);
+
+        List<Employees> employees=iEmployeeService.searchYG(sparam);
+        System.out.println(employees.get(1));
+
+       /* PageInfo<Employees> pageInfo=new PageInfo<>(employees,4);//调用接口里面的方法
+        Map data=new HashMap();
+        data.put("total",pageInfo.getTotal());//总记录数 一共多少条
+        data.put("pages",pageInfo.getPages());//总页数
+        data.put("current",pageInfo.getPageNum());//当前页码
+        data.put("alldata",pageInfo.getList());//总数据
+
+        System.out.println("总页数"+pageInfo.getPages());
+        ModelAndView modelAndView=new ModelAndView();*/
+        model.addAttribute("employees",employees);//把从数据库遍历到的数据添加到model
+//        modelAndView.addObject("articlePage1",data);//将一些页码参数，放入到modelAndView
+
+      /*两句合在一起*/
+//        modelAndView.setViewName("TJYG");//设置View的名字  类似于跳转 setViewName("redirect:TJYG.html")---重定向
+//        return modelAndView;    //会经过视图解析器找到对应的相应页面
+        return "TJYG";
+    }
+
+//    设置在职或离职状态
+    @GetMapping("setjobstatus")
+    public String setjobstatus( int setjob,int id){
+        iEmployeeService.setjobstatus(setjob,id);
+        System.out.println("离职0 zaizhi 1----"+setjob+"bbbb"+id);
+        return "redirect:TJYG.html";
+//        return "TJYG::setstatus1";        /*因为分页缘故导致局部刷新失败，要想局部刷新，分页要改变*/
+    }
+
+    @GetMapping("setworkstatus")
+    public String setworkstatus(int setwork,int id){
+        iEmployeeService.setworkstatus(setwork,id);
+        return "redirect:TJYG.html";
+    }
+
+    @GetMapping("settuijian")
+    public String settuijian(int settui,int id){
+        iEmployeeService.settuijian(settui, id);
         return "redirect:TJYG.html";
     }
 

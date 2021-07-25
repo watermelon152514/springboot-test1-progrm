@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-            <!--            系统设置    添加员工界面             -->
 <head>
+            <!--                 系统设置第一个界面......添加员工-->
     <meta charset="UTF-8">
     <title>添加员工</title>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+
 </head>
 
 <link rel="stylesheet" href="./css/tjyg.css">
@@ -29,6 +29,7 @@
                 alert("请求失败");
             }
         });
+
     }
 
     function showMessage(data) {
@@ -50,121 +51,66 @@
         $('#update').modal('show');
     }
 
+    // 设置离职 (0) 还是在职 (1)
+        function fset(id,jobstatus) {
+            console.log(jobstatus);
+            if(jobstatus==2){
+                 setjob=0;
+                console.log("里面的2：setjob="+setjob);
+
+            }
+            else if(jobstatus==3) {
+                  setjob=1;
+                console.log("里面的3：setjob="+setjob);
+            }
+            console.log("现在的：setjob="+setjob);
+            $.get("setjobstatus",
+                {"setjob":setjob,"id":id},
+            function(data){
+                    window.location.href="TJYG.html";//实现刷新页面
+                    alert("设置成功");
+            });
+        };
+
+    // 设置在线 (true 1)  还是(离线 0)
+    function wset(id,status) {
+        console.log(status);
+        if (status==true){
+            setwork=0;
+        }else if (status==false){
+            setwork=1;
+        }
+        console.log("现在的：setwork="+setwork);
+        $.get("setworkstatus",
+            {"setwork":setwork,"id":id},
+            function(data){
+                window.location.href="TJYG.html";//实现刷新页面
+                alert("设置成功");
+            });
+    }
+    function tset(id,status) {
+        console.log(status);
+        if (status==true){
+            settui=0;
+        }else if (status==false){
+            settui=1;
+        }
+        console.log("现在的：settui="+settui);
+        $.get("settuijian",
+            {"settui":settui,"id":id},
+            function(data){
+                window.location.href="TJYG.html";//实现刷新页面
+                alert("设置成功");
+            });
+    }
 </script>
 
-<!--<script type="text/javascript">
-    var empMsg = {      //自定义一个对象
-        currPage : 1, //当前页
-        pageSize : 2, //每页记录数
-        totalPage :null, //总页数
-        empData :null,  //用于缓存数据的变量
-
-    // 对应的按钮写对应的方法相应
-    gotoFirst: function () {    //去首页
-        if (empMsg.currPage==1){
-            alert("已经是第一页了！");
-            return;
-            }
-        empMsg.currPage=1;
-        // 如果缓存里面有数据,则不进行数据访问,直接利用缓存数据填充页面
-        if (empMsg.empData!=null){
-            //就不能调用tzQueryEmp  不用数据访问
-            empMsg.tzFillEmpListTable(empMsg.empData);//直接利用缓存数据填充页面
-            }else{
-                empMsg.tzQueryEmp();//无数据的时候调用重新刷新缓存数据
-            }
-        },
-        gotoBefore:function () {//上一页
-            empMsg.currPage&#45;&#45;;
-            if (empMsg.currPage){
-                alert("已经是第一页了！");
-                return;
-            }
-            // 如果缓存里面有数据,则不进行数据访问,直接利用缓存数据填充页面
-            if (empMsg.empData!=null){
-                //就不能调用tzQueryEmp  不用数据访问
-                empMsg.tzFillEmpListTable(empMsg.empData);//直接利用缓存数据填充页面
-            }else{
-                empMsg.tzQueryEmp();//无数据的时候调用重新刷新缓存数据
-            }
-        },
-        gotoNext:function () {//下一页
-            empMsg.currPage++;
-            if (empMsg.currPage>empMsg.totalPage){
-                alert("已到达最后一页！");
-                return;
-            }
-            // 如果缓存里面有数据,则不进行数据访问,直接利用缓存数据填充页面
-            if (empMsg.empData!=null){
-                //就不能调用tzQueryEmp  不用数据访问
-                empMsg.tzFillEmpListTable(empMsg.empData);//直接利用缓存数据填充页面
-            }else{
-                empMsg.tzQueryEmp();//无数据的时候调用重新刷新缓存数据
-            }
-        },
-        gotoLast:function () {//去尾页
-            if (empMsg.currPage==empMsg.totalPage){
-                alert("已到达最后一页");
-                return;
-        }
-            empMsg.currPage=empMsg.totalPage;
-            // 如果缓存里面有数据,则不进行数据访问,直接利用缓存数据填充页面
-            if (empMsg.empData!=null){
-                //就不能调用tzQueryEmp  不用数据访问
-                empMsg.tzFillEmpListTable(empMsg.empData);//直接利用缓存数据填充页面
-            }else{
-                empMsg.tzQueryEmp();//无数据的时候调用重新刷新缓存数据
-            }
-        },
-        //查询员工方法
-        tzQueryEmp:function () {
-            // 这里是模糊查询，获得参数穿给后台
-            var empNameQuery=$("#empNameQuery").val();
-            $.ajax({
-                type:'post',//请求方式
-                url:,
-                datatype:'json',//有几种格式 xml html json text 等常用
-                //data传值的另外一种方式 form的序列化
-                data:{"empNameQuery":empNameQuery},//传递给服务器的参数
-
-                success:function(data) {//与服务器交互成功调用的回调函数
-                    //data就是out.print输出的内容
-                    if (data=='error'){
-                        alert("查询员工记录失败！");
-                    }else{
-                        empMsg.empData=data;//相当于刷新了缓存里的数据
-                        empMsg.tzFillEmpListTable(data);//利用缓存数据填充页面
-                    }
-                }
-            });
-        },
-
-        tzFillEmpListTable:function (data) {
-            var htmlTable="";
-            if (data.length>0){
-                //页数：currPage = 1  每页记录条数：pageSize = 2
-                //通过页数和每页记录条数，计算显示返回数据数组的那几条记录
-                empMsg.totalPage = Math.ceil(data.length/empMsg.pageSize);//得到总页数
-                var beginRow = (empMsg.currPage-1)*empMsg.pageSize; //得到 每页开始行号？
-                var endRow = empMsg.currPage*empMsg.pageSize;   //定了当前页最后一行的行号
-                //如果通过页数和页记录计算出来的endRow大于数据总记录 ，则将endRow缩小至data.length
-                if (endRow>data.length){
-                    endRow = data.length;
-                }
-            // for (var i=0;i<data.length;i++){
-                for (var i=beginRow;i<endRow;i++){
-
-                }
-            }
-        }
-    }
-</script>-->
 
 <body>
 <div id="wrapper">
     <div class="tips">
         <div class="top1">
-            <form th:action="selectmsg" method="get">
+            <form th:action="@{selectmsg}" method="get">
                 <select name="sex" id="sex" class="events">
                     <option >性别</option>
                     <option >男</option>
@@ -193,18 +139,20 @@
             <img class="m1" src="./images/msg.png" >
             <lable class="m2">员工资料列表</lable>
 
-            <div class="mtop">
-                <form class="bs-example bs-example-form" role="form">
+            <div class="mtop"><!-- 里面的URL是变的时候 才用th  如超链接一样  -->
+                <form class="bs-example bs-example-form" role="form"  th:action="@{searchYG}" th:method="get"  >
                     <div class="row">
                         <div class="col-lg-6" style="width: 100%">
+
                             <div class="input-group">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="button">
-							筛选
-						</button>
-					</span>
-                                <input type="text" class="form-control">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">
+                                        查询
+                                    </button>
+                                </span>
+                                <input name="sparam" type="text" class="form-control" placeholder="输入姓名或级别查询">
                             </div>
+
                         </div>
                     </div>
                 </form>
@@ -238,8 +186,8 @@
 
                     </tr>
                 </thead>
-                <tbody>
-                <tr th:each="employee:${employees}"><!--数据-->
+                <tbody >
+                <tr th:each="employee,start:${employees}"><!--数据-->
                     <td id="employee" th:text="${employee.id}">001</td>
                     <td th:text="${employee.name}">Bangalore</td>
                     <td th:text="${employee.sex}">男</td>
@@ -247,14 +195,35 @@
                     <td th:text="${employee.lv}">中公</td>
                     <td th:text="${employee.entrytime}">2021-7-19</td>
                     <td th:text="'今日业绩：'+${employee.perobj}">今日业绩：1</td>
-                    <td><button type="button" class="btn btn-primary" data-toggle="button" onclick="location.href=''">设置离职</button></td>
+                    <td >
+                        <span th:if="${employee.jobstatus}=='在职'">
+                            <input type="button" class="btn btn-primary" th:onclick="|fset('${employee.id}',2)|" value="设置离职" />
+                        </span>
+                        <span th:unless="${employee.jobstatus}=='在职'">
+                            <input type="button" class="btn btn-primary" th:onclick="|fset('${employee.id}',3)|" value="设置在职" />
+                        </span>
+                    </td>
                     <td th:text="${employee.department}"> </td>
 
                     <td th:text="${employee.lable}"> </td>
                     <td th:text="${employee.ordernum}">1000</td>
-                    <td><button type="button" class="btn btn-default" style="background: skyblue">上线</button></td>
+                    <td>
+                        <span th:if="${employee.workstatus}=='在线'">
+                            <input type="button" class="btn btn-default" style="background: skyblue" th:onclick="|wset('${employee.id}',true)|" value="下线"/>
+                        </span>
+                        <span th:unless="${employee.workstatus}=='在线'">
+                            <input type="button" class="btn btn-default" style="background: gray" th:onclick="|wset('${employee.id}',false)|" value="上线"/>
+                        </span>
+                    </td>
                     <td th:text="${employee.open_ports}">端端端端端</td>
-                    <td th:text="${employee.tuijian_status}"><button type="button" class="btn btn-default " style="background: orange">取消推荐</button></td>
+                    <td>
+                        <span th:if="${employee.tuijian_status}=='推荐'">
+                            <input type="button" class="btn btn-default " style="background: orange" th:onclick="|tset('${employee.id}',true)|" value="取消推荐"/>
+                        </span>
+                        <span th:unless="${employee.tuijian_status}=='推荐'">
+                            <input type="button" class="btn btn-default " style="background: lawngreen" th:onclick="|tset('${employee.id}',false)|" value="推荐"/>
+                        </span>
+                    </td>
 
                     <td>
                         <input id="vv" type="button" class="btn btn-default" data-toggle="modal" data-target="#update" th:onclick="|f1('${employee.id}')|" value="修改"/>
@@ -298,6 +267,10 @@
                 </li>
 
             </ul>
+
+
+
+
 
 
         </div>
@@ -396,10 +369,7 @@
                     <div class="add radio">
                         <lable>*性 别   </lable>
 
-                        <!--<input type="radio" name="sex" value="man" id="man">
-                        <label for="man">男</label>
-                        <input type="radio" name="sex" value="female" id="female">
-                        <label for="female">女</label>-->
+
                             <label for="man"><input  id="man" type="radio" name="sex" value="男">男</label>
                             <label for="female"><input id="female" type="radio" name="sex" value="女">女</label>
                     </div>

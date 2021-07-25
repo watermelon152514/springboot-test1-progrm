@@ -14,4 +14,9 @@ public interface IEmployeeService {
     Employees getEmployeeById(int id);
     void updateEmployee(int id, String name, String sex, String phone, String lv, Date entrytime, int perobj, String jobstatus, String department, String lable, int ordernum, String workstatus, String open_ports, String tuijian_status);
     void addEmployee(int id, String name, String sex, String phone, String lv, Date entrytime, String jobstatus, String department, int ordernum, String workstatus, String open_ports, String tuijian_status);
+
+    List<Employees> searchYG(@Param("sparam") String sparam);
+    void setjobstatus(@Param("setjob") int setjob, @Param("id") int id);
+    void setworkstatus(@Param("setwork") int setwork, @Param("id") int id);
+    void settuijian(@Param("settui") int settui, @Param("id") int id);
 }
