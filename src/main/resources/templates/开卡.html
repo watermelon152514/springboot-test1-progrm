@@ -1,135 +1,179 @@
-<!DOCTYPE html>
-<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="Generator" content="EditPlus®">
-  <meta name="Author" content="">
-  <meta name="Keywords" content="">
-  <meta name="Description" content="">
-  <title>开卡</title>
-  <style>
-      *{
-          padding: 0px;
-          margin: 0px;
-      }
-      .wrapper{
-          padding: 20px;
-      }
-      .header{
-          height: 25px; 
-          display: flex;
-          flex-direction: row;
-          align-items: flex-start; 
-      }
-      .events{   
-          height: 25px;
-          margin-bottom: 5px;
-          margin-left: 4px; 
-      }
-      #search{
-          width: 70px;
-          border-radius: 5px;
-          background-color: green;
-          color: white;
-          border: none;
-      }
-      .tips{
-          width: 1260px;
-          height: 40px;
-          margin-left: 5px;
-          margin-top: 10px;
-          background-color: rgb(221, 231, 175);
-          border: rgb(218, 230, 168) solid 1px;
-      }
-      .main{
-          width: 1500px;
-          height: 565px;
-          border: 1px inset gray;
-          margin-left: 5px;
-          margin-top: 15px;
-      }
-      .paybody div{
-          margin-left: 100px;
-          margin-top: 20px;
-      }
-      #pay input{
-          width: 55px;
-          height: 25px;
-      }
-      #select input{
-          width: 305px;
-          height: 25px;
-      }
-      #date input{
-          width: 15px;
-          height: 25px;
-      }
-      .forms{
-          width: 305px;
-          height: 25px;
-          margin-bottom: 10px;
-          margin-left: -5px;
-      }
-      #remarks input{
-          width: 250px;
-          height: 70px;
-      }
-      #remarks span{
-          vertical-align: top;
-      }
-      .Checkout{
-          height: 40px;
-          margin-bottom: 0px;
-          margin-left: 5px;
-      }
-      .paybody{
-          width: 85%;
-          height: 25px;
-          float: left;
-      }
-      .date{
-          width:15%;
-          height: 25px;
-          float: left;
-      }
-      .date div{
-          margin-left: 0px;
-          margin-top: 30px;
-          font-size: 15px;
-      }
-      .one{
-          display: block;
-          float: left;
-          margin-right: 180px;
-      }
-      .phead{
-          width: 100px;
-          height: 30px;
-          margin-left: 5px;
-          margin-top: 5px;
-      }
-  </style>
- </head>
- <body>
-  <div class="wrapper">
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>开卡</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        .wrapper{
+            padding: 5px;
+        }
+        .header{
+            height: 25px;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+        .events{
+            height: 25px;
+            margin-bottom: 5px;
+            margin-left: 4px;
+        }
+        #search{
+            width: 70px;
+            border-radius: 5px;
+            background-color: green;
+            color: white;
+            border: none;
+        }
+        #psearch{
+            width: 100px;
+            border-radius: 5px;
+            background-color: rgb(55, 120, 194);
+            color: white;
+            border: none;
+        }
+        .tips{
+            width: 790px;
+            height: 25px;
+            margin-left: 5px;
+            margin-top: 10px;
+            background-color: rgb(255, 255, 255);
+            border: rgb(192, 192, 189) solid 1px;
+        }
+        .main{
+            width: 790px;
+            height: 300px;
+            border: 1px inset gray;
+            margin-left: 5px;
+            margin-top: 15px;
+            font-size: 15px;
+        }
+        .paybody div{
+            margin-left: 100px;
+            margin-top: 20px;
+        }
+        #pay input{
+            width: 50px;
+            height: 15px;
+        }
+        #select{
+            position: relative;
+        }
+        .one1{
+            position: absolute;
+            top: 20px;
+        }
+        .one2{
+            position: absolute;
+            top: 20px;
+            left: 350px;
+        }
+        .one3{
+            position: absolute;
+            top: 63px;
+        }
+        .one4{
+            position: absolute;
+            top: 100px;
+        }
+        #select input{
+            width: 230px;
+            height: 20px;
+        }
+        #date input{
+            width: 15px;
+            height: 25px;
+        }
+        .forms{
+            width: 235px;
+            height: 25px;
+            margin-bottom: 10px;
+            margin-left: -5px;
+        }
+        #remarks input{
+            width: 250px;
+            height: 70px;
+        }
+        #remarks span{
+            vertical-align: top;
+        }
+        .Checkout{
+            height: 40px;
+            margin-bottom: 0px;
+            margin-left: 5px;
+        }
+        .paybody{
+            width: 85%;
+            height: -10px;
+            float: left;
+        }
+        .date{
+            width:15%;
+            height: 25px;
+            float: left;
+        }
+        .date div{
+            margin-left: 0px;
+            margin-top: 30px;
+            font-size: 15px;
+        }
+        .phead{
+            width: 100px;
+            height: 15px;
+            margin-left: 5px;
+            margin-top: -10px;
+            font-size: 20px;
+        }
+        .pmid{
+            width: 250px;
+            height: 25px;
+            margin-left: 5px;
+            margin-top: 2px;
+            font-size: 15px;
+        }
+        .mid{
+            width: 790px;
+            height: 190px;
+            border: 1px inset gray;
+            margin-left: 5px;
+            margin-top: 15px;
+            font-size: 15px;
+        }
+        .Checkout{
+            height: 40px;
+            margin-bottom: 0px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
     <div>
         <p class="phead">基本信息</p>
     </div>
     <div class="main">
         <div class="paybody">
-            <div id="select" style="margin-top: 80px;">
-                <span class="one">会员卡号<input type="text"></span>
-                <span class="one">过期日期<input type="text"></span>
+            <div id="select" style="margin-top: 15px;margin-left: 10px;">
+                <span class="one1">会员卡号<input type="text"></span>
+                <span class="one2">过期日期<input type="text"></span>
             </div>
         </div>
         <div class="date">
-            <div id="date" style="margin-top: 80px;">
-                <input type="checkbox" name="date" value="No term"/>无期限
+            <div id="date" style="margin-top: 35px;">
+                <input type="checkbox" name="date" value="No term"/><span class="one3">无期限</span>
             </div>
         </div>
         <div class="paybody">
-            <div id="select" style="margin-top: 100px;">
-                <span class="one">会员类型
+            <div id="select" style="margin-top: 20px;margin-left: 10px;">
+                <span class="one1">会员类型
                     <select  name="All States" id="States" class="forms">
                         <option value="6">6-美甲会员</option>
                         <option value="1">1-9折卡</option>
@@ -139,32 +183,77 @@
                         <option value="5">5-7折卡</option>
                     </select>
                 </span>
-                <span class="one">生&emsp;&emsp;日<input type="text"></span>
+                <span class="one2">生&emsp;&emsp;日<input type="text"></span>
             </div>
         </div>
         <div class="date">
-            <div id="date" style="margin-top: 100px;">
-                <input type="radio" checked="checked" name="search" class="events"/>阳历
-                <input type="radio" checked="checked" name="search" class="events"/>阴历
+            <div id="date" style="margin-top: 40px;">
+                <input type="radio" checked="checked" name="search" class="events"/><span>阳历</span>
+                <input type="radio" checked="checked" name="search" class="events"/><span>阴历</span>
             </div>
         </div>
         <div class="paybody">
-            <div id="select" style="margin-top: 120px;">
-                <span class="one">折&emsp;&emsp;扣<input type="text"></span>
-                <span class="one">消费密码<input type="text"></span>
+            <div id="select" style="margin-top: 25px;margin-left: 10px;">
+                <span class="one1">折&emsp;&emsp;扣<input type="text"></span>
+                <span class="one2">消费密码<input type="text"></span>
             </div>
         </div>
         <div class="paybody">
-            <div id="select" style="margin-top: 140px;">
-                <span class="one">流水单号<input type="text"></span>
-                <span class="one">来源类型
+            <div id="select" style="margin-top: 30px;margin-left: 10px;">
+                <span class="one1">流水单号<input type="text"></span>
+                <span class="one2">来源类型
                     <select  name="All States" id="States" class="forms">
                         <option value="type">6-美甲会员</option>
                     </select>
                 </span>
             </div>
         </div>
+        <div class="paybody">
+            <div id="select" style="margin-top: 35px;margin-left: 10px;">
+                <span class="one1">办卡时间 <input type="text"></span>
+                <span class="one2">选推荐人<input type="text" placeholder="会员或推荐人信息查询"></span>
+            </div>
+        </div>
+        <div class="paybody">
+            <div id="select" style="margin-top: 35px;margin-left: 10px;">
+                <span class="one1">姓&emsp;&emsp;名<input type="text"></span>
+                <span class="one2">备&emsp;&emsp;注<input type="text"></span>
+            </div>
+        </div>
+        <div class="paybody">
+            <div id="select" style="margin-top: 35px;margin-left: 10px;">
+                <span class="one1">手&emsp;&emsp;机<input type="text"></span>
+            </div>
+        </div>
+        <div class="paybody">
+            <div id="select" style="margin-top: 35px;margin-left: 10px;">
+                <span class="one1">性&emsp;&emsp;别<input type="text" placeholder="0=男,1=女(默认)"></span>
+            </div>
+        </div>
     </div>
-  </div>
- </body>
+    <div class="tips">
+        <p class="pmid">充值信息(保存数据后将不能更改)</p>
+    </div>
+    <div class="mid">
+        <div id="pay" style="margin-top: 10px;margin-left: 10px;">付款方式
+            <span>现金</span><input type="text"><span>¥</span>
+            <span>银联</span><input type="text"><span>¥</span>
+            <span>欠款</span><input type="text"><span>¥</span>
+            <span>支付宝</span> <input type="text"><span>¥</span>
+            <span>微信</span><input type="text"><span>¥</span>
+        </div>
+        <div id="pay" style="margin-top: 20px;margin-left: 10px;">送赠送金
+            <span>赠金</span><input type="text"><span>¥</span>
+        </div>
+        <div id="pay" style="margin-top: 30px;margin-left: 10px;">员工信息
+            <span>员工</span><input type="text">
+            <span>业绩</span><input type="text"><span>¥</span>
+            <span>提成</span><input type="text"><span>¥</span>
+        </div>
+        <div style="margin-top: 20px;margin-left: 70px;">
+            <input type="submit" value="开卡" id="psearch" class="Checkout" style="width: 250px;">
+        </div>
+    </div>
+</div>
+</body>
 </html>

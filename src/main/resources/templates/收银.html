@@ -1,226 +1,226 @@
 <!doctype html>
-<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-  <meta charset="UTF-8">
-  <meta name="Generator" content="EditPlus®">
-  <meta name="Author" content="">
-  <meta name="Keywords" content="">
-  <meta name="Description" content="">
-  <title>收银</title>
-  <style>
-      *{
-          padding: 0px;
-          margin: 0px;
-          box-sizing: border-box;
-      }     
-      .wrapper{
-          width: 1000px;
-          height: 800px;
-          padding: 30px;
-      }
-      .header{
-          height: 30px;
-          margin-left: 10px; 
-          display: flex;
-          flex-direction: row;
-          align-items: flex-end; 
-      }
-      .events{ 
-          height: 30px;
-          margin-bottom: 0px;
-          margin-left: 5px; 
-      }
-      .search{
-          height: 30px;
-          margin: 0px; 
-          border-radius: 5px;
-      } 
-      #search{
-          width: 40px;
-          border-radius: 5px;
-          background-color: rgb(32, 173, 32);
-          color: white;
-          border: none;
-      }
-      #psearch{
-          width: 100px;
-          border-radius: 5px;
-          background-color: rgb(55, 120, 194);
-          color: white;
-          border: none;
-      }
-      #psearch1{
-          width: 100px;
-          border-radius: 5px;
-          background-color: rgb(206, 165, 53);
-          color: white;
-          border: none;
-      }
-      .tips{
-          width: 1500px;
-          height: 50px;
-          margin-left: 5px;
-          margin-top: -40px;
-          background-color: rgb(221, 248, 225);
-          border: rgb(167, 228, 212) solid 1px;
-      }
-      .main{
-          width: 1010px;
-          height: 565px;
-          margin-left: 5px;
-          margin-top: 15px;
-      }
-      .phead{
-          width: 100px;
-          height: 30px;
-          margin-left: 5px;
-          margin-top: 5px;
-      }
-      .paybody div{
-          margin-left: 100px;
-          margin-top: 20px;
-      }
-      #pay input{
-          width: 55px;
-          height: 25px;
-      }
-      .style-left{
-          float: left;
-      }
-      #select input{
-          width: 250px;
-          height: 25px;
-      }
-      .forms{
-          width: 250px;
-          height: 25px;
-          margin-bottom: 5px;
-          margin-left: -5px;
-      }
-      #remarks input{
-          width: 250px;
-          height: 70px;
-      }
-      #remarks span{
-        vertical-align: top;
-      }
-      .Checkout{
-          height: 40px;
-          margin-bottom: 0px;
-          margin-left: 5px;
-      }
-  </style>
- </head>
- <body>
-     <div class="wrapper">
-         <div class="header">
-            <input type="text" placeholder="会员或领用人信息查询"  class="search">
-            <input id="accurate" type="radio" checked="checked" name="search" class="events"/>精确
-            <input id="vague" type="radio" checked="checked" name="search" class="events"/>模糊
-            <input type="submit" value="同一会员买单" id="psearch" class="events">
-         </div>
-         <div class="tips">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>收银</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+        .wrapper{
+            width: 80%;
+            padding: 5px;
+        }
+        .header{
+            height: 30px;
+            margin-left: 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+        }
+        .events{
+            height: 25px;
+            margin-bottom: 0px;
+            margin-left: 5px;
+        }
+        .search{
+            height: 25px;
+            margin: 0px;
+            border-radius: 5px;
+        }
+        #search{
+            width: 40px;
+            border-radius: 5px;
+            background-color: rgb(32, 173, 32);
+            color: white;
+            border: none;
+        }
+        #psearch{
+            width: 100px;
+            border-radius: 5px;
+            background-color: rgb(55, 120, 194);
+            color: white;
+            border: none;
+        }
+        #psearch1{
+            width: 100px;
+            border-radius: 5px;
+            background-color: rgb(206, 165, 53);
+            color: white;
+            border: none;
+        }
+        .tips{
+            width: 790px;
+            height: 50px;
+            margin-left: 5px;
+            margin-top: -40px;
+            background-color: rgb(221, 248, 225);
+            border: rgb(167, 228, 212) solid 1px;
+        }
+        .main{
+            width:790px;
+            height: 490px;
+            margin-left: 5px;
+            margin-top: 15px;
+            font-size: 20px;
+        }
+        .phead{
+            width:100px;
+            height: 20px;
+            margin-left: 5px;
+            margin-top: 5px;
+            font-size: 20px;
+        }
+        .paybody div{
+            margin-left: 50px;
+            margin-top: 10px;
+        }
+        #pay input{
+            width: 55px;
+            height: 25px;
+        }
+        .style-left{
+            float: left;
+        }
+        #select input{
+            width: 250px;
+            height: 25px;
+        }
+        .forms{
+            width: 250px;
+            height: 25px;
+            margin-bottom: 5px;
+            margin-left: -5px;
+        }
+        #remarks input{
+            width: 250px;
+            height: 70px;
+        }
+        #remarks span{
+            vertical-align: top;
+        }
+        .Checkout{
+            height: 40px;
+            margin-bottom: 0px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="header">
+        <input type="text" placeholder="会员或领用人信息查询"  class="search">
+        <input id="accurate" type="radio" checked="checked" name="search" class="events"/><span style="font-size: 20px;">精确</span>
+        <input id="vague" type="radio" checked="checked" name="search" class="events"/><span style="font-size: 20px;">模糊</span>
+        <input type="submit" value="同一会员买单" id="psearch" class="events">
+    </div>
+    <div class="tips">
 
-         </div>
-         <div>
-             <p class="phead">项目消费</p>
-         </div>
-         <div class="main">
-            <table width="1010" border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                    <td colspan="4" align="center" bgcolor="#999999">服务项目</td>
-                    <td colspan="3" align="center" bgcolor="#66FFFF">发型师</td>
-                    <td colspan="3" align="center" bgcolor="#FFCC99">中工</td>
-                    <td colspan="3" align="center" bgcolor="#CCFF99">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td align="center" bgcolor="#CCCCCC">编号</td>
-                    <td align="center" bgcolor="#CCCCCC">原价</td>
-                    <td align="center" bgcolor="#CCCCCC">售价</td>
-                    <td align="center" bgcolor="#CCCCCC">业绩</td>
-                    <td align="center" bgcolor="#99FFFF">工号</td>
-                    <td align="center" bgcolor="#99FFFF">类型</td>
-                    <td align="center" bgcolor="#99FFFF">业绩</td>
-                    <td align="center" bgcolor="#FFFFCC">工号</td>
-                    <td align="center" bgcolor="#FFFFCC">类型</td>
-                    <td align="center" bgcolor="#FFFFCC">业绩</td>
-                    <td align="center" bgcolor="#CCFFCC">工号</td>
-                    <td align="center" bgcolor="#CCFFCC">类型</td>
-                    <td align="center" bgcolor="#CCFFCC">业绩</td>
-                </tr>
-                <tr>
-                    <td align="center" bgcolor="#CCCCCC">&nbsp;</td>
-                    <td align="center" bgcolor="#CCCCCC">&nbsp;</td>
-                    <td align="center" bgcolor="#CCCCCC">&nbsp;</td>
-                    <td align="center" bgcolor="#CCCCCC">&nbsp;</td>
-                    <td align="center" bgcolor="#99FFFF">&nbsp;</td>
-                    <td align="center" bgcolor="#99FFFF">&nbsp;</td>
-                    <td align="center" bgcolor="#99FFFF">&nbsp;</td>
-                    <td align="center" bgcolor="#FFFFCC">&nbsp;</td>
-                    <td align="center" bgcolor="#FFFFCC">&nbsp;</td>
-                    <td align="center" bgcolor="#FFFFCC">&nbsp;</td>
-                    <td align="center" bgcolor="#CCFFCC">&nbsp;</td>
-                    <td align="center" bgcolor="#CCFFCC">&nbsp;</td>
-                    <td align="center" bgcolor="#CCFFCC">&nbsp;</td>
-                </tr>
-            </table>
-            <div class="paybody">
-                <div>消费金额 0元</div>
-                <div id="pay">付款明细
-                    <span>微信</span><input type="text">
-                    <span>支付宝</span><input type="text">
-                    <span>现金</span><input type="text">
-                    <span>银联</span> <input type="text">
-                    <span>免单</span><input type="text">
-                </div>
+    </div>
+    <div>
+        <p class="phead">项目消费</p>
+    </div>
+    <div class="main">
+        <table width="790" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td colspan="4" align="center" bgcolor="#999999">服务项目</td>
+                <td colspan="3" align="center" bgcolor="#66FFFF">发型师</td>
+                <td colspan="3" align="center" bgcolor="#FFCC99">中工</td>
+                <td colspan="3" align="center" bgcolor="#CCFF99">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#CCCCCC">编号</td>
+                <td align="center" bgcolor="#CCCCCC">原价</td>
+                <td align="center" bgcolor="#CCCCCC">售价</td>
+                <td align="center" bgcolor="#CCCCCC">业绩</td>
+                <td align="center" bgcolor="#99FFFF">工号</td>
+                <td align="center" bgcolor="#99FFFF">类型</td>
+                <td align="center" bgcolor="#99FFFF">业绩</td>
+                <td align="center" bgcolor="#FFFFCC">工号</td>
+                <td align="center" bgcolor="#FFFFCC">类型</td>
+                <td align="center" bgcolor="#FFFFCC">业绩</td>
+                <td align="center" bgcolor="#CCFFCC">工号</td>
+                <td align="center" bgcolor="#CCFFCC">类型</td>
+                <td align="center" bgcolor="#CCFFCC">业绩</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#CCCCCC">&nbsp;</td>
+                <td align="center" bgcolor="#CCCCCC">&nbsp;</td>
+                <td align="center" bgcolor="#CCCCCC">&nbsp;</td>
+                <td align="center" bgcolor="#CCCCCC">&nbsp;</td>
+                <td align="center" bgcolor="#99FFFF">&nbsp;</td>
+                <td align="center" bgcolor="#99FFFF">&nbsp;</td>
+                <td align="center" bgcolor="#99FFFF">&nbsp;</td>
+                <td align="center" bgcolor="#FFFFCC">&nbsp;</td>
+                <td align="center" bgcolor="#FFFFCC">&nbsp;</td>
+                <td align="center" bgcolor="#FFFFCC">&nbsp;</td>
+                <td align="center" bgcolor="#CCFFCC">&nbsp;</td>
+                <td align="center" bgcolor="#CCFFCC">&nbsp;</td>
+                <td align="center" bgcolor="#CCFFCC">&nbsp;</td>
+            </tr>
+        </table>
+        <div class="paybody">
+            <div>消费金额 0元</div>
+            <div id="pay">付款明细
+                <span>微信</span><input type="text">
+                <span>支付宝</span><input type="text">
+                <span>现金</span><input type="text">
+                <span>银联</span> <input type="text">
+                <span>免单</span><input type="text">
             </div>
-            <div class="paybody">
-                <div id="select">
-                    <span>实际业绩</span><input type="text">
-                    <span>选代金券</span><input type="text">
-                </div>
+        </div>
+        <div class="paybody">
+            <div id="select">
+                <span>实际业绩</span><input type="text">
+                <span>选代金券</span><input type="text">
             </div>
-            <div class="paybody">
-                <div id="select">
-                    <span>流水单号</span><input type="text">
-                    <span>水单日期</span><input type="text">
-                </div>
+        </div>
+        <div class="paybody">
+            <div id="select">
+                <span>流水单号</span><input type="text">
+                <span>水单日期</span><input type="text">
             </div>
-            <div class="paybody">
-                <div id="select">
-                    <span>客户姓名</span><input type="text">
-                    <span>手机号码</span><input type="text">
-                </div>
+        </div>
+        <div class="paybody">
+            <div id="select">
+                <span>客户姓名</span><input type="text">
+                <span>手机号码</span><input type="text">
             </div>
-            <div class="paybody">
-                <div id="select">
-                    <span>客户性别</span><input type="text" placeholder="0=男,1=女(默认)">
-                    <span>客户来源</span>
-                        <select name="select type" id="type" class="forms">
-                            <option value="all">选择类型</option>
-                        </select>
-                </div>
+        </div>
+        <div class="paybody">
+            <div id="select">
+                <span>客户性别</span><input type="text" placeholder="0=男,1=女(默认)">
+                <span>客户来源</span>
+                <select name="select type" id="type" class="forms">
+                    <option value="all">选择类型</option>
+                </select>
             </div>
-            <div class="paybody">
-                <div id="remarks">
-                    <span>备&emsp;&emsp;注</span><input type="text">
-                </div>
+        </div>
+        <div class="paybody">
+            <div id="remarks">
+                <span>备&emsp;&emsp;注</span><input type="text">
             </div>
-            <div class="paybody">
-                <div>
-                    <span>客人来源</span><input type="radio" checked="checked" name="search" class="events"/>常规
-                    <input type="radio" checked="checked" name="search" class="events"/>内创
-                </div>
+        </div>
+        <div class="paybody">
+            <div>
+                <span>客人来源</span><input type="radio" checked="checked" name="search" class="events"/><span>常规</span>
+                <input type="radio" checked="checked" name="search" class="events"/><span>内创</span>
             </div>
-            <div class="paybody">
-                <div>
-                    <input type="submit" value="结账" id="psearch" class="Checkout" style="width: 250px;">
-                    <input type="submit" value="联单&emsp;&emsp;结算" id="search" class="Checkout" style="width: 150px;">
-                    <input type="submit" value="挂单&emsp;&emsp;结算" id="psearch1" class="Checkout" style="width: 150px;">
-                </div>
+        </div>
+        <div class="paybody">
+            <div>
+                <input type="submit" value="结账" id="psearch" class="Checkout" style="width: 250px;">
+                <input type="submit" value="联单&emsp;&emsp;结算" id="search" class="Checkout" style="width: 150px;">
+                <input type="submit" value="挂单&emsp;&emsp;结算" id="psearch1" class="Checkout" style="width: 150px;">
             </div>
-         </div>
-     </div>
- </body>
+        </div>
+    </div>
+</div>
+</body>
 </html>
