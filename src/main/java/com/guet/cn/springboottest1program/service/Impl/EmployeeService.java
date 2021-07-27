@@ -20,11 +20,11 @@ public class EmployeeService implements IEmployeeService {
         return employeesMapper.selectmsg(sex,jobstatus);
     }
 
-    @Override//改造这个方法成分页时候的查询
+    /*@Override//改造这个方法成分页时候的查询
     public List<Employees> viewEmployees() {
         return employeesMapper.viewEmployees();
     }
-
+*/
     @Override
     public void deleteEmployee(int id) {
         employeesMapper.deleteEmployee(id);
@@ -64,6 +64,11 @@ public class EmployeeService implements IEmployeeService {
     @Override
     public void settuijian(int settui, int id) {
         employeesMapper.settuijian(settui, id);
+    }
+
+    @Override
+    public List<Employees> viewEmployees(String sparam) {
+        return employeesMapper.viewEmployees(sparam);
     }
 
 

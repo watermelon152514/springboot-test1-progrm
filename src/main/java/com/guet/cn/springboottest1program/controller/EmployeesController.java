@@ -39,26 +39,35 @@ public class EmployeesController {
     @RequestMapping("TJYG.html")
 //    初始页 1  ; 一页数据 4条（行）
     public ModelAndView page(Model model, @RequestParam(value ="pageNum",defaultValue ="1") int pageNum,
-                             @RequestParam(value = "pageSize",defaultValue = "4") int pageSize){
+                             @RequestParam(value = "pageSize",defaultValue = "4") int pageSize,HttpServletRequest request){
+
+        String sparam= request.getParameter("sparam");
+        System.out.println("搜索框的传参："+sparam);
         PageHelper.startPage(pageNum,pageSize);//调用PageHelper接口
-        List<Employees> employees=iEmployeeService.viewEmployees();
+        List<Employees> employees =iEmployeeService.viewEmployees(sparam);
+
         PageInfo<Employees> pageInfo=new PageInfo<>(employees,4);//调用接口里面的方法
-//        for(Employees emp:employees){
-//            System.out.println(emp);
-//        }
+
+        request.setAttribute("sparam",sparam);
         Map data=new HashMap();
         data.put("total",pageInfo.getTotal());//总记录数 一共多少条
         data.put("pages",pageInfo.getPages());//总页数
-        data.put("current",pageInfo.getPageNum());//当前页码
+        data.put("PageNum",pageInfo.getPageNum());//当前页码
         data.put("alldata",pageInfo.getList());//总数据
-
+        data.put("hasPreviousPage", pageInfo.isHasPreviousPage());
+        data.put("prePage",pageInfo.getPrePage());
+        data.put("navigatepageNums",pageInfo.getNavigatepageNums());
+        System.out.println("oppppppppppp"+pageInfo.getNavigatepageNums());
+        System.out.println("当前页码"+pageInfo.getPageNum());
+        data.put("nextPage",pageInfo.getNextPage());
+        data.put("hasNextPage",pageInfo.isHasNextPage());
         System.out.println("是否是第一页："+pageInfo.isIsFirstPage());
         System.out.println(pageInfo.getNavigatepageNums());
-        model.addAttribute("employees",employees);//把从数据库遍历到的数据添加到model
-        System.out.println("sssss"+pageInfo.getList());
-//        System.out.println(pageInfo.getPageNum());
-
         ModelAndView modelAndView=new ModelAndView();
+        modelAndView.addObject("employees",employees);//把从数据库遍历到的数据添加到model
+        System.out.println("sssss"+pageInfo.getList());
+
+
         modelAndView.addObject("articlePage",data);//将一些页码参数，放入到modelAndView
         modelAndView.setViewName("TJYG");//设置View的名字  类似于跳转 setViewName("redirect:TJYG.html")---重定向
 
@@ -92,7 +101,9 @@ public class EmployeesController {
     }
     @GetMapping("updateEmployee")
     public String updateEmployee(int id, String name, String sex, String phone, String lv, Date entrytime, int perobj, String jobstatus, String department, String lable, int ordernum, String workstatus, String open_ports, String tuijian_status){
+        System.out.println("开始执行修改功能");
         iEmployeeService.updateEmployee(id, name, sex, phone, lv, entrytime, perobj,jobstatus,department, lable,ordernum,workstatus, open_ports, tuijian_status);
+        System.out.println("完成修改功能");
         return "redirect:TJYG.html";
     }
 
@@ -106,27 +117,11 @@ public class EmployeesController {
     public String searchYG(String sparam, Model model, @RequestParam(value ="pageNum",defaultValue ="1") int pageNum,
                            @RequestParam(value = "pageSize",defaultValue = "4") int pageSize){
         System.out.println("1111111111"+sparam);
-//        PageHelper.startPage(pageNum,pageSize);//调用PageHelper接口
-        //iEmployeeService.searchYG(sparam);
+
 
         List<Employees> employees=iEmployeeService.searchYG(sparam);
         System.out.println(employees.get(1));
-
-       /* PageInfo<Employees> pageInfo=new PageInfo<>(employees,4);//调用接口里面的方法
-        Map data=new HashMap();
-        data.put("total",pageInfo.getTotal());//总记录数 一共多少条
-        data.put("pages",pageInfo.getPages());//总页数
-        data.put("current",pageInfo.getPageNum());//当前页码
-        data.put("alldata",pageInfo.getList());//总数据
-
-        System.out.println("总页数"+pageInfo.getPages());
-        ModelAndView modelAndView=new ModelAndView();*/
         model.addAttribute("employees",employees);//把从数据库遍历到的数据添加到model
-//        modelAndView.addObject("articlePage1",data);//将一些页码参数，放入到modelAndView
-
-      /*两句合在一起*/
-//        modelAndView.setViewName("TJYG");//设置View的名字  类似于跳转 setViewName("redirect:TJYG.html")---重定向
-//        return modelAndView;    //会经过视图解析器找到对应的相应页面
         return "TJYG";
     }
 
