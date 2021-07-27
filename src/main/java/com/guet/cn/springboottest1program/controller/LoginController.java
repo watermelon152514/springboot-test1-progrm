@@ -107,13 +107,9 @@ public class LoginController {
     //财务中心--->营业记录--->充值开卡记录表(查询数据的ajax操作)
     @RequestMapping(value = "/ChongZhiKaiKaDataOperation")
     public void ChongZhiKaiKaDataOperation(HttpServletResponse httpServletResponse,String before,String after,String type) throws IOException {
-        System.out.println(before);
-        System.out.println(after);
-        System.out.println(type);
         if(type==null){
             List<RechargeInformation> rechargeInformations=rechargeInformationService.getAllDate(before,after);
             httpServletResponse.setCharacterEncoding("utf-8");
-
             String str=JSON.toJSONString(rechargeInformations);
             PrintWriter printWriter=httpServletResponse.getWriter();
             printWriter.println(str);
@@ -135,7 +131,6 @@ public class LoginController {
     @RequestMapping(value = "/ButtonDeleteRowOperation")
     public void ButtonDeleteRowOperation(HttpServletResponse httpServletResponse,String BILL_ID) throws IOException {
         httpServletResponse.setCharacterEncoding("utf-8");
-        System.out.println(BILL_ID);
         rechargeInformationService.deleteInformation(BILL_ID);
         PrintWriter printWriter=httpServletResponse.getWriter();
         String str=null;
