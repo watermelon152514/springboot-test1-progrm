@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+
+    <style>
+        html{
+            width:970px ;
+            height: 770px;
+        }
+        body{
+            width: 100%;
+            height: 100%;
+        }
+        #TopPage{
+            width: 100%;
+            height: 5%;
+        }
+        #TopPage-Button{
+            width: 10%;
+            height: 70%;
+            background-color: #00FF7F;
+            font-family: 楷体;
+        }
+        #ZongJi{
+            width: 100%;
+            height: 5%;
+            margin-bottom: 10px;
+            font-size: x-large;
+            font-family: 华文楷体;
+            background-color: #FFDEAD;
+        }
+
+        label{
+            font-family: 华文楷体;
+        }
+        table{
+            width: 100%;
+            height: 70%;
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        td{
+            width: 154.28px;
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        tr{
+            width: 100%;
+            height: 10%;
+        }
+        th{
+            width: 154.28px;
+            height: 30px;
+            background-color: #2F4F4F;
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+            color: white;
+        }
+        a{
+            color: red;
+            font-size: x-large;
+            font-family: 华文楷体;
+        }
+    </style>
+</head>
+    <body>
+
+    <script>
+        var I=null;
+
+        function Format(datetime,fmt) {
+            if (parseInt(datetime)==datetime) {
+                if (datetime.length==10) {
+                    datetime=parseInt(datetime)*1000;
+                } else if(datetime.length==13) {
+                    datetime=parseInt(datetime);
+                }
+            }
+            datetime=new Date(datetime);
+            var o = {
+                "M+" : datetime.getMonth()+1,                 //月份
+                "d+" : datetime.getDate(),                    //日
+                "h+" : datetime.getHours(),                   //小时
+                "m+" : datetime.getMinutes(),                 //分
+                "s+" : datetime.getSeconds(),                 //秒
+                "q+" : Math.floor((datetime.getMonth()+3)/3), //季度
+                "S"  : datetime.getMilliseconds()             //毫秒
+            };
+            if(/(y+)/.test(fmt))
+                fmt=fmt.replace(RegExp.$1, (datetime.getFullYear()+"").substr(4 - RegExp.$1.length));
+            for(var k in o)
+                if(new RegExp("("+ k +")").test(fmt))
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+            return fmt;
+        }
+
+
+        function skip(){
+            var TimeBefore= $(".TopPage-date:eq(0)").val();
+            var TimeAfter= $(".TopPage-date:eq(1)").val();
+            var ZheKouType=$("#TopPage-text").val();
+            $.ajax({
+                url:"ChongZhiKaiKaDataOperation",
+                dataType:"json",
+                type:"post",
+                data:{
+                    before:TimeBefore,
+                    after:TimeAfter,
+                    type:ZheKouType
+                },
+                success:function (resp) {
+                    console.log(resp);
+                    var ObjTable=document.getElementById("KaiKaTable-information");
+                    var rowCount=resp.length;
+                    $(".ZongJi-a:eq(0)").html(rowCount);
+                    var cellCount=0;
+                    for(var i in resp){
+                        for(j in resp[i])
+                            cellCount=cellCount+1;
+                    }
+                    cellCount=cellCount/rowCount;
+                    var tableHtml = ""
+                    var AllInMonet=0;
+                    for(var i=0;i<resp.length;i++){
+                        ObjName="button"+i;
+                        tableHtml += '<tr id='+ObjName+'>';
+                        tableHtml +=    "<td>"+ resp[i].bILL_ID +"</td>";
+                        tableHtml +=    "<td>"+ resp[i].cUSTOMER_NAME +"</td>";
+                        tableHtml +=    "<td>"+ resp[i].cUSTOMER_SEX +"</td>";
+                        tableHtml +=    "<td>"+ resp[i].vIP_TYPE +"</td>";
+                        tableHtml +=    "<td>"+ resp[i].rECHARGE_MONEY +"</td>";
+                        AllInMonet=AllInMonet+resp[i].rECHARGE_MONEY;
+                        tableHtml +=    "<td>"+ resp[i].iN_MONEY +"</td>";
+                        tableHtml +=    '<td>'+ Format(resp[i].tIME,"yyyy-MM-dd") +'</td>';
+                        tableHtml +=    '<td>'+Format(resp[i].bILL_TIME,"yyyy-MM-dd")+'</td>';
+                        tableHtml +=    "<td>"+ resp[i].rEMARKS +"</td>";
+                        tableHtml +=    "<td>"+ resp[i].eMPLOYEE +"</td>";
+                        tableHtml +=    '<td><input type="button" value="删除" name='+ObjName+ '  onclick="DeleteInformation(name)"></td>';
+                        tableHtml += "</tr>";
+                    }
+                    $(".ZongJi-a:eq(1)").html(AllInMonet);
+                    $(".ZongJi-a:eq(2)").html(AllInMonet);
+                    $("#KaiKaTable-information").html(tableHtml);
+                }
+            })
+
+
+        }
+
+        function DeleteInformation(name) {
+            var ObjRow=name.substr(6,7);
+            var thisTabe=document.getElementById("KaiKaTable-information");
+            var DeleteRow = document.getElementById(name);
+            I=thisTabe.rows[ObjRow].cells[0].innerHTML;
+            DeleteRow.style.display = "none";
+            $.ajax({
+                url: "ButtonDeleteRowOperation",
+                type: "post",
+                dataType: "json",
+                data: {
+                    BILL_ID: I
+                },
+                success: function (resp) {
+                    skip();
+                }
+            })
+        }
+
+
+    </script>
+
+    <div id="TopPage">
+        <input type="date" class="TopPage-date" name="before" >
+        <input type="date" class="TopPage-date" name="after" >
+        <input type="text" id="TopPage-text" placeholder="卡类型">
+        <input type="button" id="TopPage-Button" value="查询" name="top-button"  onclick="skip()">
+    </div>
+
+    <div id="ZongJi">
+        <h5>查询统计：总共&nbsp;&nbsp;<a class="ZongJi-a"></a>&nbsp;条记录，总业绩：<a class="ZongJi-a"></a>&nbsp;元,&nbsp;实际业绩：<a class="ZongJi-a"></a>&nbsp;元</h5>
+    </div>
+    <label >充值开卡记录表</label>
+    <div id="KaiKaTable">
+        <table>
+            <thead>
+            <tr>
+                <th>单号</th>
+                <th>客户姓名</th>
+                <th>性别</th>
+                <th>会员卡类型</th>
+                <th>充值金额</th>
+                <th>实际业绩</th>
+                <th>消费时间</th>
+                <th>创建时间</th>
+                <th>备注</th>
+                <th>操作人</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="KaiKaTable-information">
+            </tbody>
+        </table>
+    </div>
+    </body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+    <style>
+        html{
+            width:970px ;
+            height: 770px;
+        }
+        body{
+            width: 100%;
+            height: 100%;
+        }
+        #TopPage{
+            width: 100%;
+            height: 5%;
+            background: blue;
+        }
+        .TopPage-Button{
+            width: 10%;
+            height: 70%;
+            background-color: #DCDCDC;
+        }
+        #GongZi{
+            width: 100%;
+            height: 5%;
+            background: aqua;
+        }
+        #GongZiTable{
+            width: 100%;
+            height: 70%;
+        }
+        #BottomPage{
+            width: 100%;
+            height: 10%;
+        }
+        #BottomPage-properties{
+            width: 70%;
+            height: 100%;
+            float: right;
+        }
+        table{
+            width: 100%;
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        td{
+            width: 154.28px;
+             border: 1px solid black;
+             border-collapse: collapse;
+             text-align: center;
+         }
+        tr{
+            width: 100%;
+            height: 10%;
+        }
+        th{
+            width: 154.28px;
+            height: 30px;
+            background-color: #2F4F4F;
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+            color: white;
+        }
+        #XiaoJi{
+            width: 100%;
+            height: 5%;
+        }
+        #ZongJi{
+            width: 100%;
+            height: 5%;
+        }
+        h5{
+           text-align: center;
+            font-family: "华文楷体";
+        }
+    </style>
+
+</head>
+
+
+<script type="text/javascript" >
+
+    var tagOfType="发型师";
+
+    window.onload=function () {
+        $(".TopPage-Button:eq(0)").css("background-color","#F0E68C");
+
+
+        var date = new Date();
+        var data_year= date .getFullYear(); //获取完整的年份(4位)
+        var data_month=("0" + (date.getMonth() + 1)).slice(-2); ; //获取当前月份(0-11,0代表1月)
+        var data_YM=data_year+"-"+(data_month);
+        $("#GongZi-Month").val(data_YM)
+        InquireData();
+        document.getElementById("GongZi-Date").innerText=document.getElementById("GongZi-Month").value;
+    }
+
+    function InquireData() {
+        var obj=$("#GongZi-Month").val();
+        document.getElementById("GongZi-Date").innerText = obj;
+        $.ajax({
+            url:"YuanGongGongZiDataOperation",
+            type:"post",
+            dataType:"json",
+            data:{
+                time:$("#GongZi-Month").val(),
+                type:tagOfType
+            },
+            success:function (objEmployeeMoney) {
+               var objTable= document.getElementById("GongZiTable-information");
+               var rowCount=objEmployeeMoney.length;
+               $("#btn0").html(rowCount);
+               var cellCount=0;
+               for(var i in objEmployeeMoney){
+                   for(j in objEmployeeMoney[i])
+                        cellCount=cellCount+1;
+               }
+               cellCount=cellCount/rowCount;
+                var tableHtml = ""
+               for(var i=0;i<objEmployeeMoney.length;i++){
+                   tableHtml += "<tr>";
+                   tableHtml +=    "<td>"+ objEmployeeMoney[i].employee_Id +"</td>";
+                   tableHtml +=    "<td>"+ objEmployeeMoney[i].type_Name +"</td>";
+                   tableHtml +=    "<td>"+ objEmployeeMoney[i].add_Money +"</td>";
+                   tableHtml +=    "<td>"+ objEmployeeMoney[i].bottom_Money +"</td>";
+                   tableHtml +=    "<td>"+ objEmployeeMoney[i].up_Money +"</td>";
+                   tableHtml +=    "<td>"+ objEmployeeMoney[i].delete_Money +"</td>";
+                   tableHtml +=    "<td>"+ objEmployeeMoney[i].remarks +"</td>";
+                   tableHtml += "</tr>";
+               }
+                $("#GongZiTable-information").html(tableHtml);
+            }
+        })
+        $.ajax({
+            url:"YuanGongGongZiZongJi",
+            dataType:"json",
+            type:"post",
+            data:{
+                time:$("#GongZi-Month").val(),
+                type:tagOfType
+            },
+            success:function (zongJiMoney) {
+                $("#ZongJi-a").html(zongJiMoney);
+                $("#ZongJi-a").css("color","red");
+                $("#ZongJi-a").css("font-size","xx-large");
+            }
+        })
+    }
+
+</script>
+
+    <script>
+        function skip(name){
+            if(name=="FaXingShi"){
+                var objOfButton=document.getElementsByClassName("TopPage-Button");
+                $(".TopPage-Button:eq(0)").css("background-color","#F0E68C");
+                $(".TopPage-Button:eq(1)").css("background-color","#DCDCDC");
+                $(".TopPage-Button:eq(2)").css("background-color","#DCDCDC");
+                tagOfType="发型师";
+            }
+            else if(name=="ZhongGong") {
+                $(".TopPage-Button:eq(1)").css("background-color","#F0E68C");
+                $(".TopPage-Button:eq(0)").css("background-color","#DCDCDC");
+                $(".TopPage-Button:eq(2)").css("background-color","#DCDCDC");
+                tagOfType="中工";
+            }
+        }
+    </script>
+
+    <body>
+        <div id="TopPage">
+            <input type="button" class="TopPage-Button" name="FaXingShi" value="发型师" onclick="skip(name)">
+            <input type="button" class="TopPage-Button" name="ZhongGong" value="中工" onclick="skip(name)">
+            <input type="button" class="TopPage-Button" name="----" value="----">
+        </div>
+        <div id="GongZi">
+            工资报表：<a id="GongZi-Date">日历</a>&nbsp;&nbsp;工资表
+            <input id="GongZi-Month" type="month">
+            <select>
+                <option value ="EmployeeState">在职</option>
+                <option value ="EmployeeState">离线</option>
+            </select>
+            <input type="button" onclick="InquireData()" value="查询">
+        </div>
+
+        <div id="GongZiTable">
+            <table>
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>员工姓名+级别</th>
+                        <th>提成</th>
+                        <th>底薪</th>
+                        <th>奖金</th>
+                        <th>扣款</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody id="GongZiTable-information">
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+        <div id="XiaoJi">
+
+        </div>
+
+        <div id="ZongJi">
+            <h5>总计工资金额为：<a id="ZongJi-a"></a>&nbsp;&nbsp;元</h5>
+        </div>
+
+
+
+        <div id="BottomPage">
+            <div id="BottomPage-properties">
+
+                总计信息为：<a id="btn0">15</a>&nbsp;条
+                <a  href="#"  id="btn1">首页</a>
+                <a  href="#"  id="btn2">上一页</a>
+                <a  href="#"  id="btn3">下一页</a>
+                <a  href="#"  id="btn4">尾页</a>&nbsp;
+                <a>转到&nbsp;</a>
+                <input id="changePage" type="text" size="1" maxlength="4"/>
+                <a>页&nbsp;</a>
+                <a  href="#"  id="btn5">跳转</a>
+            </div>
+        </div>
+
+    </body>
+</html>

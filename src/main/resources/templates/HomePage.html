@@ -32,7 +32,7 @@
             width: 15%;
             height: 90%;
             float: left;
-            background-color: #272727;
+            background-color: #616D7E;
 
         }
         .centre-page{
@@ -169,6 +169,14 @@
                         obj.setAttribute('src','ShouZhiHtml');
                         console.log("ShouZhiHtml Pass!!")
                     }
+                    else if(name=="YuanGongGongZi"){
+                        obj.setAttribute('src','YuanGongGongZiHtml');
+                        console.log("YuanGongGongZi Pass!!")
+                    }
+                    else if(name=="ChongZhiKaiKa"){
+                        obj.setAttribute('src','ChongZhiKaiKaHtml');
+                        console.log("YuanGongGongZi Pass!!")
+                    }
                 }
             })
         }
@@ -241,29 +249,29 @@
         </div>
     </div>
     <div id="three">
-        <div id="9" ><a href="javascript:onClick=show('three-9')">营业记录</a>
+        <div id="9" ><a href="javascript:onClick=show('three-9')"><img src="img/营业记录.png" height="30" width="30">营业记录</a>
             <ul id="three-9" style="display: none">
                 <li><a href="">水单审核</a></li>
                 <li><a href="">项目消费记录</a></li>
                 <li><a href="">商品销售记录</a></li>
-                <li><a href="">充值开卡记录</a></li>
+                <li><a name="ChongZhiKaiKa" href="javascript:void(0);" onclick="skip(name)">充值开卡记录</a></li>
                 <li><a href="">订购套餐记录</a></li>
             </ul>
         </div>
-        <div id="10"><a href="javascript:onClick=show('three-10')">店面财务数据</a>
+        <div id="10"><a href="javascript:onClick=show('three-10')"><img src="img/店铺财务数据.png" height="30" width="30">店面财务数据</a>
             <ul id="three-10" style="display: none">
                 <li><a href="">店面财务数据</a></li>
             </ul>
         </div>
-        <div id="11"><a href="javascript:onClick=show('three-11')">业绩提成核对</a>
+        <div id="11"><a href="javascript:onClick=show('three-11')"><img src="img/业绩提成核对.png" height="30" width="30">业绩提成核对</a>
             <ul id="three-11" style="display: none">
                 <li><a href="">员工提成核对</a></li>
                 <li><a href="">员工业绩核对</a></li>
             </ul>
         </div>
-        <div id="12"><a href="javascript:onClick=show('three-12')">员工资料表</a>
+        <div id="12"><a href="javascript:onClick=show('three-12')"><img src="img/员工工资表.png" height="30" width="30">员工资料表</a>
             <ul id="three-12" style="display: none">
-                <li><a href="">员工资料表</a></li>
+                <li><a name="YuanGongGongZi" href="javascript:void(0);" onclick="skip(name)">员工资料表</a></li>
             </ul>
         </div>
     </div>

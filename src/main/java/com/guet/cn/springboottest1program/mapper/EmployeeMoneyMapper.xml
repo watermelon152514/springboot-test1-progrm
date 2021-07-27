@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.guet.cn.springboottest1program.mapper.EmployeeMoneyMapper">
+    <select id="getEmployeeMoneyInformation"   resultType="com.guet.cn.springboottest1program.bean.EmployeeMoney">
+        SELECT EMPLOYEE_ID,TYPE_NAME,ADD_MONEY,BOTTOM_MONEY,UP_MONEY,DELETE_MONEY,REMARKS FROM Employee_Money WHERE DATE_FORMAT(MONEY_TIME,'%Y-%m')=#{0} AND TYPE_NAME LIKE CONCAT(CONCAT('%',#{1}),'%')
+    </select>
+    <select id="zongJiMoney" resultType="int">
+        SELECT SUM(BOTTOM_MONEY+UP_MONEY+ADD_MONEY-DELETE_MONEY) FROM Employee_Money WHERE TYPE_NAME LIKE CONCAT(CONCAT('%',#{1}),'%') AND DATE_FORMAT(MONEY_TIME,'%Y-%m')=#{0}
+    </select>
+</mapper>
