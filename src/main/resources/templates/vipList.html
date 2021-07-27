@@ -7,10 +7,17 @@
     <script type="text/javascript"  th:src="@{/js/jquery-3.6.0.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/vipList.js}"></script>
     <script type="text/javascript" th:src="@{/js/layer-v3.5.1/layer/layer.js}"></script>
-    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css}" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.6.3/css/all.css}" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/css/bootstrap-table.min.css}">
-    <script type="text/javascript" th:src="@{https://unpkg.com/bootstrap-table@1.15.3/dist/bootstrap-table.min.js}"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入bootstrap-table样式 -->
+    <link th:href="@{/css/bootstrap-table.min.css}" rel="stylesheet">
+    <!-- jquery及bootstrapjs -->
+    <script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- bootstrap-table.min.js -->
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+    <!-- 引入中文语言包 -->
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
     <script th:inline="javascript">
         function la(VIP_ID){
             layer.open({
@@ -28,52 +35,52 @@
             $("#table").bootstrapTable({
                 columns:[{
                     field:'select',
-                    title:'口'
+                    title:'口',
                 },{
                     field:'VIP_ID',
-                    title:'卡号'
+                    title:'卡号',
                 },{
                     field:'VIP_NAME',
-                    title:'用户姓名'
+                    title:'用户姓名',
                 },{
                     field:'VIP_PHONE',
-                    title:'手机号'
+                    title:'手机号',
                 },{
                     field:'VIP_TYPE',
-                    title:'卡类'
+                    title:'卡类',
                 },{
                     field:'CARD_MONEY',
-                    title:'卡金'
+                    title:'卡金',
                 },{
                     field:'HISTORY_MONGEY',
-                    title:'消费总额'
+                    title:'消费总额',
                 },{
                     field:'ZENGSONG_MONEY',
-                    title:'赠送金'
+                    title:'赠送金',
                 },{
                     field:'JIFEN',
-                    title:'积分'
+                    title:'积分',
                 },{
                     field:'QIANKUAN',
-                    title:'欠款'
+                    title:'欠款',
                 },{
                     field:'TAOCAN_NUMBER',
-                    title:'套餐数量'
+                    title:'套餐数量',
                 },{
                     field:'TAOCAN_REMAIN',
-                    title:'套餐余额'
+                    title:'套餐余额',
                 },{
                     field:'BIRTHDAY',
-                    title:'生日'
+                    title:'生日',
                 },{
                     field:'OPENG_TIME',
-                    title:'开卡时间'
+                    title:'开卡时间',
                 },{
                     field:'LAST_TIME',
-                    title:'最近操作时间'
+                    title:'最近操作时间',
                 },{
                     field:'opra',
-                    title:'操作'
+                    title:'操作',
                 },]
             })
         })
@@ -82,7 +89,6 @@
 <body>
 <div class="wrapper">
     <div class="header">
-
         <form th:action="vipList.do" method="get">
             <input type="text" placeholder="会员姓名/卡号/手机号"  class="search" id="searchT" name="searchT" th:value="${searchT}">
             <select name="VIP_TYPE" id="VIP_TYPE" class="events">
@@ -96,9 +102,9 @@
                 <option th:selected="${vip_type=='7折卡'}" value="7折卡">7折卡</option>
             </select>
             <select name="CUSTOMER_SEX" id="CUSTOMER_SEX" class="events" th:option="${customer_sex}">
-                <option th:selected="${vip_type=='全部性别'}" value="全部性别">全部性别</option>
-                <option th:selected="${vip_type=='男'}" value="男">男</option>
-                <option th:selected="${vip_type=='女'}" value="女">女</option>
+                <option th:selected="${customer_sex=='全部性别'}" value="全部性别">全部性别</option>
+                <option th:selected="${customer_sex=='男'}" value="男">男</option>
+                <option th:selected="${customer_sex=='女'}" value="女">女</option>
             </select>
             <!--后两个select暂不处理-->
             <select name="kinds_user" id="kinds_user" class="events">
@@ -118,26 +124,21 @@
         </div>
     </div>
     <div class="main" >
-        <table border="1" id="table" th:if="${vip_information} ne null"
+        <table border="1" id="table"
                data-pagination="true"  data-side-pagination="client"  data-page-size="5">
-<!--            <tr>-->
-<!--                <th>口</th>-->
-<!--                <th>卡号</th>-->
-<!--                <th>用户姓名</th>-->
-<!--                <th>手机号</th>-->
-<!--                <th>卡类</th>-->
-<!--                <th>卡金</th>-->
-<!--                <th>消费总额</th>-->
-<!--                <th>赠送金</th>-->
-<!--                <th>积分</th>-->
-<!--                <th>欠款</th>-->
-<!--                <th>套餐数量</th>-->
-<!--                <th>套餐余额</th>-->
-<!--                <th>生日</th>-->
-<!--                <th>开卡时间</th>-->
-<!--                <th>最近消费时间</th>-->
-<!--                <th>操作</th>-->
-<!--            </tr>-->
+            <thead>
+            <div id="th" style="background-color: rgb(212, 209, 209);width: 100%;height: 40px;">
+                <div class="icon"></div>
+                <span id="span1">会员列表</span>
+                <span id="span2">筛选&emsp;
+                    <form style="float: right" th:action="vipList.do" method="get">
+                        <input type="text" style="border: none;" id="searchVip" name="searchVip" th:value="${searchVip}">
+                        <input type="submit" style="border: none;background-color: rgb(255, 255, 255);margin-left: -5px;">
+                    </form>
+                </span>
+            </div>
+            </thead>
+            <tbody th:if="${vip_information} ne null">
             <tr th:each="vip:${vip_information}">
                 <td></td>
                 <td th:text="${vip.VIP_ID}"></td>
@@ -157,10 +158,11 @@
                 <td>
                     <!--th:href="@{modify(card_id=${vip.card_id})}"-->
                     <a ><input type="button" id="modify" value="修改" th:onclick="la([[${vip.VIP_ID}]])"></a>
-                    <a th:href="@{delete(VIP_ID=${vip.VIP_ID})}"><input type="button" id="delete" value="删除"></a>
+                    <a th:href="@{deleteVip(VIP_ID=${vip.VIP_ID})}"><input type="button" id="delete" value="删除"></a>
                 </td>
 
             </tr>
+            </tbody>
         </table>
     </div>
 </div>

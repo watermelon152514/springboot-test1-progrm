@@ -43,3 +43,23 @@
     margin-left: 5px;
     margin-top: 15px;
 }
+.icon{
+    width: 40px;
+    height: 100%;
+    border-right: inset 1px rgb(238, 232, 232);
+    background-color: greenyellow;
+    float: left;
+}
+#th{
+    position: relative;
+}
+#th #span1{
+    position: absolute;
+    top: 5px;
+    left: 45px;
+}
+#th #span2{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}

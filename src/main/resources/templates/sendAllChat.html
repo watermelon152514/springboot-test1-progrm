@@ -5,14 +5,82 @@
     <title>群发短信</title>
     <link rel="stylesheet" th:href="@{/css/sendAllChat.css}" />
     <script type="text/javascript"  th:src="@{/js/jquery-3.6.0.min.js}"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入bootstrap-table样式 -->
+    <link th:href="@{/css/bootstrap-table.min.css}" rel="stylesheet">
+    <!-- jquery及bootstrapjs -->
+    <script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- bootstrap-table.min.js -->
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+    <!-- 引入中文语言包 -->
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script th:inline="javascript">
+        $(document).ready(function(){
+            $("#table").bootstrapTable({
+                columns:[{
+                    field:'SENDTMIE',
+                    title:'发送时间'
+                },{
+                    field:'RESULT',
+                    title:'发送结果'
+                },{
+                    field:'CUSTOMER_NUMBER',
+                    title:'客户数'
+                },{
+                    field:'SMS_NUMBER',
+                    title:'使用短信数量'
+                },{
+                    field:'CONTENT',
+                    title:'发送内容'
+                },{
+                    field:'TIPS',
+                    title:'备注'
+                },{
+                    field:'opration',
+                    title:'操作'
+                },]
+            })
+        })
+    </script>
 </head>
 <body>
 <div class="wrapper">
     <div class="tips">
+        <div style="width: 80%" th:text="查询统计：总共+${sumSms}+条记录" th:if="${sms_information} ne null"></div>
         <a th:href="@{sendChat.html}" target="menuFrame" class="button"><input type="button" value="发送短信" id="button"></a>
     </div>
     <div class="main">
+        <table border="1" id="table"
+               data-pagination="true"  data-side-pagination="client"  data-page-size="8">
+            <thead>
+            <div id="th" style="background-color: rgb(212, 209, 209);width: 100%;height: 40px;">
+                <div class="icon"></div>
+                <span id="span1">营销短信发送记录表</span>
+                <span id="span2">筛选&emsp;
+                    <form style="float: right" th:action="searchSms" method="get">
+                        <input type="text" style="border: none;" id="searchSms" name="searchSms" th:value="${searchSms}">
+                        <input type="submit" style="border: none;background-color: rgb(255, 255, 255);margin-left: -5px;">
+                    </form>
+                </span>
+            </div>
+            </thead>
+            <tbody th:if="${sms_information} ne null">
+                <tr th:each="sms:${sms_information}">
+                    <td th:text="${sms.SENDTMIE}"></td>
+                    <td th:text="${sms.RESULT}"></td>
+                    <td th:text="${sms.CUSTOMER_NUMBER}"></td>
+                    <td th:text="${sms.SMS_NUMBER}"></td>
+                    <td th:text="${sms.CONTENT}"></td>
+                    <td th:text="${sms.TIPS}"></td>
+                    <td>
+                        <a th:href="@{deleteSms(SENDTMIE=${sms.SENDTMIE})}"><input type="button" id="delete" value="删除"></a>
+                    </td>
+                </tr>
+            </tbody>
 
+        </table>
     </div>
 </div>
 
