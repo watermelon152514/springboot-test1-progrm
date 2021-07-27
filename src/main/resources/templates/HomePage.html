@@ -173,6 +173,10 @@
                         obj.setAttribute('src','YuanGongGongZiHtml');
                         console.log("YuanGongGongZi Pass!!")
                     }
+                    else if(name=="ChongZhiKaiKa"){
+                        obj.setAttribute('src','ChongZhiKaiKaHtml');
+                        console.log("YuanGongGongZi Pass!!")
+                    }
                 }
             })
         }
@@ -250,7 +254,7 @@
                 <li><a href="">水单审核</a></li>
                 <li><a href="">项目消费记录</a></li>
                 <li><a href="">商品销售记录</a></li>
-                <li><a href="">充值开卡记录</a></li>
+                <li><a name="ChongZhiKaiKa" href="javascript:void(0);" onclick="skip(name)">充值开卡记录</a></li>
                 <li><a href="">订购套餐记录</a></li>
             </ul>
         </div>
