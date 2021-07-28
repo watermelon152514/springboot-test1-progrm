@@ -177,6 +177,10 @@
                         obj.setAttribute('src','ChongZhiKaiKaHtml');
                         console.log("YuanGongGongZi Pass!!")
                     }
+                    else if(name=="TianJiaYuanGong"){
+                        obj.setAttribute('src','TJYG.html');
+                        console.log("TianJiaYuanGong Pass!!")
+                    }
                 }
             })
         }
@@ -307,7 +311,7 @@
     <div id="five">
         <div id="17"><a href="javascript:onClick=show('five-17')">开店设置</a>
             <ul id="five-17" style="display: none">
-                <li><a href="">添加员工</a></li>
+                <li><a name="TianJiaYuanGong" href="javascript:void(0);" onclick="skip(name)">添加员工</a></li>
                 <li><a href="">添加卡类型</a></li>
                 <li><a href="">添加服务项目</a></li>
                 <li><a href="">添加疗程套餐</a></li>
