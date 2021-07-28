@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-table.js"></script>
+    <link rel="stylesheet" href="css/bootstrap-table.css"/>
     <style>
         html{
             width:970px ;
@@ -122,6 +124,7 @@
                }
                cellCount=cellCount/rowCount;
                 var tableHtml = ""
+
                for(var i=0;i<objEmployeeMoney.length;i++){
                    tableHtml += "<tr>";
                    tableHtml +=    "<td>"+ objEmployeeMoney[i].employee_Id +"</td>";
@@ -136,6 +139,8 @@
                 $("#GongZiTable-information").html(tableHtml);
             }
         })
+
+
         $.ajax({
             url:"YuanGongGongZiZongJi",
             dataType:"json",
@@ -150,7 +155,15 @@
                 $("#ZongJi-a").css("font-size","xx-large");
             }
         })
+
     }
+
+
+
+
+
+
+
 
 </script>
 
@@ -189,7 +202,7 @@
         </div>
 
         <div id="GongZiTable">
-            <table>
+            <table >
                 <thead>
                     <tr>
                         <th>编号</th>
@@ -224,8 +237,8 @@
 
                 总计信息为：<a id="btn0">15</a>&nbsp;条
                 <a  href="#"  id="btn1">首页</a>
-                <a  href="#"  id="btn2">上一页</a>
-                <a  href="#"  id="btn3">下一页</a>
+                <a  name="before" href="#" onclick="HuanYe(name)"  id="btn2">上一页</a>
+                <a  name="after" href="#" onclick="HuanYe(name)" id="btn3">下一页</a>
                 <a  href="#"  id="btn4">尾页</a>&nbsp;
                 <a>转到&nbsp;</a>
                 <input id="changePage" type="text" size="1" maxlength="4"/>

@@ -27,4 +27,9 @@ public class RechargeInformationImpl implements RechargeInformationService {
     public void deleteInformation(String BILL_ID) {
         rechargeInformationMapper.deleteInformation(BILL_ID);
     }
+
+    @Override
+    public void changeInformation(RechargeInformation rechargeInformation) {
+        rechargeInformationMapper.rechangeInformation(rechargeInformation);
+    }
 }

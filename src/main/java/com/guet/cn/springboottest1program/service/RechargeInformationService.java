@@ -10,4 +10,5 @@ public interface RechargeInformationService {
     List<RechargeInformation> getAllDate(String before,String after);
     List<RechargeInformation> getAllDates(String before,String after,String type);
     void deleteInformation(String BILL_ID);
+    void changeInformation(RechargeInformation rechargeInformation);
 }

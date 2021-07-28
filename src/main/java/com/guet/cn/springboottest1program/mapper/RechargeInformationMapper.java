@@ -11,4 +11,5 @@ public interface RechargeInformationMapper {
     List<RechargeInformation> getAllData(String before,String after);
     List<RechargeInformation> getAllDatas(String before,String after,String type);
     void deleteInformation(String BILL_ID);
+    void rechangeInformation(RechargeInformation rechargeInformation);
 }

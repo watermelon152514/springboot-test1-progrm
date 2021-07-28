@@ -32,7 +32,38 @@
             font-family: 华文楷体;
             background-color: #FFDEAD;
         }
+        #Box{
 
+            width: 400px;
+            height: 600px;
+            position: absolute;
+            left: 25%;
+            top:7%;
+            background-color: darkgray;
+            display: none;
+        }
+        .TestBox{
+            height: 5%;
+            width: 75%;
+            color: black;
+        }
+        #ButtonOfTest1{
+            position: absolute;
+            right: 100px;
+            bottom: 10px;
+        }
+        #ButtonOfTest2{
+            position: absolute;
+            right: 25px;
+            bottom: 10px;
+        }
+        #Box-Lable{
+            position: absolute;
+            top: 30px;
+            left: 30%;
+            font-size: xx-large;
+            font-family: 华文楷体;
+        }
         label{
             font-family: 华文楷体;
         }
@@ -141,7 +172,10 @@
                         tableHtml +=    '<td>'+Format(resp[i].bILL_TIME,"yyyy-MM-dd")+'</td>';
                         tableHtml +=    "<td>"+ resp[i].rEMARKS +"</td>";
                         tableHtml +=    "<td>"+ resp[i].eMPLOYEE +"</td>";
-                        tableHtml +=    '<td><input type="button" value="删除" name='+ObjName+ '  onclick="DeleteInformation(name)"></td>';
+                        tableHtml +=    '<td>' +
+                            '<input type="button" value="修改" name='+ObjName+ '  onclick="ChangeInformation(name)">' +
+                            '<input type="button" value="删除" name='+ObjName+ '  onclick="DeleteInformation(name)">' +
+                            '</td>';
                         tableHtml += "</tr>";
                     }
                     $(".ZongJi-a:eq(1)").html(AllInMonet);
@@ -154,10 +188,13 @@
         }
 
         function DeleteInformation(name) {
+
+
+
             var ObjRow=name.substr(6,7);
             var thisTabe=document.getElementById("KaiKaTable-information");
             var DeleteRow = document.getElementById(name);
-            I=thisTabe.rows[ObjRow].cells[0].innerHTML;
+           I=thisTabe.rows[ObjRow].cells[0].innerHTML;
             DeleteRow.style.display = "none";
             $.ajax({
                 url: "ButtonDeleteRowOperation",
@@ -171,6 +208,64 @@
                 }
             })
         }
+        function ChangeInformation(name) {
+            document.getElementById("Box").style.display="block";
+            var BoxObj =document.getElementsByClassName("TestBox");
+            $(".TestBox:eq(0)").css("background-color","red");
+            var ObjRow=name.substr(6,7);
+            var thisTabe=document.getElementById("KaiKaTable-information");
+            var DeleteRow = document.getElementById(name);
+            var DanHaoId=thisTabe.rows[ObjRow].cells[0].innerHTML;
+            var XingMing=thisTabe.rows[ObjRow].cells[1].innerHTML;
+            var XingBei=thisTabe.rows[ObjRow].cells[2].innerHTML;
+            var LeixIng=thisTabe.rows[ObjRow].cells[3].innerHTML;
+            var ChongZhiMoney=thisTabe.rows[ObjRow].cells[4].innerHTML;
+            var ShiJiMoney=thisTabe.rows[ObjRow].cells[5].innerHTML;
+            var BeiZhu=thisTabe.rows[ObjRow].cells[8].innerHTML;
+            var CaoZuo=thisTabe.rows[ObjRow].cells[9].innerHTML;
+            $(".TestBox:eq(0)").val(DanHaoId);
+            $(".TestBox:eq(1)").val(XingMing);
+            $(".TestBox:eq(2)").val(XingBei);
+            $(".TestBox:eq(3)").val(LeixIng);
+            $(".TestBox:eq(4)").val(ChongZhiMoney);
+            $(".TestBox:eq(5)").val(ShiJiMoney);
+            $(".TestBox:eq(6)").val(BeiZhu);
+            $(".TestBox:eq(7)").val(CaoZuo);
+
+
+        }
+
+    function ButtonOfTest(name) {
+        if(name=="ButtonOfTest1"){
+            $.ajax({
+                url:"ButtonChangeRowOperation",
+                dataType:"json",
+                type:"post",
+                data:{
+                    BILL_ID: $(".TestBox:eq(0)").val(),
+                    CUSTOMER_NAME:$(".TestBox:eq(1)").val(),
+                    CUSTOMER_SEX:$(".TestBox:eq(2)").val(),
+                    VIP_TYPE:$(".TestBox:eq(3)").val(),
+                    RECHARGE_MONEY:$(".TestBox:eq(4)").val(),
+                    IN_MONEY:$(".TestBox:eq(5)").val(),
+                    TIME:"2021-07-21",
+                    BILL_TIME:"2021-07-21",
+                    REMARKS:$(".TestBox:eq(6)").val(),
+                    EMPLOYEE:$(".TestBox:eq(7)").val(),
+                    OPERATION:null
+                },
+                success:function (resp) {
+                    document.getElementById("Box").style.display="none";
+                    skip();
+                }
+            })
+        }
+        if(name=="ButtonOfTest2"){
+            document.getElementById("Box").style.display="none";
+        }
+    }
+
+
 
 
     </script>
@@ -186,6 +281,24 @@
         <h5>查询统计：总共&nbsp;&nbsp;<a class="ZongJi-a"></a>&nbsp;条记录，总业绩：<a class="ZongJi-a"></a>&nbsp;元,&nbsp;实际业绩：<a class="ZongJi-a"></a>&nbsp;元</h5>
     </div>
     <label >充值开卡记录表</label>
+
+    <div id="Box">
+        </br></br>
+        <label id="Box-Lable">账单信息</label>
+        </br></br></br>
+        单号：<input class="TestBox" type="text" placeholder="流水单号" ></br></br>
+        客户姓名：<input class="TestBox" type="text"></br></br>
+        性别：<input class="TestBox" type="text" placeholder="男or女"></br></br>
+        卡类型：<input class="TestBox" type="text"></br></br>
+        充值金额：<input class="TestBox" type="text" placeholder="xxx元"></br></br>
+        实际业绩：<input class="TestBox" type="text" placeholder="xxx元"></br></br>
+        备注：<input class="TestBox" type="text" placeholder="50字内"></br></br>
+        操作人：<input class="TestBox" type="text" placeholder="工作人员姓名">
+        <input id="ButtonOfTest1" name="ButtonOfTest1" type="button" value="提交" onclick="ButtonOfTest(name)">
+        <input id="ButtonOfTest2" name="ButtonOfTest2" type="button" value="返回" onclick="ButtonOfTest(name)">
+    </div>
+
+
     <div id="KaiKaTable">
         <table>
             <thead>

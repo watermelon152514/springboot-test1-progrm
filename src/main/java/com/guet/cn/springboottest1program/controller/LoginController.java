@@ -8,10 +8,13 @@ import com.guet.cn.springboottest1program.bean.User;
 import com.guet.cn.springboottest1program.service.EmployeeService;
 import com.guet.cn.springboottest1program.service.RechargeInformationService;
 import com.guet.cn.springboottest1program.service.UserService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import javax.servlet.http.HttpServletResponse;
@@ -127,6 +130,22 @@ public class LoginController {
         }
 
     }
+
+
+    //财务中心--->营业记录--->充值开卡记录表(Button修改一行信息)
+
+    @RequestMapping(value = "/ButtonChangeRowOperation")
+    @ResponseBody
+    public void ButtonChangeRowOperation(HttpServletResponse httpServletResponse, RechargeInformation rechargeInformation) throws IOException {
+        httpServletResponse.setCharacterEncoding("utf-8");
+        rechargeInformationService.changeInformation(rechargeInformation);
+        PrintWriter printWriter=httpServletResponse.getWriter();
+        String str=null;
+        printWriter.println(str);
+        printWriter.flush();
+        printWriter.close();
+    }
+
     //财务中心--->营业记录--->充值开卡记录表(Button删除一行信息)
     @RequestMapping(value = "/ButtonDeleteRowOperation")
     public void ButtonDeleteRowOperation(HttpServletResponse httpServletResponse,String BILL_ID) throws IOException {
