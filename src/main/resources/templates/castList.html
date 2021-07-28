@@ -68,15 +68,15 @@
     </div>
     <div class="tips">
         <div th:if="${sanke_information} ne null" >
-            <div th:text="查询统计：总共+${sumSanke}+条记录"></div>
+            <div id="tip" th:text="查询统计：总共+${sumSanke}+条记录"></div>
         </div>
     </div>
     <div class="main">
         <table border="1" id="table"
-               data-pagination="true"  data-side-pagination="client"  data-page-size="5">
+               data-pagination="true"  data-side-pagination="client"  data-page-size="11">
             <thead>
-                <div id="th" style="background-color: rgb(212, 209, 209);width: 100%;height: 40px;">
-                    <div class="icon"></div>
+                <div id="th" style="border:1px solid;width: 100%;background-color:rgb(238, 232, 232);height: 40px;">
+                    <div class="icon"><img th:src="@{/img/列表.svg}" alt=""></div>
                     <span id="span1">散客列表</span>
                     <span id="span2">筛选&emsp;
                         <form style="float: right" th:action="SankeList.do" method="get">

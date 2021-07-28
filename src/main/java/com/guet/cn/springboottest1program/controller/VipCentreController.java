@@ -60,11 +60,11 @@ public class VipCentreController {
         return "vipList";
     }
     @GetMapping("vipList.do")  //搜索框和下拉选择框的查询处理
-    public String vipList(String VIP_TYPE,String CUSTOMER_SEX,HttpServletRequest request){
+    public String selectVipList(String VIP_TYPE,String CUSTOMER_SEX,HttpServletRequest request){
         String searchT=request.getParameter("searchT");
         String searchVip=request.getParameter("searchVip");
         List<Vip_information> vipsList;
-        System.out.println(searchVip);
+        System.out.println("search"+searchVip);
         if (searchVip != null && searchVip != ""){
             vipsList=vipService.selectVip(vip_type,customer_sex,searchT,searchVip);
         }else {
@@ -72,7 +72,6 @@ public class VipCentreController {
             vip_type=VIP_TYPE;
             customer_sex=CUSTOMER_SEX;
         }
-
 
         //回显数据
         request.setAttribute("vip_information",vipsList);
@@ -111,16 +110,18 @@ public class VipCentreController {
     public String deleteVip(String VIP_ID,HttpServletRequest request){
         System.out.println(VIP_ID);
         vipService.deleteVip(VIP_ID);
-        vipList(vip_type,customer_sex,request);
+        selectVipList(vip_type,customer_sex,request);
         return "vipList.html";
     }
     @GetMapping("modifyVip")  //修改会员信息
     public String modifyVip(Vip_information vip, HttpServletRequest request){
-        if (vip.getVIP_NAME()!=null && vip.getVIP_PHONE()!=null) {
+        if (vip.getVIP_NAME()!="" && vip.getVIP_PHONE()!="") {
             System.out.println("修改");
             vipService.modifyVip(vip.getVIP_NAME(),vip.getVIP_PHONE(),Card_id);
-            vipList(vip_type,customer_sex,request);
-            return "vipList.html";
+            System.out.println(vip_type);
+            System.out.println(customer_sex);
+            selectVipList(vip_type,customer_sex,request);
+            return "vipList";
         }else {
             System.out.println("修改失败");
             return "vipList.html";

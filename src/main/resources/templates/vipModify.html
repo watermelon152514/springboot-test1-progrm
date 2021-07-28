@@ -10,13 +10,40 @@
              parent.layer.close(index);
          }
      </script>
-  </head>
-  <body>
-      <form th:action="@{modifyVip}" method="GET">
-        <div><span>卡号</span><input type="text" id="VIP_ID" name="VIP_ID" disabled="disabled" th:value="${vipModify.VIP_ID}"></div>
-        <div><span>姓名</span><input type="text" id="VIP_NAME" name="VIP_NAME" th:value="${vipModify.VIP_NAME}"></div>
-        <div><span>手机号码</span><input type="text" id="VIP_PHONE" name="VIP_PHONE" th:value="${vipModify.VIP_PHONE}"></div>
-        <div><a><input type="submit" value="确认修改" onclick="closeWindon()"></a></div>
-      </form>
-  </body>
+     <style>
+         .wrapper{
+             width: 400px;
+             height: 300px;
+             margin: 0 auto;
+             position: relative;
+         }
+         .wrapper .div1{
+             text-align: right;
+             margin-top: 50px;
+             margin-right: 20%;
+         }
+         .wrapper .div2{
+             text-align: center;
+             color: red;
+         }
+         .wrapper .div3{
+             margin-top: 50px;
+             text-align: center;
+         }
+         .wrapper .div3 input{
+             margin-left: 30px;
+         }
+     </style>
+ </head>
+ <body>
+ <form th:action="@{modifyVip}" method="GET">
+     <div class="wrapper">
+         <div style="display: none;"><span>卡号</span><input type="text" id="VIP_ID" name="VIP_ID" disabled="disabled" th:value="${vipModify.VIP_ID}"></div>
+         <div class="div2">修改值不能为空！</div>
+         <div class="div1"><span>修改姓名:&emsp;</span><input type="text" id="VIP_NAME" name="VIP_NAME" th:value="${vipModify.VIP_NAME}"></div>
+         <div class="div1"><span>修改手机号码:&emsp;</span><input type="text" id="VIP_PHONE" name="VIP_PHONE" th:value="${vipModify.VIP_PHONE}"></div>
+         <div class="div3"><a><input type="submit" value="确认修改" onclick="closeWindon()"></a><input type="button" value="取消" onclick="closeWindon()"></div>
+     </div>
+ </form>
+ </body>
 </html>
