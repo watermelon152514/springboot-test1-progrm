@@ -8,4 +8,8 @@
             (#{item.id},#{item.name},#{item.sex},#{item.phone},#{item.lv},#{item.entrytime},#{item.perobj},#{item.jobstatus},#{item.department},#{item.lable},#{item.ordernum},#{item.workstatus},#{item.open_ports},#{item.tuijian_status})
         </foreach>
     </insert>
+
+    <select id="EmpList" resultType="com.guet.cn.springboottest1program.bean.Employees">
+        select id, name, sex, phone, lv, entrytime, perobj,jobstatus,department, lable,ordernum,workstatus, open_ports, tuijian_status from employeesinfo
+    </select>
 </mapper>

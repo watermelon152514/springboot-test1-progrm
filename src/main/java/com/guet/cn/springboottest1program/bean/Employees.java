@@ -4,17 +4,17 @@ package com.guet.cn.springboottest1program.bean;
 import java.sql.Date;
 
 public class Employees {
-    private int id;
+    private Integer id;
     private String name;
     private String sex;
     private String phone;
     private String lv;
     private Date entrytime;
-    private int perobj;
+    private Integer perobj;
     private String jobstatus;
     private String department;
     private String lable;
-    private int ordernum;
+    private Integer ordernum;
     private String workstatus;
     private String open_ports;
     private String tuijian_status;
@@ -22,28 +22,11 @@ public class Employees {
     public Employees() {
     }
 
-    public Employees(int id, String name, String sex, String phone, String lv, Date entrytime, int perobj, String jobstatus, String department, String lable, int ordernum, String workstatus, String open_ports, String tuijian_status) {
-        this.id = id;
-        this.name = name;
-        this.sex = sex;
-        this.phone = phone;
-        this.lv = lv;
-        this.entrytime = entrytime;
-        this.perobj = perobj;
-        this.jobstatus = jobstatus;
-        this.department = department;
-        this.lable = lable;
-        this.ordernum = ordernum;
-        this.workstatus = workstatus;
-        this.open_ports = open_ports;
-        this.tuijian_status = tuijian_status;
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -87,11 +70,11 @@ public class Employees {
         this.entrytime = entrytime;
     }
 
-    public int getPerobj() {
+    public Integer getPerobj() {
         return perobj;
     }
 
-    public void setPerobj(int perobj) {
+    public void setPerobj(Integer perobj) {
         this.perobj = perobj;
     }
 
@@ -119,11 +102,11 @@ public class Employees {
         this.lable = lable;
     }
 
-    public int getOrdernum() {
+    public Integer getOrdernum() {
         return ordernum;
     }
 
-    public void setOrdernum(int ordernum) {
+    public void setOrdernum(Integer ordernum) {
         this.ordernum = ordernum;
     }
 

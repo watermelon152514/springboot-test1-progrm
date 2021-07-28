@@ -15,21 +15,15 @@
 
 <!-- 修改功能中的传参请求 处理 将数据回显到模态框中-->
 <script  th:inline="javascript">
-    // $(document).ready(function () {
-    //     // $("#vv").on("click",function () {
-    //
-    //     }
-    //
-    //
-    // });
-    // var employees=new Employees();
 
-    function update(id) {
+    function f1(id) {
         console.log("aaaaaaaaaaa");
         $.ajax({
-            type: "get",
+            type: "get",//+$("").text(),
+            // url: "@{getEmployeeById?id=+${id}}",
             url: "getEmployeeById",
             data: {"id": id},
+            // data:JSON.stringify(employees.id),
             dataType: "json",
             success: showMessage,
             error: function () {
@@ -75,8 +69,7 @@
                 // 禁止的原因是,FormData已经帮我们做了处理
                 success: function () {
                     console.log("sadadadadas");
-                    //但需要你后端有返回值
-                    window.location.href="TJYG.html";//实现刷新页面
+                    location.reload();
                     alert("通过Excel插入成功!");
                 },error: function () {
                 alert("通过Excel插入失败!");
@@ -84,10 +77,6 @@
             });
     });
     });
-
-
-
-
 
 
 
@@ -111,9 +100,9 @@
             $.get("setjobstatus",
                 {"setjob":setjob,"id":id},
             function(data){
-                    // $("#setstatus1").html(data);
-                    window.location.href="TJYG.html";//实现刷新页面
-                    alert("设置成功");
+                location.reload();
+                alert("设置成功");
+
             });
         };
 
@@ -129,7 +118,7 @@
         $.get("setworkstatus",
             {"setwork":setwork,"id":id},
             function(data){
-                window.location.href="TJYG.html";//实现刷新页面
+                location.reload();
                 alert("设置成功");
             });
     }
@@ -144,10 +133,15 @@
         $.get("settuijian",
             {"settui":settui,"id":id},
             function(data){
-                window.location.href="TJYG.html";//实现刷新页面
+                location.reload();//  点击过后，值改变，显示也变了 达到预期目标     重新载入当前文档:
                 alert("设置成功");
             });
     }
+
+    function exportExcel() {
+        window.location.href = "exportExcel"
+    }
+
 </script>
 
 
@@ -275,8 +269,9 @@
                         </span>
                     </td>
 
+
                     <td>
-                        <input id="vv" type="button" class="btn btn-default" data-toggle="modal" data-target="#update" th:onclick="|update('${employee.id}')|" value="修改"/>
+                        <input id="vv" type="button" class="btn btn-default" data-toggle="modal" data-target="#update" th:onclick="|f1('${employee.id}')|" value="修改"/>
                     </td>
 
                     <td> <a th:href="@{deleteEmployee(id=${employee.id})}">
@@ -289,15 +284,15 @@
             <!--        分页页码显示-->
             <ul id="yiul" class="pager" th:if="${articlePage.pages>0}" >
                 <li  th:if="${articlePage.hasPreviousPage}">
-
+<!--                    <a th:href="'TJYG.html?sparampageNum=1'">首页</a>-->
                     <a th:href="@{TJYG.html(sparam=${sparam},pageNum=1)}">首页</a>
                 </li>
 
-                <li  th:if="${articlePage.hasPreviousPage}">
 
+                <li  th:if="${articlePage.hasPreviousPage}">
+<!--                    <a th:href="'TJYG.html?pageNum='+${articlePage.prePage}">上一页</a>-->
                     <a th:href="@{TJYG.html(sparam=${sparam},pageNum=${articlePage.prePage})}">上一页</a>
                 </li>
-
 
                  <span th:each="i:${#numbers.sequence(1,articlePage.pages)}">
                         <a th:href="@{TJYG.html(sparam=${sparam},pageNum=${i})}" th:text="${i}" th:if="${i} != '${articlePage.pageNum}'"></a>
@@ -311,7 +306,6 @@
                 <li class="next" th:if="${articlePage.hasNextPage}">
                     <a th:href="@{TJYG.html(sparam=${sparam},pageNum=${articlePage.nextPage})}">下一页</a>
                 </li>
-
 
                 <li>
                     <a th:href="@{TJYG.html(sparam=${sparam},pageNum=${articlePage.pages})}">尾页</a>
@@ -556,29 +550,33 @@
 <!--            <form class="form-horizontal" autocomplete="off" action="0.php">-->
                 <div class="modal-header">
                     <button class="close" data-dismiss="modal">x</button>
-                    <h4>完成批量添加</h4>
+                    <h4>批量导入导出</h4>
                 </div>
                 <div class="modal-body-1">
                     <ul id="myTab" class="nav nav-tabs">
                         <li class="active">
-                            <a href="#home" data-toggle="tab">
-                                菜鸟教程
-                            </a>
+                            <a href="#home" data-toggle="tab" style="width: 110px;">批量导入</a>
                         </li>
-                        <li><a href="#ios" data-toggle="tab">iOS</a></li>
+                        <li><a href="#ios" data-toggle="tab" style="width: 120px;">导出员工资料</a></li>
                     </ul>
                     <div id="myTabContent" class="tab-content" style="height: 220px;">
                         <div class="tab-pane fade in active" id="home">
                             <div class="alert alert-danger alert-dismissible w-50" style="height: 110px;width: 598px;">
-                                <span data-dismiss="alert" class="close">X</span>
+                                <span data-dismiss="alert" class="close">x</span>
                                     <strong>小提示</strong><br>
-                                1.按照模版中要求填写员工信息。<br>
-                                2.点击下方“选择文档”按钮,在电脑中选中已填写完成的文档,点击“导入”。<br>
-                                3.如果系统有提示,请提示修改文档,如无法解决请联系我们客服: 400-077-0829
+                                1.先下载模板;按照模版中要求填写员工信息。<br>
+                                2.点击下方“选择文件”按钮,在电脑中选中已填写完成的文档,点击“导入”。<br>
+                                3.导入的excel文件后缀是.xlsx, 如模板文件一样!<br>
                             </div>
+
+
                             <div>
                                 <form name="myForm" enctype="multipart/form-data" style="width: 580px;"  >
-                                    <input id="f_upload" type="file" name="file" style="margin-left: 120px;background: greenyellow" /><br>
+                                    <span class="f-l" >
+                                        <a href="download" class="btn btn-primary radius" style="float: right;height: 30px;width: 110px;text-align: center;background: radial-gradient(black, transparent);font-size: xx-small;">
+                                        <i class="Hui-iconfont">&#xe600;</i> 下载模板表格</a>
+                                    </span>
+                                    <input id="f_upload" type="file" name="file" style="margin-left: 150px;background: #f5eee6" /><br>
 <!--                                    <button type="submit" class="btn btn-default" style="margin-left:285px; width: 50px;height: 30px;">导入</button>-->
                                     <button type="button" id="upload" class="btn btn-default" style="float:right;width: 50px;height: 30px;">导入</button>
                                     <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-left: 460px;width: 50px;height: 30px;">关闭</button>
@@ -586,9 +584,15 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="ios">
-                            <p>iOS 是一个由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple
-                                TV。iOS 派生自 OS X，它们共享 Darwin 基础。OS X 操作系统是用在苹果电脑上，iOS 是苹果的移动版本。</p>
+                        <div class="tab-pane fade" id="ios" style="height:80px;width: 598px;">
+                            <div class="alert alert-danger alert-dismissible w-50" style="height: 80px;width: 598px;">
+                                <span data-dismiss="alert" class="close">x</span>
+                                <strong>小提示</strong><br>
+                                1.导出员工信息资料的文件为Excel文件。<br>
+                            </div>
+                            <div style="margin-left: 20px;width:570px;height: 90px;">
+                                <input type="button"  value="导出员工信息资料" onclick="exportExcel()" style="margin-left: 200px; margin-top:30px;width: 150px;height: 40px; background-color: rgba(210,255,216,0.27);"/>
+                            </div>
                         </div>
                     </div>
 
