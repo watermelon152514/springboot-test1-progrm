@@ -87,11 +87,23 @@
 
 <script type="text/javascript" >
 
+    var JsonDataObj;//json数据
+    var AllRowNumbers=0;//总数据行数
+    var FirstPage=1;//首页
+    var NowPage;//当前页面
+    var LastPage;//尾页
+    var NextPage;//下一页
+    var UpPage;//上一页
+    var AllPage;//总页数
+    var EachNumber=2;//每页最大行数
+
+
+
     var tagOfType="发型师";
 
     window.onload=function () {
         $(".TopPage-Button:eq(0)").css("background-color","#F0E68C");
-
+        $("#btn-nowPage").html("1");
 
         var date = new Date();
         var data_year= date .getFullYear(); //获取完整的年份(4位)
@@ -114,31 +126,33 @@
                 type:tagOfType
             },
             success:function (objEmployeeMoney) {
+                JsonDataObj=objEmployeeMoney;
                var objTable= document.getElementById("GongZiTable-information");
                var rowCount=objEmployeeMoney.length;
-               $("#btn0").html(rowCount);
+                AllRowNumbers=rowCount;
+               if(rowCount%EachNumber==0){
+                   AllPage=parseInt(rowCount/EachNumber);
+                   $("#btn-allPage").html(AllPage);
+               }
+               else{
+                   AllPage=parseInt(rowCount/EachNumber)+1;
+                   $("#btn-allPage").html(AllPage);
+               }
+                $("#btn0").html(rowCount);
                var cellCount=0;
                for(var i in objEmployeeMoney){
                    for(j in objEmployeeMoney[i])
                         cellCount=cellCount+1;
                }
                cellCount=cellCount/rowCount;
-                var tableHtml = ""
-
-               for(var i=0;i<objEmployeeMoney.length;i++){
-                   tableHtml += "<tr>";
-                   tableHtml +=    "<td>"+ objEmployeeMoney[i].employee_Id +"</td>";
-                   tableHtml +=    "<td>"+ objEmployeeMoney[i].type_Name +"</td>";
-                   tableHtml +=    "<td>"+ objEmployeeMoney[i].add_Money +"</td>";
-                   tableHtml +=    "<td>"+ objEmployeeMoney[i].bottom_Money +"</td>";
-                   tableHtml +=    "<td>"+ objEmployeeMoney[i].up_Money +"</td>";
-                   tableHtml +=    "<td>"+ objEmployeeMoney[i].delete_Money +"</td>";
-                   tableHtml +=    "<td>"+ objEmployeeMoney[i].remarks +"</td>";
-                   tableHtml += "</tr>";
-               }
-                $("#GongZiTable-information").html(tableHtml);
+               LastPage=AllPage;
+               NowPage=FirstPage;
+               NextPage=NowPage+1;
+               UpPage=NowPage-1;
+                DisplayPage(1,JsonDataObj);
             }
         })
+
 
 
         $.ajax({
@@ -159,9 +173,84 @@
     }
 
 
+    function HuanYe(name) {
+        if(name=="SkipToNumber"){
+            var ToNumber=$("#changePage").val();
+            if(ToNumber>AllPage){
+                alert("超出总页数，无法跳转。目前跳转尾页");
+                DisplayPage(LastPage,JsonDataObj);
+                NowPage=LastPage;
+            }
+            else if(ToNumber<FirstPage){
+                alert("超出总页数，无法跳转。目前跳转至首页");
+                DisplayPage(FirstPage,JsonDataObj);
+                NowPage=FirstPage;
+            }
+            else{
+                NowPage=ToNumber;
+                DisplayPage(ToNumber,JsonDataObj);
+            }
+        }
+        if(name=="Up"){
+            if(NowPage-1<FirstPage){
+                alert("以是首页！！！");
+            }
+            else {
+                NowPage=NowPage-1;
+                DisplayPage(NowPage,JsonDataObj);
+            }
+        }
+        else if(name=="Next"){
+            var numberOfNow=Number(NowPage);
+            var ParaNumber=numberOfNow+1
+            if( LastPage<ParaNumber){
+                alert("以是尾页！！！");
+            }
+            else {
+                NowPage=Number(NowPage)+1;
+                DisplayPage(NowPage,JsonDataObj);
+            }
+        }
+        else if(name=="First"){
+                NowPage=1;
+                DisplayPage(NowPage,JsonDataObj);
+        }
+        else if(name=="Last"){
+            NowPage=LastPage;
+            DisplayPage(NowPage,JsonDataObj);
+        }
+
+        $("#btn-nowPage").html(NowPage);
 
 
 
+    }
+
+    function DisplayPage(NumberOfPage,JsonDataObj) {
+        $("#GongZiTable-information").empty();
+        if(NumberOfPage==AllPage){
+            var StartIndex=NumberOfPage*EachNumber-EachNumber;
+            var EndIndex=AllRowNumbers;
+
+        }
+        else {
+            var EndIndex=NumberOfPage*EachNumber;
+            var StartIndex=EndIndex-EachNumber;
+            }
+        var tableHtml = "";
+        for(StartIndex;StartIndex<EndIndex;StartIndex++){
+            tableHtml += "<tr>";
+            tableHtml +=    "<td>"+ JsonDataObj[StartIndex].employee_Id +"</td>";
+            tableHtml +=    "<td>"+ JsonDataObj[StartIndex].type_Name +"</td>";
+            tableHtml +=    "<td>"+ JsonDataObj[StartIndex].add_Money +"</td>";
+            tableHtml +=    "<td>"+ JsonDataObj[StartIndex].bottom_Money +"</td>";
+            tableHtml +=    "<td>"+ JsonDataObj[StartIndex].up_Money +"</td>";
+            tableHtml +=    "<td>"+ JsonDataObj[StartIndex].delete_Money +"</td>";
+            tableHtml +=    "<td>"+ JsonDataObj[StartIndex].remarks +"</td>";
+            tableHtml += "</tr>";
+            $("#GongZiTable-information").html(tableHtml);
+        }
+    }
 
 
 
@@ -235,15 +324,17 @@
         <div id="BottomPage">
             <div id="BottomPage-properties">
 
-                总计信息为：<a id="btn0">15</a>&nbsp;条
-                <a  href="#"  id="btn1">首页</a>
-                <a  name="before" href="#" onclick="HuanYe(name)"  id="btn2">上一页</a>
-                <a  name="after" href="#" onclick="HuanYe(name)" id="btn3">下一页</a>
-                <a  href="#"  id="btn4">尾页</a>&nbsp;
-                <a>转到&nbsp;</a>
+                总计信息为：<a id="btn0">15</a>&nbsp;&nbsp;&nbsp;条
+                总计<a id="btn-allPage"></a>&nbsp;&nbsp;页
+                Now:第<a  id="btn-nowPage"></a>&nbsp;&nbsp;页
+                <a  name="First" href="javascript:void(0);" onclick="HuanYe(name)" id="btn1">首页</a>
+                <a  name="Up" href="javascript:void(0);" onclick="HuanYe(name)"  id="btn2">上一页</a>
+                <a  name="Next" href="javascript:void(0);" onclick="HuanYe(name)" id="btn3">下一页</a>
+                <a  name="Last" href="javascript:void(0);" onclick="HuanYe(name)" id="btn4">尾页</a>&nbsp;
+                &nbsp;&nbsp;<a>转到&nbsp;</a>
                 <input id="changePage" type="text" size="1" maxlength="4"/>
                 <a>页&nbsp;</a>
-                <a  href="#"  id="btn5">跳转</a>
+                <a  name="SkipToNumber" href="javascript:void(0);" onclick="HuanYe(name)" id="btn5">跳转</a>
             </div>
         </div>
 
