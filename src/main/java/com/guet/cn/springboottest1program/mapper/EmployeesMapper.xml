@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.guet.cn.springboottest1program.mapper.EmployeesMapper">
+
+
+    <select id="selectmsg" parameterType="com.guet.cn.springboottest1program.bean.Employees" resultType="com.guet.cn.springboottest1program.bean.Employees">
+        <choose>
+            <when test="sex eq '性别' and jobstatus eq '状态'">
+                SELECT * FROM employeesinfo
+            </when>
+            <when test="sex eq '性别' ">
+                SELECT * FROM jobstatus=#{jobstatus}
+            </when>
+            <when test="jobstatus eq '状态' ">
+                SELECT * FROM sex=#{sex}
+            </when>
+            <otherwise>
+                SELECT * FROM sex=#{sex} AND jobstatus=#{jobstatus}
+            </otherwise>
+        </choose>
+    </select>
+
+
+
+    <delete id="deleteEmployee" parameterType="int">
+        DELETE FROM employeesinfo WHERE id=#{value}
+    </delete>
+
+    <select id="getEmployeeById" parameterType="int" resultType="com.guet.cn.springboottest1program.bean.Employees">
+        SELECT * FROM employeesinfo WHERE id=#{value}
+    </select>
+
+    <!--    添加员工信息-->
+    <insert id="addEmployee" parameterType="com.guet.cn.springboottest1program.bean.Employees">
+        INSERT INTO employeesinfo VALUES (#{id},#{name}, #{sex}, #{phone}, #{lv}, #{entrytime},null,#{jobstatus},#{department}, null,#{ordernum},workstatus=#{workstatus}, open_ports=#{open_ports}, #{tuijian_status})
+    </insert>
+    <!--    修改员工信息-->
+    <update id="updateEmployee" parameterType="com.guet.cn.springboottest1program.bean.Employees">
+        UPDATE employeesinfo SET name=#{name}, sex=#{sex}, phone=#{phone}, lv=#{lv}, entrytime=#{entrytime},perobj=#{perobj},jobstatus=#{jobstatus},department=#{department}, lable=#{lable},ordernum=#{ordernum},workstatus=#{workstatus}, open_ports=#{open_ports}, tuijian_status=#{tuijian_status}
+        WHERE id=#{id}
+    </update>
+    <!--    搜索框查询-->
+    <select id="searchYG" parameterType="string" resultType="com.guet.cn.springboottest1program.bean.Employees">
+        <choose>
+            <when test="sparam eq '中工' or sparam eq '发型师' or sparam eq'理发师' ">
+                SELECT * FROM employeesinfo WHERE lv=#{sparam}
+            </when>
+            <otherwise>
+                SELECT * FROM employeesinfo WHERE name=#{sparam}
+            </otherwise>
+        </choose>
+    </select>
+    <!--    设置 离职或在职状态-->
+    <update id="setjobstatus" parameterType="com.guet.cn.springboottest1program.bean.Employees">
+            <if test="setjob eq 0 and id != null">
+                UPDATE employeesinfo SET jobstatus='离职' WHERE id=#{id}
+            </if>
+            <if test="setjob eq 1 and id != null">
+                UPDATE employeesinfo SET jobstatus='在职' WHERE id=#{id}
+            </if>
+    </update>
+    <!--    设置 下线或在线状态-->
+    <update id="setworkstatus" parameterType="com.guet.cn.springboottest1program.bean.Employees">
+        <if test="setwork eq 0 and id != null">
+            UPDATE employeesinfo SET workstatus='下线' WHERE id=#{id}
+        </if>
+        <if test="setwork eq 1 and id != null">
+            UPDATE employeesinfo SET workstatus='在线' WHERE id=#{id}
+        </if>
+    </update>
+    <!--    设置 推荐或不推荐状态-->
+    <update id="settuijian" parameterType="com.guet.cn.springboottest1program.bean.Employees">
+        <if test="settui eq 0 and id != null">
+            UPDATE employeesinfo SET tuijian_status='不推荐' WHERE id=#{id}
+        </if>
+        <if test="settui eq 1 and id != null">
+            UPDATE employeesinfo SET tuijian_status='推荐' WHERE id=#{id}
+        </if>
+    </update>
+
+    <select id="viewEmployees" parameterType="string" resultType="com.guet.cn.springboottest1program.bean.Employees">
+        <choose>
+            <when test="sparam eq '' or sparam eq null ">
+                SELECT * FROM employeesinfo
+            </when>
+            <otherwise>
+                SELECT * FROM employeesinfo
+                <if test="sparam eq '中工' or sparam eq '发型师' or sparam eq'理发师' ">
+                    WHERE lv=#{sparam}
+                </if>
+                 <if test="sparam neq '中工' and sparam neq '发型师' and sparam neq'理发师' ">
+                    WHERE name=#{sparam}
+                 </if>
+            </otherwise>
+        </choose>
+    </select>
+
+
+</mapper>

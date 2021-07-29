@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.guet.cn.springboottest1program.mapper.InsertEmpMapper">
+    <insert id="insertEmp">
+        INSERT INTO employeesinfo VALUES
+        <foreach collection="list" separator="," item="item" >
+            (#{item.id},#{item.name},#{item.sex},#{item.phone},#{item.lv},#{item.entrytime},#{item.perobj},#{item.jobstatus},#{item.department},#{item.lable},#{item.ordernum},#{item.workstatus},#{item.open_ports},#{item.tuijian_status})
+        </foreach>
+    </insert>
+
+    <select id="EmpList" resultType="com.guet.cn.springboottest1program.bean.Employees">
+        select id, name, sex, phone, lv, entrytime, perobj,jobstatus,department, lable,ordernum,workstatus, open_ports, tuijian_status from employeesinfo
+    </select>
+</mapper>

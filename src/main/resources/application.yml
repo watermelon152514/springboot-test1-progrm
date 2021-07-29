@@ -20,6 +20,7 @@ spring:
       prefix: classpath:/templates/
       suffix: .html
 
+
 #关闭百里香缓存
   thymeleaf:
     cache: false
