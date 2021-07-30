@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>会员列表</title>
+    <link rel="stylesheet" th:href="@{/css/vipList.css}"/>
+    <script type="text/javascript"  th:src="@{/js/jquery-3.6.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/vipList.js}"></script>
+    <script type="text/javascript" th:src="@{/js/layer-v3.5.1/layer/layer.js}"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入bootstrap-table样式 -->
+    <link th:href="@{/css/bootstrap-table.min.css}" rel="stylesheet">
+    <!-- jquery及bootstrapjs -->
+    <script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!-- bootstrap-table.min.js -->
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+    <!-- 引入中文语言包 -->
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script th:inline="javascript">
+        function la(VIP_ID){
+            layer.open({
+                type: 2 //Page层类型
+                ,area: ['500px', '400px']
+                ,title: 'Hello layer'
+                ,shade: 0.6 //遮罩透明度
+                ,maxmin: true //允许全屏最小化
+                ,anim: 5 //0-6的动画形式，-1不开启
+                ,content: 'vipModify.html?VIP_ID='+VIP_ID
+                ,end:function () {
+                    window.location.reload();
+                }
+            });
+        }
+        $(document).ready(function(){
+            $("#table").bootstrapTable({
+                columns:[{
+                    field:'select',
+                    title:'<input type="checkbox" name="tb" onclick="allSelect(\'tb\', \'tb1\')">',
+                },{
+                    field:'VIP_ID',
+                    title:'卡号',
+                },{
+                    field:'VIP_NAME',
+                    title:'用户姓名',
+                },{
+                    field:'VIP_PHONE',
+                    title:'手机号',
+                },{
+                    field:'VIP_TYPE',
+                    title:'卡类',
+                },{
+                    field:'CARD_MONEY',
+                    title:'卡金',
+                },{
+                    field:'HISTORY_MONGEY',
+                    title:'消费总额',
+                },{
+                    field:'ZENGSONG_MONEY',
+                    title:'赠送金',
+                },{
+                    field:'JIFEN',
+                    title:'积分',
+                },{
+                    field:'QIANKUAN',
+                    title:'欠款',
+                },{
+                    field:'TAOCAN_NUMBER',
+                    title:'套餐数量',
+                },{
+                    field:'TAOCAN_REMAIN',
+                    title:'套餐余额',
+                },{
+                    field:'BIRTHDAY',
+                    title:'生日',
+                },{
+                    field:'OPENG_TIME',
+                    title:'开卡时间',
+                },{
+                    field:'LAST_TIME',
+                    title:'最近操作时间',
+                },{
+                    field:'opra',
+                    title:'操作',
+                },]
+            })
+        })
+        function allSelect(check_v, checkname)
+        {
+            var v_item = document.getElementsByName(check_v);
+            var items = document.getElementsByName(checkname);
+            for (var i = 0; i < items.length; ++i)
+            {
+                if (v_item[0].checked)
+                {
+                    items[i].checked = true;
+                }
+                else
+                {
+                    items[i].checked = false;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="header">
+        <form th:action="vipList.do" method="get">
+            <input type="text" placeholder="会员姓名/卡号/手机号"  class="search" id="searchT" name="searchT" th:value="${searchT}">
+            <select name="VIP_TYPE" id="VIP_TYPE" class="events">
+                <!--th:selected="${vip_type=='全部会员卡类'}" value="全部会员卡类" 用于判断是否等于该类，等于则回显value-->
+                <option th:selected="${vip_type=='全部会员卡类'}" value="全部会员卡类">全部会员卡类</option>
+                <option th:selected="${vip_type=='美甲会员'}" value="美甲会员">美甲会员</option>
+                <option th:selected="${vip_type=='9折卡'}" value="9折卡">9折卡</option>
+                <option th:selected="${vip_type=='8.5折卡'}" value="8.5折卡">8.5折卡</option>
+                <option th:selected="${vip_type=='8折卡'}" value="8折卡">8折卡</option>
+                <option th:selected="${vip_type=='7.5折卡'}" value="7.5折卡">7.5折卡</option>
+                <option th:selected="${vip_type=='7折卡'}" value="7折卡">7折卡</option>
+            </select>
+            <select name="CUSTOMER_SEX" id="CUSTOMER_SEX" class="events" th:option="${customer_sex}">
+                <option th:selected="${customer_sex=='全部性别'}" value="全部性别">全部性别</option>
+                <option th:selected="${customer_sex=='男'}" value="男">男</option>
+                <option th:selected="${customer_sex=='女'}" value="女">女</option>
+            </select>
+            <!--后两个select暂不处理-->
+            <select name="kinds_user" id="kinds_user" class="events">
+                <option>正常用户</option>
+                <option>已删除用户</option>
+            </select>
+            <select name="kinds_meal" id="kinds_meal" class="events">
+                <option>全部套餐</option>
+            </select>
+            <input type="submit" value="查询" id="search" class="events">
+            <input type="submit" value="高级查询" id="psearch" class="events">
+        </form>
+    </div>
+    <div class="tips" id="div1" th:fragment="div1" >
+        <div th:if="${vip_information} ne null" >
+            <div id="tip" th:text="查询统计：总共+${a}+位，卡金+${card_amount}+元，赠送金+${gift_money}+元，积分+${integral}+分，套餐用户+${package}+位，套餐余额+${package_amount}+元，欠款+${arrears}+元"></div>
+        </div>
+    </div>
+    <div class="main" >
+        <table border="1" id="table"
+               data-pagination="true"  data-side-pagination="client"  data-page-size="6">
+            <thead>
+            <div id="th" style="border:1px solid;width: 100%;background-color:rgb(238, 232, 232);height: 40px;">
+                <div class="icon"><img th:src="@{/img/列表.svg}" alt=""></div>
+                <span id="span1">会员列表</span>
+                <span id="span2">筛选&emsp;
+                    <form style="float: right" th:action="vipList.do" method="get">
+                        <input type="text" style="border: none;" id="searchVip" name="searchVip" th:value="${searchVip}">
+                        <input type="submit" style="border: none;background-color: rgb(255, 255, 255);margin-left: -5px;">
+                    </form>
+                </span>
+            </div>
+            </thead>
+            <tbody th:if="${vip_information} ne null">
+            <tr th:each="vip:${vip_information}">
+                <td><input type="checkbox" name="tb1"></td>
+                <td th:text="${vip.VIP_ID}"></td>
+                <td th:text="${vip.VIP_NAME}"></td>
+                <td th:text="${vip.VIP_PHONE}"></td>
+                <td th:text="${vip.VIP_TYPE}"></td>
+                <td th:text="${vip.CARD_MONEY}"></td>
+                <td th:text="${vip.HISTORY_MONGEY}"></td>
+                <td th:text="${vip.ZENGSONG_MONEY}"></td>
+                <td th:text="${vip.JIFEN}"></td>
+                <td th:text="${vip.QIANKUAN}"></td>
+                <td th:text="${vip.TAOCAN_NUMBER}"></td>
+                <td th:text="${vip.TAOCAN_REMAIN}"></td>
+                <td th:text="${vip.BIRTHDAY}"></td>
+                <td th:text="${vip.OPENG_TIME}"></td>
+                <td th:text="${vip.LAST_TIME}"></td>
+                <td>
+                    <!--th:href="@{modify(card_id=${vip.card_id})}"-->
+                    <a ><input type="button" id="modify" value="修改" th:onclick="la([[${vip.VIP_ID}]])"></a>
+                    <a th:href="@{deleteVip(VIP_ID=${vip.VIP_ID})}"><input type="button" id="delete" value="删除"></a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
