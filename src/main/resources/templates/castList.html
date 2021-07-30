@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>散客列表</title>
+    <link rel="stylesheet" th:href="@{/css/castList.css}" />
+    <script type="text/javascript"  th:src="@{/js/jquery-3.6.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/layer-v3.5.1/layer/layer.js}"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入bootstrap-table样式 -->
+    <link th:href="@{/css/bootstrap-table.min.css}" rel="stylesheet">
+    <!-- jquery及bootstrapjs -->
+    <script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- bootstrap-table.min.js -->
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+    <!-- 引入中文语言包 -->
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script th:inline="javascript">
+        $(document).ready(function(){
+            $("#table").bootstrapTable({
+                columns:[{
+                    field:'CUSTOMER_NAME',
+                    title:'客户姓名'
+                },{
+                    field:'CUSTOMER_SEX',
+                    title:'客户性别'
+                },{
+                    field:'CUSTOMER_PHONE',
+                    title:'电话号码'
+                },{
+                    field:'TYPE',
+                    title:'消费项目'
+                },{
+                    field:'MONEY',
+                    title:'消费金额'
+                },{
+                    field:'TIME',
+                    title:'消费时间'
+                },{
+                    field:'FROMWHERE',
+                    title:'客户来源'
+                },{
+                    field:'REMARKS',
+                    title:'备注信息'
+                },{
+                    field:'EMPLOYEE',
+                    title:'服务员工姓名'
+                },]
+            })
+        })
+    </script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="header">
+        <div>最后消费时间</div>
+        <form th:action="SankeList.do" method="get">
+            <input type="date" value="2020-05-28 - 2022-06-27" min="2020-05-28" max="2022-06-27" name="TIME" id="TIME" class="events"/>
+                <select name="TYPE" id="TYPE" class="events">
+                    <option value="">选择类型</option>
+                    <option th:selected="${TYPE=='剪头发'}" value="剪头发">剪头发</option>
+                    <option th:selected="${TYPE=='洗剪吹'}" value="洗剪吹">洗剪吹</option>
+                </select>
+            <input type="submit" value="查询" id="search" class="events">
+        </form>
+    </div>
+    <div class="tips">
+        <div th:if="${sanke_information} ne null" >
+            <div id="tip" th:text="查询统计：总共+${sumSanke}+条记录"></div>
+        </div>
+    </div>
+    <div class="main">
+        <table border="1" id="table"
+               data-pagination="true"  data-side-pagination="client"  data-page-size="11">
+            <thead>
+                <div id="th" style="border:1px solid;width: 100%;background-color:rgb(238, 232, 232);height: 40px;">
+                    <div class="icon"><img th:src="@{/img/列表.svg}" alt=""></div>
+                    <span id="span1">散客列表</span>
+                    <span id="span2">筛选&emsp;
+                        <form style="float: right" th:action="SankeList.do" method="get">
+                            <input type="text" style="border: none;" id="searchSanke" name="searchSanke" th:value="${searchSanke}">
+                            <input type="submit" style="border: none;background-color: rgb(255, 255, 255);margin-left: -5px;">
+                        </form>
+                    </span>
+                </div>
+            </thead>
+            <tbody th:if="${sanke_information} ne null">
+                <tr th:each="sanke:${sanke_information}">
+                    <td th:text="${sanke.CUSTOMER_NAME}"></td>
+                    <td th:text="${sanke.CUSTOMER_SEX}"></td>
+                    <td th:text="${sanke.CUSTOMER_PHONE}"></td>
+                    <td th:text="${sanke.TYPE}"></td>
+                    <td th:text="${sanke.MONEY}"></td>
+                    <td th:text="${sanke.TIME}"></td>
+                    <td th:text="${sanke.FROMWHERE}"></td>
+                    <td th:text="${sanke.REMARKS}"></td>
+                    <td th:text="${sanke.EMPLOYEE}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
