@@ -181,6 +181,21 @@
                         obj.setAttribute('src','TJYG.html');
                         console.log("TianJiaYuanGong Pass!!")
                     }
+                    else if(name=="HuiYuanLieBiao"){
+                        obj.setAttribute('src','vip/vipList.html');
+                        console.log("HuiYuanLieBiao Pass!!")
+                    }
+                    else if(name=="SanKeLieBiao"){
+                        obj.setAttribute('src','vip/castList.html');
+                        console.log("SanKeLieBiao Pass!!")
+                    }
+                    else if(name=="QunFaDuanXing"){
+                        obj.setAttribute('src','vip/sendAllChat.html');
+                        console.log("QunFaDuanXing Pass!!")
+                    }
+
+
+
                 }
             })
         }
@@ -242,13 +257,13 @@
     <div id="two">
         <div id="7"><a href="javascript:onClick=show('two-7')">会员资料</a>
             <ul id="two-7" style="display: none">
-                <li><a href="">会员列表</a></li>
-                <li><a href=""> 散客列表</a></li>
+                <li><a name="HuiYuanLieBiao" href="javascript:void(0);" onclick="skip(name)">会员列表</a></li>
+                <li><a name="SanKeLieBiao" href="javascript:void(0);" onclick="skip(name)"> 散客列表</a></li>
             </ul>
         </div>
         <div id="8"><a href="javascript:onClick=show('two-8')">消息与通知</a>
             <ul id="two-8" style="display: none">
-                <li><a href="">群发短信</a></li>
+                <li><a name="QunFaDuanXing" href="javascript:void(0);" onclick="skip(name)">群发短信</a></li>
             </ul>
         </div>
     </div>
