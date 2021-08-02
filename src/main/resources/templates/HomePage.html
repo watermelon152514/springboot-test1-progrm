@@ -181,6 +181,10 @@
                         obj.setAttribute('src','TJYG.html');
                         console.log("TianJiaYuanGong Pass!!")
                     }
+                    else if(name=="AddCardType"){
+                        obj.setAttribute('src','tklx_huksz.html');
+                        console.log("AddCardType Pass!!")
+                    }
                 }
             })
         }
@@ -312,7 +316,7 @@
         <div id="17"><a href="javascript:onClick=show('five-17')">开店设置</a>
             <ul id="five-17" style="display: none">
                 <li><a name="TianJiaYuanGong" href="javascript:void(0);" onclick="skip(name)">添加员工</a></li>
-                <li><a href="">添加卡类型</a></li>
+                <li><a name="AddCardType" href="javascript:void(0);" onclick="skip(name)">添加卡类型</a></li>
                 <li><a href="">添加服务项目</a></li>
                 <li><a href="">添加疗程套餐</a></li>
                 <li><a href="">添加商品</a></li>
