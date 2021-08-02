@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="Generator" content="EditPlus®">
@@ -65,7 +65,7 @@
             border: none;
         }
         .tips{
-            width: 790px;
+            width: 1000px;
             height: 30px;
             margin-left: 5px;
             margin-top: -30px;
@@ -73,8 +73,8 @@
             border: rgb(167, 228, 212) solid 1px;
         }
         .main{
-            width: 790px;
-            height: 525px;
+            width: 1000px;
+            height: 550px;
             border: 1px inset gray;
             margin-left: 5px;
             margin-top: 15px;
@@ -94,7 +94,7 @@
         .one2{
             position: absolute;
             top: 55px;
-            left: 580px;
+            left: 810px;
         }
     </style>
 </head>
@@ -126,17 +126,20 @@
                 <option value="yesterday">昨天</option>
             </select>
         </form>
-        <input type="submit" value="查询" id="search1" class="events1">
+        <form th:action="searchTestjj" method="get">
+            <input type="text" id="searchTest" name="searchTest" >
+            <input type="submit" value="查询" id="search1" class="events1">
+        </form>
     </div>
     <div class="tips">
 
     </div>
     <div class="main">
         <div class="phead">
-            <span class="one1">挂单记录</span>
+            <span class="one1">今日水单列表</span>
             <span class="one2">筛选&nbsp;<input type="text"></span>
         </div>
-        <table width="790" border="1" cellspacing="0" cellpadding="0" style="color:aliceblue;font-size: 15px;margin-top: 10px;">
+        <table width="1000" border="1" cellspacing="0" cellpadding="0" style="color:aliceblue;font-size: 15px;margin-top: 10px;">
             <tr>
                 <td align="center" bgcolor="#444444">单号</td>
                 <td align="center" bgcolor="#444444">客户姓名</td>
