@@ -1,0 +1,191 @@
+*{
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+.wrapper{
+  width: 1000px;
+  height: 639.6px;
+  padding: 0 0 0 10px;
+}
+a{
+  text-decoration: none;
+}
+.top{
+  width: 100%;
+  height: 6%;
+  border: black inset 1px;
+
+}
+.top div{
+  margin-top: 7px;
+  margin-left: 20px;
+  position: relative;
+}
+.top #button{
+  width: 100px;
+  height: 30px;
+  color: aliceblue;
+  background-color: rgb(101, 214, 101);
+  border: rgb(111, 129, 111) 1px inset;
+  position: absolute;
+  top: -2px;
+  right: 10px;
+}
+.head{
+  width: 100%;
+  height: 22%;
+  background-color: rgb(178, 240, 241);
+  margin-top: 10px;
+  position: relative;
+}
+.head #tips{
+  position: absolute;
+  top: 5px;
+  left: 15px;
+  color: rgb(69, 126, 126);
+}
+.head #tips div{
+  margin-top: 5px;
+}
+.ps{
+  color: red;
+}
+.main{
+  width: 100%;
+  height: 50%;
+  margin-top: 10px;
+}
+.left{
+  width: 70%;
+  height:100%;
+  border: rgb(238, 236, 236) inset 1px;
+  float: left;
+}
+.left #left-head{
+  width: 100%;
+  height: 40px;
+  background-color: rgb(238, 232, 232);
+  position: relative;
+}
+.icon{
+  width: 40px;
+  height: 100%;
+  border-right: inset 1px rgb(238, 232, 232);
+  background-color: greenyellow;
+  float: left;
+
+}
+.left #left-head span{
+  position: absolute;
+  top: 5px;
+  left: 45px;
+}
+.left #left-contain{
+  margin-top: 10px;
+  margin-left: 20px;
+}
+.left #left-contain div{
+  margin-top: 15px;
+}
+.left #left-contain span{
+  /* 让文字局顶显示 */
+  vertical-align: top;
+}
+.left #left-contain>div>input{
+  height: 25px;
+  width: 100px;
+}
+#sendTime>span{
+  float: left;
+}
+#sendTime div{
+  margin-left: 80px;
+}
+#s-t-items{
+  margin-left: 10px;
+}
+#s-t-item{
+  margin-left: 20px;
+  height: 25px;
+  width: 200px;
+}
+#s-t-b{
+  width: 60px;
+  height: 30px;
+  color: rgb(250, 249, 249);
+  background-color: blue;
+}
+#l-c-items{
+  margin-left: 15px;
+
+}
+.right{
+  width: 30%;
+  height: 100%;
+  margin-left: 70%;
+}
+.right #right-head{
+  float: right;
+  width: 90%;
+  height: 40px;
+  background-color: rgb(238, 232, 232);
+  position: relative;
+  border: rgb(238, 236, 236) inset 1px;
+}
+.right #right-head span{
+  position: absolute;
+  top: 5px;
+  left: 45px;
+}
+.right #right-contain ul{
+  width: 90%;
+  float: right;
+  list-style: none;
+}
+.right #right-contain ul li{
+  width: 100%;
+  height: 40px;
+  margin-top: 10px;
+  background-color: rgb(238, 232, 232);
+  border: rgb(238, 236, 236) inset 1px;
+}
+.right #right-contain ul li a{
+  display: block;
+  color: black;
+  text-align: left;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.foot{
+  width: 100%;
+  height: 20%;
+  margin-top: 20px;
+  border: black inset 1px;
+}
+.foot #foot-head{
+  float: right;
+  width: 100%;
+  height: 40px;
+  background-color: rgb(238, 232, 232);
+  position: relative;
+  border: rgb(238, 236, 236) inset 1px;
+}
+.foot #foot-head>input{
+  float: right;
+  width: 110px;
+  height: 30px;
+  color: rgb(252, 249, 249);
+  background-color: rgb(216, 50, 50);
+  margin-top: 5px;
+}
+.foot #foot-head span{
+  position: absolute;
+  top: 5px;
+  left: 45px;
+}
+#f-text{
+  margin-top: 14px;
+  margin-left: 10px;
+}

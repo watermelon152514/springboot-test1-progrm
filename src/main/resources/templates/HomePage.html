@@ -32,7 +32,7 @@
             width: 15%;
             height: 90%;
             float: left;
-            background-color: #272727;
+            background-color: #616D7E;
 
         }
         .centre-page{
@@ -173,6 +173,29 @@
                         obj.setAttribute('src','YuanGongGongZiHtml');
                         console.log("YuanGongGongZi Pass!!")
                     }
+                    else if(name=="ChongZhiKaiKa"){
+                        obj.setAttribute('src','ChongZhiKaiKaHtml');
+                        console.log("YuanGongGongZi Pass!!")
+                    }
+                    else if(name=="TianJiaYuanGong"){
+                        obj.setAttribute('src','TJYG.html');
+                        console.log("TianJiaYuanGong Pass!!")
+                    }
+                    else if(name=="HuiYuanLieBiao"){
+                        obj.setAttribute('src','vip/vipList.html');
+                        console.log("HuiYuanLieBiao Pass!!")
+                    }
+                    else if(name=="SanKeLieBiao"){
+                        obj.setAttribute('src','vip/castList.html');
+                        console.log("SanKeLieBiao Pass!!")
+                    }
+                    else if(name=="QunFaDuanXing"){
+                        obj.setAttribute('src','vip/sendAllChat.html');
+                        console.log("QunFaDuanXing Pass!!")
+                    }
+
+
+
                 }
             })
         }
@@ -234,38 +257,38 @@
     <div id="two">
         <div id="7"><a href="javascript:onClick=show('two-7')">会员资料</a>
             <ul id="two-7" style="display: none">
-                <li><a href="">会员列表</a></li>
-                <li><a href=""> 散客列表</a></li>
+                <li><a name="HuiYuanLieBiao" href="javascript:void(0);" onclick="skip(name)">会员列表</a></li>
+                <li><a name="SanKeLieBiao" href="javascript:void(0);" onclick="skip(name)"> 散客列表</a></li>
             </ul>
         </div>
         <div id="8"><a href="javascript:onClick=show('two-8')">消息与通知</a>
             <ul id="two-8" style="display: none">
-                <li><a href="">群发短信</a></li>
+                <li><a name="QunFaDuanXing" href="javascript:void(0);" onclick="skip(name)">群发短信</a></li>
             </ul>
         </div>
     </div>
     <div id="three">
-        <div id="9" ><a href="javascript:onClick=show('three-9')">营业记录</a>
+        <div id="9" ><a href="javascript:onClick=show('three-9')"><img src="img/营业记录.png" height="30" width="30">营业记录</a>
             <ul id="three-9" style="display: none">
                 <li><a href="">水单审核</a></li>
                 <li><a href="">项目消费记录</a></li>
                 <li><a href="">商品销售记录</a></li>
-                <li><a href="">充值开卡记录</a></li>
+                <li><a name="ChongZhiKaiKa" href="javascript:void(0);" onclick="skip(name)">充值开卡记录</a></li>
                 <li><a href="">订购套餐记录</a></li>
             </ul>
         </div>
-        <div id="10"><a href="javascript:onClick=show('three-10')">店面财务数据</a>
+        <div id="10"><a href="javascript:onClick=show('three-10')"><img src="img/店铺财务数据.png" height="30" width="30">店面财务数据</a>
             <ul id="three-10" style="display: none">
                 <li><a href="">店面财务数据</a></li>
             </ul>
         </div>
-        <div id="11"><a href="javascript:onClick=show('three-11')">业绩提成核对</a>
+        <div id="11"><a href="javascript:onClick=show('three-11')"><img src="img/业绩提成核对.png" height="30" width="30">业绩提成核对</a>
             <ul id="three-11" style="display: none">
                 <li><a href="">员工提成核对</a></li>
                 <li><a href="">员工业绩核对</a></li>
             </ul>
         </div>
-        <div id="12"><a href="javascript:onClick=show('three-12')">员工资料表</a>
+        <div id="12"><a href="javascript:onClick=show('three-12')"><img src="img/员工工资表.png" height="30" width="30">员工资料表</a>
             <ul id="three-12" style="display: none">
                 <li><a name="YuanGongGongZi" href="javascript:void(0);" onclick="skip(name)">员工资料表</a></li>
             </ul>
@@ -303,7 +326,7 @@
     <div id="five">
         <div id="17"><a href="javascript:onClick=show('five-17')">开店设置</a>
             <ul id="five-17" style="display: none">
-                <li><a href="">添加员工</a></li>
+                <li><a name="TianJiaYuanGong" href="javascript:void(0);" onclick="skip(name)">添加员工</a></li>
                 <li><a href="">添加卡类型</a></li>
                 <li><a href="">添加服务项目</a></li>
                 <li><a href="">添加疗程套餐</a></li>

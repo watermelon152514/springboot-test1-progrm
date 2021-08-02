@@ -1,0 +1,53 @@
+.nav nav-tabs{
+    display: flex;
+    margin-top: 0px;
+    margin-left: 5px;
+}
+.active{
+    height:50px;
+    width: 100px;
+}
+.modal-body{
+    display:flex;/*设为伸缩容器*/
+    flex-flow:row;/*伸缩项目单行排列*/
+
+}
+#d1{
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.add{
+    margin-left: 5px;
+    margin-top: 5px;
+}
+.radio{
+    margin-left: 5px;
+    margin-top: 15px;
+}
+.input{
+    height: 20px;
+    width: 170px;
+}
+/*.lm{*/
+/*    height: 20px;*/
+/*    width: 170px;*/
+/*}*/
+#d2{
+    flex-direction: column;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+.add2{
+    margin-left: 60px;
+    margin-top: 5px;
+}
+.lg{
+    height: 20px;
+    width: 160px;
+}
+#twobt{
+    display: inline-block;
+
+}

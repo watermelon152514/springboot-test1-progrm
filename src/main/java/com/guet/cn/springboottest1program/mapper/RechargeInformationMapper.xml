@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.guet.cn.springboottest1program.mapper.RechargeInformationMapper">
+    <select id="getAllData" resultType="com.guet.cn.springboottest1program.bean.RechargeInformation">
+        SELECT * FROM recharge_information WHERE BILL_TIME BETWEEN STR_TO_DATE(#{0},'%Y-%m-%d') AND STR_TO_DATE(#{1},'%Y-%m-%d')
+    </select>
+    <select id="getAllDatas" resultType="com.guet.cn.springboottest1program.bean.RechargeInformation">
+        SELECT * FROM recharge_information WHERE  VIP_TYPE LIKE CONCAT(CONCAT('%',#{2}),'%') AND BILL_TIME BETWEEN STR_TO_DATE(#{0},'%Y-%m-%d') AND STR_TO_DATE(#{1},'%Y-%m-%d')
+    </select>
+    <delete id="deleteInformation">
+        DELETE FROM recharge_information WHERE BILL_ID=#{0}
+    </delete>
+    <update id="rechangeInformation" parameterType="com.guet.cn.springboottest1program.bean.RechargeInformation">
+        UPDATE recharge_information SET CUSTOMER_NAME=#{CUSTOMER_NAME},
+        CUSTOMER_SEX=#{CUSTOMER_SEX},
+        VIP_TYPE=#{VIP_TYPE},
+        RECHARGE_MONEY=#{RECHARGE_MONEY},
+        IN_MONEY=#{IN_MONEY},
+        REMARKS=#{REMARKS},
+        EMPLOYEE=#{EMPLOYEE}
+        WHERE BILL_ID=#{BILL_ID}
+    </update>
+</mapper>
