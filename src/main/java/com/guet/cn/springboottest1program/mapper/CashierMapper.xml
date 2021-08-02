@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.guet.cn.springboottest1program.mapper.CashierMapper">
+    <insert id="insertVip" parameterType="com.guet.cn.springboottest1program.bean.Vip_information">
+        insert into vip_information(VIP_ID,EXPIRATION_DATE,DISCOUNT,Consumption_password,Serial_number,Source_type,Select_recommender,Remarks,Cash,UnionPay,QIANKUAN,Alipay,WeChat,ZENGSONG_MONEY,Staff,Achievement,Commission,VIP_NAME,VIP_PHONE,VIP_TYPE,BIRTHDAY,OPENG_TIME,CARD_MONEY,HISTORY_MONGEY,JIFEN,TAOCAN_NUMBER,TAOCAN_REMAIN)
+        VALUES (#{VIP_ID},#{EXPIRATION_DATE},#{DISCOUNT},#{Consumption_password},#{Serial_number},#{Source_type},#{Select_recommender},#{Remarks},#{Cash},#{UnionPay},#{QIANKUAN},#{Alipay},#{WeChat},#{ZENGSONG_MONEY},#{Staff},#{Achievement},#{Commission},#{VIP_NAME},#{VIP_PHONE},#{VIP_TYPE},#{BIRTHDAY},#{OPENG_TIME},50,200,0,'无',0)
+    </insert>
+</mapper>

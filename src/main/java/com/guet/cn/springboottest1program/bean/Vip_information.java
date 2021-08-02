@@ -1,6 +1,8 @@
 package com.guet.cn.springboottest1program.bean;
 
-public class Vip_information {
+import java.io.Serializable;
+
+public class Vip_information implements Serializable {
     private String VIP_ID;
     private String VIP_NAME;
     private String VIP_PHONE;
@@ -16,6 +18,132 @@ public class Vip_information {
     private String OPENG_TIME;
     private String LAST_TIME;
     private String CUSTOMER_SEX;
+    private String EXPIRATION_DATE;
+    private String DISCOUNT;
+    private String Consumption_password;
+    private String Serial_number;
+    private String Source_type;
+    private String Select_recommender;
+    private String Remarks;
+    private String Cash;
+    private String UnionPay;
+    private String Alipay;
+    private String WeChat;
+    private String Staff;
+    private String Achievement;
+    private String Commission;
+
+    public String getEXPIRATION_DATE() {
+        return EXPIRATION_DATE;
+    }
+
+    public void setEXPIRATION_DATE(String EXPIRATION_DATE) {
+        this.EXPIRATION_DATE = EXPIRATION_DATE;
+    }
+
+    public String getDISCOUNT() {
+        return DISCOUNT;
+    }
+
+    public void setDISCOUNT(String DISCOUNT) {
+        this.DISCOUNT = DISCOUNT;
+    }
+
+    public String getConsumption_password() {
+        return Consumption_password;
+    }
+
+    public void setConsumption_password(String consumption_password) {
+        Consumption_password = consumption_password;
+    }
+
+    public String getSerial_number() {
+        return Serial_number;
+    }
+
+    public void setSerial_number(String serial_number) {
+        Serial_number = serial_number;
+    }
+
+    public String getSource_type() {
+        return Source_type;
+    }
+
+    public void setSource_type(String source_type) {
+        Source_type = source_type;
+    }
+
+    public String getSelect_recommender() {
+        return Select_recommender;
+    }
+
+    public void setSelect_recommender(String select_recommender) {
+        Select_recommender = select_recommender;
+    }
+
+    public String getRemarks() {
+        return Remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        Remarks = remarks;
+    }
+
+    public String getCash() {
+        return Cash;
+    }
+
+    public void setCash(String cash) {
+        Cash = cash;
+    }
+
+    public String getUnionPay() {
+        return UnionPay;
+    }
+
+    public void setUnionPay(String unionPay) {
+        UnionPay = unionPay;
+    }
+
+    public String getAlipay() {
+        return Alipay;
+    }
+
+    public void setAlipay(String alipay) {
+        Alipay = alipay;
+    }
+
+    public String getWeChat() {
+        return WeChat;
+    }
+
+    public void setWeChat(String weChat) {
+        WeChat = weChat;
+    }
+
+    public String getStaff() {
+        return Staff;
+    }
+
+    public void setStaff(String staff) {
+        Staff = staff;
+    }
+
+    public String getAchievement() {
+        return Achievement;
+    }
+
+    public void setAchievement(String achievement) {
+        Achievement = achievement;
+    }
+
+    public String getCommission() {
+        return Commission;
+    }
+
+    public void setCommission(String commission) {
+        Commission = commission;
+    }
 
     public String getCUSTOMER_SEX() {
         return CUSTOMER_SEX;

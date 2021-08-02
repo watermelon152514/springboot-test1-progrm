@@ -1,81 +1,120 @@
-<!DOCTYPE html>
-<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="Generator" content="EditPlus®">
-  <meta name="Author" content="">
-  <meta name="Keywords" content="">
-  <meta name="Description" content="">
-  <title>收银</title>
-  <style>
-      *{
-          padding: 0px;
-          margin: 0px;
-          box-sizing: border-box;
-      }     
-      .wrapper{
-          padding: 30px;
-      }
-      .header{
-          height: 30px;
-          margin-left: 10px; 
-          display: flex;
-          flex-direction: row;
-          align-items: flex-end; 
-      }
-      .events{ 
-          height: 30px;
-          margin-bottom: 5px;
-          margin-left: 1400px;
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>收银</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+        .wrapper{
+            padding: 5px;
+        }
+        .header{
+            height: 30px;
+            margin-left: 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+        }
+        .events{
+            height: 20px;
+            margin-bottom: 5px;
+            margin-left: 950px;
 
-      }
-      .search{
-          height: 30px;
-          margin: 5px; 
-          border-radius: 5px;
-      } 
-      #search{
-          width: 60px;
-          border-radius: 5px;
-          background-color: rgb(63, 60, 60);
-          color: white;
-          border: none;
-      }
-      #psearch{
-          width: 100px;
-          border-radius: 5px;
-          background-color: rgb(55, 120, 194);
-          color: white;
-          border: none;
-      }
-      .tips{
-        width: 1500px;
-        height: 40px;
-        margin-left: 5px;
-        margin-top: -40px;
-        background-color: rgb(246, 247, 216);
-        border: rgb(167, 228, 212) solid 1px;
-      }
-      .main{
-        width: 1260px;
-        height: 565px;
-        border: 1px inset gray;
-        margin-left: 5px;
-        margin-top: 15px;
-      }
-  </style>
- </head>
- <body>
-     <div class="wrapper">
-         <div class="header">
-            <input type="submit" value="删除" id="search" class="events">
-         </div>
-         <div class="tips">
+        }
+        .search{
+            height: 30px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        #search{
+            width: 45px;
+            border-radius: 5px;
+            background-color: rgb(63, 60, 60);
+            color: white;
+            border: none;
+        }
+        #psearch{
+            width: 100px;
+            border-radius: 5px;
+            background-color: rgb(55, 120, 194);
+            color: white;
+            border: none;
+        }
+        .tips{
+            width: 1000px;
+            height: 30px;
+            margin-left: 5px;
+            margin-top: -30px;
+            background-color: rgb(246, 247, 216);
+            border: rgb(167, 228, 212) solid 1px;
+        }
+        .main{
+            width: 1000px;
+            height: 550px;
+            border: 1px inset gray;
+            margin-left: 5px;
+            margin-top: 15px;
+        }
+        .phead{
+            width: 100px;
+            height: 15px;
+            margin-left: 5px;
+            margin-top: 5px;
+            font-size: 15px;
+        }
+        .one1{
+            position: absolute;
+            top: 55px;
+            left: 25px;
+        }
+        .one2{
+            position: absolute;
+            top: 55px;
+            left: 810px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="header">
+        <input type="submit" value="删除" id="search" class="events">
+    </div>
+    <div class="tips">
 
-         </div>
-         <div class="main">
-            
-         </div>
-     </div>
- </body>
+    </div>
+    <div class="main">
+        <div class="phead">
+            <span class="one1">挂单记录</span>
+            <span class="one2">筛选&nbsp;<input type="text"></span>
+        </div>
+        <table width="1000" border="1" cellspacing="0" cellpadding="0" style="color:aliceblue;font-size: 15px;margin-top: 10px;">
+            <tr>
+                <td align="center" bgcolor="#444444">■</td>
+                <td align="center" bgcolor="#444444">单号</td>
+                <td align="center" bgcolor="#444444">客户姓名</td>
+                <td align="center" bgcolor="#444444">消费金额</td>
+                <td align="center" bgcolor="#444444">总业绩</td>
+                <td align="center" bgcolor="#444444">订单类型</td>
+                <td align="center" bgcolor="#444444">服务内容</td>
+                <td align="center" bgcolor="#444444">售价</td>
+                <td align="center" bgcolor="#444444">业绩</td>
+                <td align="center" bgcolor="#444444">员工信息</td>
+                <td align="center" bgcolor="#444444">类型</td>
+                <td align="center" bgcolor="#444444">业绩</td>
+                <td align="center" bgcolor="#444444">提成</td>
+                <td align="center" bgcolor="#444444">备注</td>
+                <td align="center" bgcolor="#444444">操作</td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
 </html>

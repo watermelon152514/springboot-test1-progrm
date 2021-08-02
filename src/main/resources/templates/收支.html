@@ -1,109 +1,157 @@
-<!DOCTYPE html>
-<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="Generator" content="EditPlus®">
-  <meta name="Author" content="">
-  <meta name="Keywords" content="">
-  <meta name="Description" content="">
-  <title>收银</title>
-  <style>
-      *{
-          padding: 0px;
-          margin: 0px;
-          box-sizing: border-box;
-      }     
-      .wrapper{
-          padding: 30px;
-      }
-      .header{
-          height: 30px;
-          margin-left: 10px; 
-          display: flex;
-          flex-direction: row;
-          align-items: flex-end; 
-      }
-      .events{ 
-          height: 30px;
-          margin-bottom: 5px;
-          margin-left: 5px;
-      }
-      .events1{ 
-          height: 30px;
-          margin-bottom: 5px;
-          margin-left: 30px;
-      }
-      .forms{
-          height: 30px;
-          margin-bottom: 5px;
-          margin-left: 30px;
-      }
-      .search{
-          height: 30px;
-          margin: 5px; 
-          border-radius: 5px;
-      } 
-      #search{
-          width: 60px;
-          border-radius: 5px;
-          background-color: rgb(165, 11, 11);
-          color: white;
-          border: none;
-      }
-      #search1{
-          width: 60px;
-          border-radius: 5px;
-          background-color: rgb(10, 180, 33);
-          color: white;
-          border: none;
-      }
-      #psearch{
-          width: 100px;
-          border-radius: 5px;
-          background-color: rgb(55, 120, 194);
-          color: white;
-          border: none;
-      }
-      .tips{
-        width: 1480px;
-        height: 80px;
-        margin-left: 5px;
-        margin-top: 40px;
-        background-color: rgb(246, 247, 216);
-        border: rgb(167, 228, 212) solid 1px;
-      }
-      .main{
-        width: 1260px;
-        height: 565px;
-        border: 1px inset gray;
-        margin-left: 5px;
-        margin-top: 15px;
-      }
-  </style>
- </head>
- <body>
-     <div class="wrapper">
-         <div class="header">
-            <input type="date" value="2020-05-28 - 2020-06-27" min="2020-05-28" max="2020-06-27" class="events"/>
-            <form>
-                <select name="Consumption type" id="type" class="forms">
-                    <option value="all">全部类型</option>
-                </select>
-            </form>
-            <form>
-                <select name="States" id="States" class="forms">
-                    <option value="normal">正常</option>
-                    <option value="deleted">已删除</option>
-                </select>
-            </form>
-            <input type="submit" value="查询" id="search1" class="events1">
-         </div>
-         <div class="tips">
-
-         </div>
-         <div class="main">
-            
-         </div>
-     </div>
- </body>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>收银</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+        .wrapper{
+            padding: 5px;
+        }
+        .header{
+            height: 30px;
+            margin-left: 10px;
+            margin-top: -10px;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+        }
+        .events{
+            height: 20px;
+            margin-bottom: 0px;
+            margin-left: -5px;
+        }
+        .events1{
+            height: 20px;
+            margin-bottom: 0px;
+            margin-left: 30px;
+        }
+        .forms{
+            height: 20px;
+            margin-bottom: -5px;
+            margin-left: 30px;
+        }
+        .search{
+            height: 20px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        #search{
+            width: 60px;
+            border-radius: 5px;
+            background-color: rgb(165, 11, 11);
+            color: white;
+            border: none;
+        }
+        #search1{
+            width: 60px;
+            border-radius: 5px;
+            background-color: rgb(10, 180, 33);
+            color: white;
+            border: none;
+        }
+        #psearch{
+            width: 100px;
+            border-radius: 5px;
+            background-color: rgb(238, 237, 237);
+            color: white;
+            border: rgb(114, 114, 114) solid 1px;
+        }
+        .tips{
+            width: 1000px;
+            height: 60px;
+            margin-left: 5px;
+            margin-top: 10px;
+            background-color: rgb(246, 247, 216);
+            border: rgb(167, 228, 212) solid 1px;
+        }
+        .main{
+            width: 1000px;
+            height: 500px;
+            border: 1px inset gray;
+            margin-left: 5px;
+            margin-top: 15px;
+        }
+        .Checkout{
+            height: 20px;
+            margin-top: 35px;
+            margin-left: 670px;
+            float: left;
+        }
+        .phead{
+            width: 100px;
+            height: 15px;
+            margin-left: 5px;
+            margin-top: 5px;
+            font-size: 15px;
+        }
+        .one1{
+            position: absolute;
+            top: 115px;
+            left: 25px;
+        }
+        .one2{
+            position: absolute;
+            top: 115px;
+            left: 810px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="header">
+        <input type="date" value="2020-05-28 - 2020-06-27" min="2020-05-28" max="2020-06-27" class="events"/>
+        <form>
+            <select name="States" id="States" class="forms">
+                <option value="normal">正常</option>
+                <option value="deleted">已删除</option>
+            </select>
+        </form>
+        <form>
+            <select name="Consumption type" id="type" class="forms">
+                <option value="all">全部类型</option>
+            </select>
+        </form>
+        <input type="submit" value="查询" id="search1" class="events1">
+    </div>
+    <div class="tips">
+        <div class="Checkout" style="margin-top: 25px;">
+            <input type="submit" value="添加收支类型" id="psearch" style="width: 100px;color: black;">
+        </div>
+        <div class="Checkout" style="margin-left: 0px;margin-top: 25px;">
+            <input type="submit" value="添加收入" id="search" style="width: 70px;color: rgb(255, 255, 255);">
+        </div>
+        <div class="Checkout" style="margin-left: 0px;margin-top: 25px;">
+            <input type="submit" value="添加支出" id="search1" style="width: 70px;color: rgb(255, 255, 255);">
+        </div>
+        <div class="Checkout" style="margin-left: 0px;margin-top: 25px;">
+            <input type="submit" value="导出表格" id="psearch" style="width: 80px;color: black;">
+        </div>
+    </div>
+    <div class="main">
+        <div class="phead">
+            <span class="one1">支出与收入记录</span>
+            <span class="one2">筛选&nbsp;<input type="text"></span>
+        </div>
+        <table width="1000" border="1" cellspacing="0" cellpadding="0" style="color:aliceblue;font-size: 15px;margin-top: 10px;">
+            <tr>
+                <td colspan="3" align="center" bgcolor="#444444">时间</td>
+                <td colspan="3" align="center" bgcolor="#444444">类型</td>
+                <td colspan="3" align="center" bgcolor="#444444">金额</td>
+                <td colspan="3" align="center" bgcolor="#444444">明细内容</td>
+                <td colspan="3" align="center" bgcolor="#444444">操作人</td>
+                <td colspan="3" align="center" bgcolor="#444444">操作</td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
 </html>
