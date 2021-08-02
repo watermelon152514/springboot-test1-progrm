@@ -15,8 +15,8 @@
         }
         .wapper{
             width: 1010px;
-            height: 800px;
-            margin: auto;
+            height: 700px;
+
         }
        
         
@@ -36,12 +36,11 @@
            
         }
         .main{
-            width: 80%;
+            width: 100%;
             height: 75px;
             background-color:white;
             position: absolute;
-            top: 0px;
-            right: 0px;
+
         }
       
         
@@ -50,9 +49,8 @@
        a{
            text-decoration-line: none;
            list-style: none;
-           padding-left: 15px;
-           color:#7C7F8D;
-                 
+
+
        }
        #fi{
            line-height: 45px;
@@ -73,6 +71,8 @@
 
        }
        #buttom{
+             width:150px;
+             height:30px;
             -webkit-transition-duration: 0.4s;
             transition-duration: 0.4s;
             padding: 4px 6px;
@@ -80,6 +80,7 @@
             background-color: #eeeef5d8;
             color: black;
             border: 1px solid #eeeef5d8;
+            border-radius: 10px;
             
        }
        #buttom:hover{
@@ -92,6 +93,8 @@
 
        }
        #buttom1{
+        width:150px;
+        height:30px;
         -webkit-transition-duration: 0.4s;
         transition-duration: 0.4s;
         padding: 2px 12px;
@@ -100,9 +103,9 @@
         color: black;
         border: 1px solid #eeeef5d8;
         position: relative;
-       top: -45px;
-       left: 680px;
-      
+        top: -45px;
+        left: 860px;
+        border-radius: 10px;
         
                       
        }
@@ -143,4 +146,83 @@
    #sel:hover{
     background-color: white;
    }
+        .form_1{
+            width:600px;
+            height:600px;
+            border:3px solid #f8f8f8;
+            visibility: hidden;
+            position: absolute;
+            z-index: 999;
+            opacity: 1;
+            overflow: hidden;
+            background-color: white;
+            text-align: center;
+            margin-top: 0%;
+            margin-left: 20%;
+            border-radius: 10px;
+        }
+        .open{
+            visibility: visible;
+            opacity: 1;
+        }
+        .input_1{
+            margin-top: 15px;
+            width:100%;
+            height:40px;
+
+        }
+        input{
+            width:280px;
+            height:30px;
+            border-radius: 5px;
+            border:1px solid  #e5dfdf;
+        }
+        #card_id{
+            width:200px;
+            height:30px;
+            border-radius: 5px;
+            border:1px solid  #e5dfdf;
+        }
+        #sel{
+            width:75px;
+            height:30px;
+            border-radius: 5px;
+            border:1px solid  #e5dfdf;
+        }
+        .input_1 .login_logo{
+            text-align: left;
+            font-size: 20px;
+            font-weight: 300;
+            padding-left: 30px;
+            float: left;
+        }
+        .input_1 .close{
+            width:20px;
+            height:20px;
+            color:#5d5d5d;
+            text-align: center;
+            line-height: 20px;
+            border:1px solid  #5d5d5d;
+            border-radius: 50%;
+            float: right;
+            padding-top: 0px;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        .input_1 .close:hover{
+            cursor:pointer;
+        }
+        hr{
+            background-color: #F8F8F8;
+        }
+
+        .input_1 .submit_1{
+            border:2px solid #f88020;
+            height:40px;
+            background-color: white;
+        }
+        .input_1 .submit_1:hover{
+            background-color: #f88020;
+            color:white;
+        }
   

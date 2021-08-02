@@ -181,21 +181,10 @@
                         obj.setAttribute('src','TJYG.html');
                         console.log("TianJiaYuanGong Pass!!")
                     }
-                    else if(name=="HuiYuanLieBiao"){
-                        obj.setAttribute('src','vip/vipList.html');
-                        console.log("HuiYuanLieBiao Pass!!")
+                    else if(name=="AddCardType"){
+                        obj.setAttribute('src','tklx_huksz.html');
+                        console.log("AddCardType Pass!!")
                     }
-                    else if(name=="SanKeLieBiao"){
-                        obj.setAttribute('src','vip/castList.html');
-                        console.log("SanKeLieBiao Pass!!")
-                    }
-                    else if(name=="QunFaDuanXing"){
-                        obj.setAttribute('src','vip/sendAllChat.html');
-                        console.log("QunFaDuanXing Pass!!")
-                    }
-
-
-
                 }
             })
         }
@@ -257,13 +246,13 @@
     <div id="two">
         <div id="7"><a href="javascript:onClick=show('two-7')">会员资料</a>
             <ul id="two-7" style="display: none">
-                <li><a name="HuiYuanLieBiao" href="javascript:void(0);" onclick="skip(name)">会员列表</a></li>
-                <li><a name="SanKeLieBiao" href="javascript:void(0);" onclick="skip(name)"> 散客列表</a></li>
+                <li><a href="">会员列表</a></li>
+                <li><a href=""> 散客列表</a></li>
             </ul>
         </div>
         <div id="8"><a href="javascript:onClick=show('two-8')">消息与通知</a>
             <ul id="two-8" style="display: none">
-                <li><a name="QunFaDuanXing" href="javascript:void(0);" onclick="skip(name)">群发短信</a></li>
+                <li><a href="">群发短信</a></li>
             </ul>
         </div>
     </div>
@@ -327,7 +316,7 @@
         <div id="17"><a href="javascript:onClick=show('five-17')">开店设置</a>
             <ul id="five-17" style="display: none">
                 <li><a name="TianJiaYuanGong" href="javascript:void(0);" onclick="skip(name)">添加员工</a></li>
-                <li><a href="">添加卡类型</a></li>
+                <li><a name="AddCardType" href="javascript:void(0);" onclick="skip(name)">添加卡类型</a></li>
                 <li><a href="">添加服务项目</a></li>
                 <li><a href="">添加疗程套餐</a></li>
                 <li><a href="">添加商品</a></li>

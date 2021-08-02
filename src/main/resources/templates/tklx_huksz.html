@@ -1,18 +1,35 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <script>
+        window.onload=function(){
+            var obj=document.getElementsByName("modify");
+            var close=document.getElementsByClassName("close");
+            var form_1=document.getElementsByClassName("form_1");
+            for (i=0;i<obj.length;i++){
+                var btn_1=document.getElementById(obj[i].id)
+                btn_1.addEventListener('click',function(){
+                    form_1[0].className="form_1 open";
+                })
+            }
+
+            close[0].addEventListener('click',function(){
+                form_1[0].className="form_1";
+            })
+
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="Generator" content="EditPlus?">
     <meta name="Author" content="">
     <meta name="Keywords" content="">
     <meta name="Description" content="">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="./css/hyksz.css">
+    <link rel="stylesheet" th:href="@{/css/hyksz.css}" type="text/css">
     
 
-  
 </head>
 
 <body>
@@ -21,25 +38,23 @@
         <div class="body">
             
             <div class="main">
-                
-                <button id="buttom" onclick="javascript:window.location.href='./tklx_huksz.html'">会员卡设置</button>
-                <button id="buttom" onclick="javascript:window.location.href='./tklx_kkczsz.html'">开卡充值设置</button>
-                <button id="buttom">升/降级设置</button><br>
-                <ul>
-                    <li>
 
-                </li>
-            </ul>
-                           
+                <a th:href="@{tklx_huksz.html}"><button id="buttom"  >会员卡设置</button></a>
+                <a th:href="@{tklx_kkczsz.html}"><button id="buttom">开卡充值设置</button></a>
+                <button id="buttom">升/降级设置</button><br>
 
                 <div id="tittle"  >
                   <ul>
                      <li><button id="buttom1">添加会员卡类型</button>   </li>
-                      <li id="ti2"><input type="text" > <input type="submit"  id="sel" value="查询"></li>
+                      <li id="ti2">
+                          <form action="tklx_huksz.html" method="get">
+                              <input type="text" name="card_id" id="card_id" > <input type="submit"  id="sel" value="查询">
+                          </form>
+                      </li>
                   </ul>
                 </div>
                 <div id="tab">
-                    <table border="1px" width="800px" >
+                    <table border="1px" width="1010px" >
                         <thead>
                             <tr>
                             <td colspan="10">会员卡类型列表</td> 
@@ -60,21 +75,38 @@
                            
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
+                            <tr th:each="cardtype,indexInc:${AddCardType}">
+
+                                <td th:text="${cardtype.card_id}"></td>
+                                <td th:text="${cardtype.card_name}"></td>
+                                <td th:text="${cardtype.item_discount}"></td>
+                                <td th:text="${cardtype.goods_discount}"></td>
+                                <td th:text="${cardtype.taocan_discount}"></td>
+                                <td th:text="${cardtype.sms_cost}"></td>
+                                <td th:text="${cardtype.expiry_date}"></td>
+                                <td th:text="${cardtype.state}"></td>
+                                <td th:text="${cardtype.tips}"></td>
+
                                 <td>
-                                    <a href="#">添加</a>
-                                    <a href="#">删除</a>
+                                    <a th:href="@{deleteVipTypeById(card_id=${cardtype.card_id})}" >删除</a>
+                                    <a  th:id="modify+(${indexInc.index}+1)" name="modify" href="#">修改</a>
                                 </td>
-                           
+                            </tr>
+                            <div class="form_1">
+                                <form >
+                                    <div class="input_1"><div  id="login_logo">添加/修改会员卡类型信息</div><div class="close">X</div></div>
+                                    <hr>
+                                    <div class="input_1">  会员卡名称：<input type="text" name="cardname" placeholder="&nbsp;会员卡名称" ></div>
+                                    <div class="input_1">   项目折扣：<input type="text" name="itemDidcount" placeholder="&nbsp;项目折扣" ></div>
+                                    <div class="input_1">   商品折扣：<input type="text" name="goodsDidcount" placeholder="&nbsp;商品折扣"></div>
+                                    <div class="input_1">   套餐折扣：<input type="text" name="tcDidcount" placeholder="&nbsp;套餐折扣"></div>
+                                    <div class="input_1">每月短信收费：<input type="text" name="cardname" placeholder="&nbsp;每月短信收费" ></div>
+                                    <div class="input_1">   有效天数：<input type="text" name="itemDidcount" placeholder="&nbsp;有效天数" ></div>
+                                    <div class="input_1">      状态：<input type="text" name="goodsDidcount" placeholder="&nbsp;状态" ></div>
+                                    <div class="input_1">      备注：<input type="text" name="tcDidcount" placeholder="&nbsp;备注" ></div>
+                                    <div class="input_1"><input class="submit_1" type="submit" value="提&nbsp;交"></div>
+                                </form>
+                            </div>
                         </tbody>
                         
                     </table>
